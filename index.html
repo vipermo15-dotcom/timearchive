@@ -326,32 +326,39 @@ async function submit() {
 
   const md = buildMD();
 
-  // ── mailto: 방식 (즉시 작동, 이메일 앱 열림) ──
-  const subject = encodeURIComponent('[타임아카이브] 원장님 시안 피드백 도착');
-  const bodyText = [
-    '작성자: ' + (v('who') || '타임아카이브 원장'),
-    '선호시안: ' + state.pick,
-    '만족도: ' + state.star + '점',
-    '',
-    '좋았던점: ' + (v('good') || '없음'),
-    '아쉬운점: ' + (v('bad') || '없음'),
-    '색감: ' + (state.color.join(', ') || '없음'),
-    '글씨크기: ' + (state.font.join(', ') || '없음'),
-    '추가요청: ' + (v('add') || '없음'),
-    '기타의견: ' + (v('etc') || '없음'),
-  ].join('\n');
+  try {
+    const res = await fetch('https://formspree.io/f/mdarzydb', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+      body: JSON.stringify({
+        _subject: '[타임아카이브] 원장님 시안 피드백 도착',
+        작성자: v('who') || '타임아카이브 원장',
+        선호시안: state.pick,
+        만족도: state.star + '점',
+        좋았던점: v('good') || '없음',
+        아쉬운점: v('bad') || '없음',
+        색감: state.color.join(', ') || '없음',
+        글씨크기: state.font.join(', ') || '없음',
+        추가요청: v('add') || '없음',
+        기타의견: v('etc') || '없음',
+        피드백전문: md,
+      }),
+    });
 
-  const mailLink = 'mailto:vipermo15@gmail.com?subject=' + subject + '&body=' + encodeURIComponent(bodyText);
-
-  // 이메일 앱 열기 시도
-  const mailWindow = window.open(mailLink, '_self');
-
-  // 완료 화면 표시 (0.8초 후)
-  setTimeout(() => {
-    document.getElementById('formwrap').style.display = 'none';
-    document.getElementById('done').classList.add('show');
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  }, 800);
+    const data = await res.json();
+    if (res.ok) {
+      document.getElementById('formwrap').style.display = 'none';
+      document.getElementById('done').classList.add('show');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    } else {
+      throw new Error(data.error || '전송 실패');
+    }
+  } catch (e) {
+    btn.disabled = false;
+    btn.textContent = '피드백 전송하기';
+    toast('전송에 실패했습니다. 잠시 후 다시 시도해 주세요.');
+    console.error(e);
+  }
 }
 
 
