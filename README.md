@@ -10,13 +10,9 @@
 | 시안 A · 다크룸 | https://vipermo15-dotcom.github.io/timearchive/design-a-darkroom.html |
 | 시안 B · 아카이브 | https://vipermo15-dotcom.github.io/timearchive/design-b-archive.html |
 
-## 파일
+## 배포 예정
 
-- `index.html` — 피드백 페이지 (Formspree 알림 연동)
-- `design-a-darkroom.html` — 시안 A
-- `design-b-archive.html` — 시안 B
-- `SETUP.md` — GitHub Pages + Formspree 세팅 방법
-
-## 세팅
-
-`SETUP.md` 참고
+- 도메인: **timearchive.co.kr**
+- 호스팅: 카페24 (기존 외주 호스팅 → 이전 예정)
+- 전화: 02-545-5457
+- 설립: 1999
