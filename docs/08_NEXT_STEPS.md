@@ -6,13 +6,16 @@
 
 ---
 
-## 현재 상태 (2026.06.28)
+## 현재 상태 (2026.06.30)
 
 ```
 ✅ 전략 기획 완료
 ✅ 두 시안 전체 개발 완료 (14개 섹션)
 ✅ GitHub Pages 배포 완료
 ✅ 원장님 피드백 페이지 + Formspree 알림 연동 완료
+✅ 상담 폼 Formspree 실제 연동 완료 (mdarzydb → vipermo15@gmail.com)
+✅ SEO 메타태그 추가 완료 (두 시안 모두)
+✅ 사파사진학원 벤치마킹 완료 → 제안서 작성 완료
 ⏳ 원장님 시안 피드백 대기 중
 ```
 
@@ -47,7 +50,10 @@
 
 ---
 
-## Phase 3 — Supabase 상담 폼 연동
+## Phase 3 — Supabase 상담 폼 연동 (선택 — Formspree로 이미 작동 중)
+
+> ⚠️ 현재 Formspree로 실제 상담 신청이 vipermo15@gmail.com으로 전송됨.
+> Supabase는 신청 내역을 대시보드로 조회하고 싶을 때 추가.
 
 - [ ] Supabase 프로젝트 생성 (supabase.com)
 - [ ] consultations 테이블 생성
@@ -64,8 +70,7 @@
   create policy "allow insert for all" on consultations
     for insert to anon with check (true);
   ```
-- [ ] .env.local 환경변수 입력
-- [ ] Sections3.jsx Consult 컴포넌트 주석 해제
+- [ ] 빌드된 HTML에서 Formspree fetch 코드 → Supabase JS SDK 코드로 교체
 - [ ] 폼 제출 테스트 확인
 
 ---
@@ -95,11 +100,23 @@
 
 ## Phase 6 — SEO & 성능 (P2)
 
+- [x] title, description, OG 태그, LD+JSON 구조화 데이터 추가 (2026.06.30)
 - [ ] robots.txt + sitemap.xml 생성
 - [ ] 네이버 서치어드바이저 등록
 - [ ] Google Search Console 등록
 - [ ] Core Web Vitals 최적화 (LCP < 2.5s)
 - [ ] next/image로 이미지 최적화
+
+---
+
+## 추가 자료 (2026.06.30)
+
+- `/Desktop/홍보-자동화/outputs/제안서-타임사진학원-20260630.md`
+  - 사파사진학원 벤치마킹 전체 분석
+  - 영상 과정 신설 3개 제안
+  - AI 과정 신설 3개 제안
+  - 홈페이지 리뉴얼 우선순위 / 마케팅 전략 / 실행 로드맵
+  - 원장님 제출 전 검토 권장
 
 ---
 
