@@ -3,382 +3,300 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>타임아카이브 — 홈페이지 시안 피드백</title>
-<!-- OG 태그 (카톡 공유 시 썸네일) -->
-<meta property="og:title" content="타임아카이브 홈페이지 시안 피드백">
-<meta property="og:description" content="새 홈페이지 시안 A·B를 보시고 편하게 의견 남겨주세요">
-<meta property="og:type" content="website">
+<title>타임아카이브 — 홈페이지 시안 비교</title>
+<meta property="og:title" content="타임아카이브 홈페이지 시안 비교">
+<meta property="og:description" content="시안 A · B · C 전체 비교">
 <link rel="preconnect" href="https://cdn.jsdelivr.net">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css">
 <style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 :root {
-  --black: #0D0D0F; --paper: #EDEAE3; --gold: #C9A84C;
-  --teal: #2C4A47; --line: #DDD8CD; --text: #1A1815; --dim: #6b6660;
-  --red: #C8483C;
+  --bg:    #F9F7F3;
+  --white: #FFFFFF;
+  --black: #0C0B09;
+  --text:  #1A1816;
+  --sub:   #6B6762;
+  --dim:   #A09D97;
+  --gold:  #B8923A;
+  --teal:  #2C4A47;
+  --red:   #C8483C;
+  --border:#E6E1D7;
+  --fn: 'Pretendard', -apple-system, sans-serif;
 }
-* { margin: 0; padding: 0; box-sizing: border-box; }
-body { font-family: 'Pretendard', -apple-system, sans-serif; background: var(--paper); color: var(--text); }
-.wrap { max-width: 720px; margin: 0 auto; padding: 0 20px 100px; }
+html { scroll-behavior: smooth; }
+body { font-family: var(--fn); background: var(--bg); color: var(--text); -webkit-font-smoothing: antialiased; }
 
-/* 헤더 */
-header { text-align: center; padding: 52px 20px 36px; border-bottom: 1px solid var(--line); margin-bottom: 40px; }
-.logo { display: flex; align-items: center; justify-content: center; gap: 8px; margin-bottom: 18px; }
-.logo-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--gold); }
-.logo-text { font-size: 16px; font-weight: 700; letter-spacing: .18em; }
-h1 { font-size: clamp(24px, 5vw, 34px); font-weight: 800; margin-bottom: 10px; letter-spacing: -.01em; }
-header p { color: var(--dim); font-size: 15px; line-height: 1.7; }
-
-/* 섹션 */
-section { margin-bottom: 40px; }
-.step-label { font-size: 12px; font-weight: 700; letter-spacing: .15em; color: var(--gold); text-transform: uppercase; margin-bottom: 6px; }
-h2 { font-size: 20px; font-weight: 800; margin-bottom: 6px; }
-.desc { color: var(--dim); font-size: 14px; margin-bottom: 16px; }
-
-/* 시안 카드 */
-.preview-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; }
-.pcard { border: 2px solid var(--line); border-radius: 12px; overflow: hidden; background: #fff; text-decoration: none; color: inherit; display: block; transition: transform .2s, box-shadow .2s; }
-.pcard:hover, .pcard:active { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,.1); }
-.pthumb { height: 100px; display: flex; align-items: center; justify-content: center; font-size: 15px; font-weight: 800; letter-spacing: .08em; }
-.pthumb.a { background: linear-gradient(135deg, #2a1a18, #0D0D0F); color: #D4D2CC; }
-.pthumb.a em { color: var(--red); font-style: normal; margin: 0 4px; }
-.pthumb.b { background: linear-gradient(135deg, #d8d2c5, #b3a890); color: #1A1815; }
-.pthumb.b em { color: var(--teal); font-style: normal; margin: 0 4px; }
-.pthumb.c { background: linear-gradient(135deg, #1a1710, #0c0b09); color: #EDEAE3; }
-.pthumb.c em { color: #B8923A; font-style: normal; margin: 0 4px; }
-.pbody { padding: 12px 14px 14px; }
-.pbody strong { font-size: 14px; display: block; margin-bottom: 3px; }
-.pbody small { color: var(--dim); font-size: 12px; line-height: 1.5; display: block; }
-.popen { display: inline-block; margin-top: 8px; font-size: 13px; font-weight: 700; color: var(--gold); }
-
-/* 선택지 */
-.choice-grid { display: flex; gap: 10px; flex-wrap: wrap; }
-.choice { flex: 1; min-width: 120px; border: 2px solid var(--line); border-radius: 10px; padding: 14px 10px; background: #fff; cursor: pointer; font-size: 15px; font-weight: 600; text-align: center; line-height: 1.4; transition: all .2s; font-family: inherit; }
-.choice:hover { border-color: var(--gold); }
-.choice.sel { border-color: var(--gold); background: #FBF8F0; }
-
-/* 별점 */
-.stars { display: flex; gap: 8px; }
-.star { font-size: 36px; color: #DDD8CD; cursor: pointer; line-height: 1; transition: color .15s, transform .1s; user-select: none; }
-.star:hover { transform: scale(1.1); }
-.star.on { color: var(--gold); }
-
-/* 입력 */
-label.qlabel { display: block; font-weight: 600; font-size: 15px; margin: 18px 0 8px; }
-textarea, input[type=text], input[type=email] {
-  width: 100%; border: 1.5px solid var(--line); border-radius: 10px;
-  padding: 14px 15px; font-size: 16px; font-family: inherit;
-  background: #fff; resize: vertical; transition: border-color .2s;
+/* HEADER */
+.hd {
+  padding: 56px 48px 48px;
+  max-width: 1200px; margin: 0 auto;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 64px;
 }
-textarea { min-height: 90px; }
-textarea:focus, input:focus { outline: none; border-color: var(--gold); }
+.hd-logo { display: flex; align-items: center; gap: 8px; margin-bottom: 32px; }
+.hd-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--gold); }
+.hd-name { font-size: 13px; font-weight: 700; letter-spacing: .18em; color: var(--text); }
+.hd-title { font-size: clamp(28px, 4vw, 44px); font-weight: 800; letter-spacing: -.02em; color: var(--text); margin-bottom: 12px; }
+.hd-sub { font-size: 16px; color: var(--sub); line-height: 1.7; }
 
-/* 칩 */
-.chips { display: flex; flex-wrap: wrap; gap: 8px; }
-.chip { border: 1.5px solid var(--line); border-radius: 999px; padding: 10px 18px; font-size: 14px; cursor: pointer; background: #fff; user-select: none; font-family: inherit; transition: all .2s; }
-.chip.on { background: var(--teal); color: #fff; border-color: var(--teal); }
+/* GRID */
+.grid {
+  max-width: 1200px; margin: 0 auto 80px;
+  padding: 0 48px;
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;
+}
 
-/* 제출 */
-.submit-wrap { padding: 28px 0 0; }
-.btn { width: 100%; border: none; border-radius: 12px; padding: 20px; font-size: 17px; font-weight: 700; cursor: pointer; font-family: inherit; transition: background .2s; }
-.btn-main { background: var(--black); color: #fff; }
-.btn-main:hover { background: #222; }
-.btn-main:disabled { background: #aaa; cursor: not-allowed; }
+/* CARD */
+.card {
+  background: var(--white); border: 1px solid var(--border);
+  border-radius: 16px; overflow: hidden;
+  display: flex; flex-direction: column;
+  transition: box-shadow .25s, transform .25s;
+}
+.card:hover { box-shadow: 0 16px 48px rgba(0,0,0,.1); transform: translateY(-3px); }
 
-/* 완료 화면 */
-.done { display: none; text-align: center; padding: 48px 20px; }
-.done.show { display: block; }
-.done-icon { width: 72px; height: 72px; border-radius: 50%; background: var(--teal); color: #fff; font-size: 36px; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; }
-.done h2 { font-size: 22px; margin-bottom: 10px; }
-.done p { color: var(--dim); font-size: 15px; line-height: 1.8; }
+/* CARD THUMBNAIL */
+.thumb {
+  height: 200px; display: flex; flex-direction: column;
+  align-items: center; justify-content: center; gap: 8px;
+  position: relative; overflow: hidden;
+}
+.thumb-a { background: linear-gradient(145deg, #1a0e0c, #0C0B09); }
+.thumb-b { background: linear-gradient(145deg, #d8d2c5, #EDEAE3); }
+.thumb-c { background: linear-gradient(145deg, #ede9e0, #F9F7F3); }
 
-/* 에러 */
-.err { color: var(--red); font-size: 13px; margin-top: 6px; display: none; }
-.err.show { display: block; }
+.thumb-badge {
+  font-size: 11px; font-weight: 700; letter-spacing: .18em; text-transform: uppercase;
+  padding: 5px 12px; border-radius: 999px; margin-bottom: 6px;
+}
+.badge-a { background: rgba(200,72,60,.18); color: #C8483C; border: 1px solid rgba(200,72,60,.3); }
+.badge-b { background: rgba(44,74,71,.12); color: #2C4A47; border: 1px solid rgba(44,74,71,.25); }
+.badge-c { background: rgba(184,146,58,.14); color: #8B6E28; border: 1px solid rgba(184,146,58,.3); }
 
-/* 토스트 */
-.toast { position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%); background: var(--black); color: #fff; padding: 12px 22px; border-radius: 8px; font-size: 14px; opacity: 0; transition: opacity .3s; pointer-events: none; white-space: nowrap; z-index: 99; }
-.toast.show { opacity: 1; }
+.thumb-label { font-size: 22px; font-weight: 800; letter-spacing: -.01em; }
+.label-a { color: #EDEAE3; }
+.label-b { color: #1A1816; }
+.label-c { color: #1A1816; }
+
+.thumb-desc { font-size: 12px; font-weight: 500; letter-spacing: .04em; }
+.desc-a { color: rgba(237,234,227,.5); }
+.desc-b { color: rgba(26,24,22,.45); }
+.desc-c { color: rgba(26,24,22,.45); }
+
+/* COLOR DOTS */
+.thumb-dots {
+  position: absolute; bottom: 16px; display: flex; gap: 6px;
+}
+.dot { width: 10px; height: 10px; border-radius: 50%; }
+
+/* CARD BODY */
+.card-body { padding: 28px 28px 32px; flex: 1; display: flex; flex-direction: column; }
+.card-name { font-size: 18px; font-weight: 700; color: var(--text); margin-bottom: 8px; }
+.card-mood { font-size: 13px; color: var(--sub); line-height: 1.6; margin-bottom: 20px; flex: 1; }
+.card-tags { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 24px; }
+.tag {
+  padding: 5px 12px; border-radius: 999px; border: 1px solid var(--border);
+  font-size: 12px; font-weight: 600; color: var(--sub);
+}
+.card-cta {
+  display: block; text-align: center; padding: 14px;
+  border-radius: 10px; font-size: 15px; font-weight: 700;
+  transition: all .2s;
+}
+.cta-a { background: #0C0B09; color: #EDEAE3; }
+.cta-a:hover { background: #1a1715; }
+.cta-b { background: #2C4A47; color: #EDEAE3; }
+.cta-b:hover { background: #3a6460; }
+.cta-c { background: var(--gold); color: #0C0B09; }
+.cta-c:hover { background: #D4AB54; }
+
+/* SELECTED BADGE */
+.selected-ribbon {
+  background: var(--teal); color: #fff;
+  font-size: 11px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase;
+  text-align: center; padding: 8px;
+}
+
+/* COMPARE TABLE */
+.compare-wrap { max-width: 1200px; margin: 0 auto 80px; padding: 0 48px; }
+.compare-title { font-size: 20px; font-weight: 700; margin-bottom: 24px; color: var(--text); }
+.compare-table { width: 100%; border-collapse: collapse; background: var(--white); border-radius: 12px; overflow: hidden; border: 1px solid var(--border); }
+.compare-table th, .compare-table td { padding: 16px 20px; text-align: left; border-bottom: 1px solid var(--border); font-size: 14px; }
+.compare-table th { font-weight: 700; color: var(--sub); font-size: 12px; letter-spacing: .08em; text-transform: uppercase; background: var(--bg); }
+.compare-table tr:last-child td { border-bottom: none; }
+.compare-table td:first-child { color: var(--sub); font-weight: 600; }
+.sel-mark { display: inline-flex; align-items: center; gap: 5px; color: var(--teal); font-weight: 700; }
+
+/* FOOTER */
+footer {
+  border-top: 1px solid var(--border); padding: 32px 48px;
+  max-width: 1200px; margin: 0 auto;
+  display: flex; justify-content: space-between; align-items: center;
+  flex-wrap: wrap; gap: 12px;
+  font-size: 13px; color: var(--dim);
+}
+
+/* RESPONSIVE */
+@media (max-width: 900px) {
+  .hd { padding: 40px 24px 36px; margin-bottom: 40px; }
+  .grid { grid-template-columns: 1fr; padding: 0 24px; gap: 20px; }
+  .compare-wrap { padding: 0 24px; }
+  footer { padding: 28px 24px; }
+}
+@media (max-width: 600px) {
+  .compare-table { font-size: 13px; }
+  .compare-table th, .compare-table td { padding: 12px 14px; }
+}
 </style>
 </head>
 <body>
-<div class="wrap">
-  <header>
-    <div class="logo"><span class="logo-dot"></span><span class="logo-text">TIME ARCHIVE</span></div>
-    <h1>홈페이지 시안 피드백</h1>
-    <p>원장님, 두 시안을 보시고 편하게 의견 남겨주세요.<br>작성하시면 교수님께 바로 알림이 갑니다.</p>
-  </header>
 
-  <!-- 완료 화면 -->
-  <div class="done" id="done">
-    <div class="done-icon">✓</div>
-    <h2>피드백이 전달되었습니다</h2>
-    <p>감사합니다, 원장님.<br>교수님께 바로 알림이 갔습니다.<br>검토 후 빠르게 연락드리겠습니다.</p>
+<div class="hd">
+  <div class="hd-logo"><span class="hd-dot"></span><span class="hd-name">TIME ARCHIVE</span></div>
+  <h1 class="hd-title">홈페이지 시안 비교</h1>
+  <p class="hd-sub">세 가지 디자인 방향을 비교해보세요. 시안 B(아카이브)가 최종 확정됐습니다.</p>
+</div>
+
+<div class="grid">
+
+  <!-- 시안 A -->
+  <div class="card">
+    <div class="thumb thumb-a">
+      <span class="thumb-badge badge-a">Design A</span>
+      <span class="thumb-label label-a">다크룸</span>
+      <span class="thumb-desc desc-a">Darkroom</span>
+      <div class="thumb-dots">
+        <span class="dot" style="background:#0C0B09;border:1px solid rgba(255,255,255,.2)"></span>
+        <span class="dot" style="background:#C8483C"></span>
+        <span class="dot" style="background:#D4D2CC"></span>
+      </div>
+    </div>
+    <div class="card-body">
+      <p class="card-name">시안 A · 다크룸</p>
+      <p class="card-mood">검정 배경에 레드 액센트. 강렬하고 몰입감 있는 분위기. 상업사진학원의 전문성을 부각합니다.</p>
+      <div class="card-tags">
+        <span class="tag">다크 톤</span>
+        <span class="tag">레드 포인트</span>
+        <span class="tag">강렬함</span>
+      </div>
+      <a class="card-cta cta-a" href="./design-a-darkroom.html" target="_blank">열어보기 →</a>
+    </div>
   </div>
 
-  <!-- 폼 -->
-  <div id="formwrap">
-
-    <!-- STEP 1 -->
-    <section>
-      <div class="step-label">STEP 1</div>
-      <h2>먼저, 두 시안을 봐주세요</h2>
-      <p class="desc">카드를 누르면 새 창으로 열립니다. 둘 다 천천히 둘러봐 주세요.</p>
-      <div class="preview-grid">
-        <a class="pcard" href="./design-a-darkroom.html" target="_blank" rel="noopener">
-          <div class="pthumb a">TIME<em>·</em>A</div>
-          <div class="pbody">
-            <strong>시안 A · 다크룸</strong>
-            <small>검정 배경 + 빨강<br>강렬하고 몰입감 있는 느낌</small>
-            <span class="popen">열어보기 →</span>
-          </div>
-        </a>
-        <a class="pcard" href="./design-b-archive.html" target="_blank" rel="noopener">
-          <div class="pthumb b">TIME<em>·</em>B</div>
-          <div class="pbody">
-            <strong>시안 B · 아카이브</strong>
-            <small>밝은 종이 톤 + 명조체<br>차분하고 격조 있는 느낌</small>
-            <span class="popen">열어보기 →</span>
-          </div>
-        </a>
-        <a class="pcard" href="./design-c-editorial.html" target="_blank" rel="noopener">
-          <div class="pthumb c">TIME<em>·</em>C</div>
-          <div class="pbody">
-            <strong>시안 C · 에디토리얼</strong>
-            <small>흰 배경 + 골드 + 대형 타이포<br>미니멀하고 현대적인 느낌</small>
-            <span class="popen">열어보기 →</span>
-          </div>
-        </a>
+  <!-- 시안 B (확정) -->
+  <div class="card" style="border-color:#2C4A47;border-width:2px;">
+    <div class="selected-ribbon">✓ 원장님 선택 · 최종 확정</div>
+    <div class="thumb thumb-b">
+      <span class="thumb-badge badge-b">Design B</span>
+      <span class="thumb-label label-b">아카이브</span>
+      <span class="thumb-desc desc-b">Archive</span>
+      <div class="thumb-dots">
+        <span class="dot" style="background:#EDEAE3;border:1px solid rgba(0,0,0,.15)"></span>
+        <span class="dot" style="background:#2C4A47"></span>
+        <span class="dot" style="background:#C9A84C"></span>
       </div>
-    </section>
-
-    <!-- STEP 2 -->
-    <section>
-      <div class="step-label">STEP 2</div>
-      <h2>어느 쪽이 더 마음에 드시나요?</h2>
-      <p class="desc">하나를 골라주세요.</p>
-      <div class="choice-grid" id="picks">
-        <button class="choice" type="button" data-v="시안 A (다크룸)">시안 A<br>다크룸</button>
-        <button class="choice" type="button" data-v="시안 B (아카이브)">시안 B<br>아카이브</button>
-        <button class="choice" type="button" data-v="시안 C (에디토리얼)">시안 C<br>에디토리얼</button>
-        <button class="choice" type="button" data-v="둘 다 좋음">전부 고민됨</button>
-      </div>
-      <div class="err" id="err-pick">시안을 선택해 주세요.</div>
-    </section>
-
-    <!-- STEP 3 -->
-    <section>
-      <div class="step-label">STEP 3</div>
-      <h2>전체적인 첫인상은 몇 점인가요?</h2>
-      <div class="stars" id="stars">
-        <span class="star" data-n="1">★</span>
-        <span class="star" data-n="2">★</span>
-        <span class="star" data-n="3">★</span>
-        <span class="star" data-n="4">★</span>
-        <span class="star" data-n="5">★</span>
-      </div>
-      <div class="err" id="err-star">별점을 선택해 주세요.</div>
-    </section>
-
-    <!-- STEP 4 -->
-    <section>
-      <div class="step-label">STEP 4</div>
-      <h2>구체적으로 알려주세요</h2>
-      <p class="desc">생각나는 것만 적으셔도 됩니다.</p>
-
-      <label class="qlabel">좋았던 점</label>
-      <textarea id="good" placeholder="예: 첫 화면 글씨가 크고 시원하다 / 작품이 잘 보인다"></textarea>
-
-      <label class="qlabel">아쉬운 점 · 바꿨으면 하는 부분</label>
-      <textarea id="bad" placeholder="예: 색이 너무 어둡다 / 상담 버튼이 더 눈에 띄었으면"></textarea>
-
-      <label class="qlabel">색감은 어떠세요?</label>
-      <div class="chips" id="color-chips">
-        <button type="button" class="chip" data-v="지금이 좋다">지금이 좋다</button>
-        <button type="button" class="chip" data-v="더 밝았으면">더 밝았으면</button>
-        <button type="button" class="chip" data-v="더 차분했으면">더 차분했으면</button>
-        <button type="button" class="chip" data-v="포인트 색 변경">포인트 색 변경</button>
-      </div>
-
-      <label class="qlabel">글씨 크기는 어떠세요?</label>
-      <div class="chips" id="font-chips">
-        <button type="button" class="chip" data-v="적당하다">적당하다</button>
-        <button type="button" class="chip" data-v="더 크게">더 크게</button>
-        <button type="button" class="chip" data-v="더 작게">더 작게</button>
-      </div>
-
-      <label class="qlabel">꼭 들어갔으면 하는 내용</label>
-      <textarea id="add" placeholder="예: 오시는 길 지도 / 수강료 안내 / 특정 작품 사진"></textarea>
-
-      <label class="qlabel">그 밖에 하고 싶은 말씀</label>
-      <textarea id="etc" placeholder="자유롭게 적어주세요"></textarea>
-    </section>
-
-    <!-- 작성자 -->
-    <section>
-      <label class="qlabel">작성자 이름 (선택)</label>
-      <input type="text" id="who" placeholder="예: 타임아카이브 원장">
-    </section>
-
-    <!-- 제출 -->
-    <div class="submit-wrap">
-      <button class="btn btn-main" id="submitBtn" type="button" onclick="submit()">
-        피드백 전송하기
-      </button>
     </div>
+    <div class="card-body">
+      <p class="card-name">시안 B · 아카이브 <span class="sel-mark">✓ 확정</span></p>
+      <p class="card-mood">따뜻한 베이지 배경에 딥 그린 포인트. 차분하고 격조 있는 느낌. 사진학원의 클래식한 전통을 담습니다.</p>
+      <div class="card-tags">
+        <span class="tag">베이지 톤</span>
+        <span class="tag">딥 그린</span>
+        <span class="tag">격조</span>
+      </div>
+      <a class="card-cta cta-b" href="./design-b-archive.html" target="_blank">열어보기 →</a>
+    </div>
+  </div>
 
-  </div><!-- /formwrap -->
-</div><!-- /wrap -->
+  <!-- 시안 C -->
+  <div class="card">
+    <div class="thumb thumb-c">
+      <span class="thumb-badge badge-c">Design C</span>
+      <span class="thumb-label label-c">에디토리얼</span>
+      <span class="thumb-desc desc-c">Editorial</span>
+      <div class="thumb-dots">
+        <span class="dot" style="background:#F9F7F3;border:1px solid rgba(0,0,0,.15)"></span>
+        <span class="dot" style="background:#B8923A"></span>
+        <span class="dot" style="background:#1C1A15"></span>
+      </div>
+    </div>
+    <div class="card-body">
+      <p class="card-name">시안 C · 에디토리얼</p>
+      <p class="card-mood">밝은 베이지 배경에 골드 액센트. 미니멀하고 현대적인 편집 디자인. Apple · Compound 스타일 레이아웃.</p>
+      <div class="card-tags">
+        <span class="tag">화이트/베이지</span>
+        <span class="tag">골드</span>
+        <span class="tag">미니멀</span>
+      </div>
+      <a class="card-cta cta-c" href="./design-c-editorial.html" target="_blank">열어보기 →</a>
+    </div>
+  </div>
 
-<div class="toast" id="toast"></div>
+</div>
 
-<script>
-// ── 상태 ──
-const state = { pick: '', star: 0, color: [], font: [] };
+<!-- 비교표 -->
+<div class="compare-wrap">
+  <p class="compare-title">세 시안 한눈에 비교</p>
+  <table class="compare-table">
+    <thead>
+      <tr>
+        <th>항목</th>
+        <th>시안 A · 다크룸</th>
+        <th>시안 B · 아카이브 ✓</th>
+        <th>시안 C · 에디토리얼</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>배경</td>
+        <td>검정 (#0C0B09)</td>
+        <td>베이지 (#EDEAE3)</td>
+        <td>밝은 베이지 (#F9F7F3)</td>
+      </tr>
+      <tr>
+        <td>액센트</td>
+        <td>레드 (#C8483C)</td>
+        <td>딥 그린 (#2C4A47)</td>
+        <td>골드 (#B8923A)</td>
+      </tr>
+      <tr>
+        <td>분위기</td>
+        <td>강렬 · 몰입감</td>
+        <td>차분 · 격조</td>
+        <td>미니멀 · 현대적</td>
+      </tr>
+      <tr>
+        <td>타이포</td>
+        <td>고딕 Bold</td>
+        <td>명조 + 고딕 혼합</td>
+        <td>대형 고딕 에디토리얼</td>
+      </tr>
+      <tr>
+        <td>레이아웃</td>
+        <td>React 번들</td>
+        <td>React 번들</td>
+        <td>Vanilla HTML (경량)</td>
+      </tr>
+      <tr>
+        <td>참조</td>
+        <td>다크 포토그래피</td>
+        <td>클래식 아카이브</td>
+        <td>Apple · Compound.com</td>
+      </tr>
+      <tr>
+        <td>상태</td>
+        <td>참고용</td>
+        <td><span class="sel-mark">✓ 최종 확정</span></td>
+        <td>참고용</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
 
-// 시안 선택
-document.querySelectorAll('#picks .choice').forEach(btn => {
-  btn.addEventListener('click', () => {
-    document.querySelectorAll('#picks .choice').forEach(b => b.classList.remove('sel'));
-    btn.classList.add('sel');
-    state.pick = btn.dataset.v;
-    document.getElementById('err-pick').classList.remove('show');
-  });
-});
+<footer>
+  <span>© 2026 타임아카이브 사진전문학원</span>
+  <span>시안 B (아카이브) 최종 확정</span>
+</footer>
 
-// 별점
-document.querySelectorAll('#stars .star').forEach(s => {
-  s.addEventListener('click', () => {
-    state.star = +s.dataset.n;
-    document.querySelectorAll('#stars .star').forEach(x =>
-      x.classList.toggle('on', +x.dataset.n <= state.star));
-    document.getElementById('err-star').classList.remove('show');
-  });
-});
-
-// 칩 (다중 선택)
-function initChips(id, key) {
-  document.querySelectorAll('#' + id + ' .chip').forEach(c => {
-    c.addEventListener('click', () => {
-      c.classList.toggle('on');
-      state[key] = [...document.querySelectorAll('#' + id + ' .chip.on')]
-        .map(x => x.dataset.v);
-    });
-  });
-}
-initChips('color-chips', 'color');
-initChips('font-chips', 'font');
-
-function v(id) { return (document.getElementById(id)?.value || '').trim(); }
-
-// ── MD 생성 ──
-function buildMD() {
-  const d = new Date();
-  const date = d.getFullYear() + '-' +
-    String(d.getMonth()+1).padStart(2,'0') + '-' +
-    String(d.getDate()).padStart(2,'0');
-  const stars = '★'.repeat(state.star) + '☆'.repeat(5 - state.star) + ' (' + state.star + '/5)';
-  return [
-    '# 타임아카이브 홈페이지 — 시안 피드백',
-    '',
-    '- 작성일: ' + date,
-    '- 작성자: ' + (v('who') || '타임아카이브 원장'),
-    '',
-    '---',
-    '',
-    '## 1. 선호 시안',
-    state.pick || '(미선택)',
-    '',
-    '## 2. 첫인상 만족도',
-    stars,
-    '',
-    '## 3. 좋았던 점',
-    v('good') || '(없음)',
-    '',
-    '## 4. 아쉬운 점 / 수정 요청',
-    v('bad') || '(없음)',
-    '',
-    '## 5. 색감',
-    state.color.length ? state.color.join(', ') : '(의견 없음)',
-    '',
-    '## 6. 글씨 크기',
-    state.font.length ? state.font.join(', ') : '(의견 없음)',
-    '',
-    '## 7. 추가 요청 내용',
-    v('add') || '(없음)',
-    '',
-    '## 8. 기타 의견',
-    v('etc') || '(없음)',
-    '',
-    '---',
-    '',
-    '> 이 피드백은 디자인 시스템 수정에 반영됩니다.',
-  ].join('\n');
-}
-
-// ── 제출 ──
-async function submit() {
-  let valid = true;
-  if (!state.pick) {
-    document.getElementById('err-pick').classList.add('show');
-    valid = false;
-  }
-  if (!state.star) {
-    document.getElementById('err-star').classList.add('show');
-    valid = false;
-  }
-  if (!valid) {
-    document.getElementById('err-pick').scrollIntoView({ behavior: 'smooth', block: 'center' });
-    return;
-  }
-
-  const btn = document.getElementById('submitBtn');
-  btn.disabled = true;
-  btn.textContent = '전송 중...';
-
-  const md = buildMD();
-
-  try {
-    const res = await fetch('https://formspree.io/f/mdarzydb', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-      body: JSON.stringify({
-        _subject: '[타임아카이브] 원장님 시안 피드백 도착',
-        작성자: v('who') || '타임아카이브 원장',
-        선호시안: state.pick,
-        만족도: state.star + '점',
-        좋았던점: v('good') || '없음',
-        아쉬운점: v('bad') || '없음',
-        색감: state.color.join(', ') || '없음',
-        글씨크기: state.font.join(', ') || '없음',
-        추가요청: v('add') || '없음',
-        기타의견: v('etc') || '없음',
-        피드백전문: md,
-      }),
-    });
-
-    const data = await res.json();
-    if (res.ok) {
-      document.getElementById('formwrap').style.display = 'none';
-      document.getElementById('done').classList.add('show');
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    } else {
-      throw new Error(data.error || '전송 실패');
-    }
-  } catch (e) {
-    btn.disabled = false;
-    btn.textContent = '피드백 전송하기';
-    toast('전송에 실패했습니다. 잠시 후 다시 시도해 주세요.');
-    console.error(e);
-  }
-}
-
-
-function toast(msg) {
-  const t = document.getElementById('toast');
-  t.textContent = msg;
-  t.classList.add('show');
-  setTimeout(() => t.classList.remove('show'), 3000);
-}
-</script>
 </body>
 </html>
