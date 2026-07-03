@@ -42,12 +42,13 @@ body { font-family: var(--fn); background: var(--bg); color: var(--text); -webki
 
 /* GRID */
 .grid {
-  max-width: 1200px; margin: 0 auto 80px;
+  max-width: 1400px; margin: 0 auto 80px;
   padding: 0 48px;
-  display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px;
+  display: grid; grid-template-columns: repeat(5, 1fr); gap: 18px;
 }
-@media (max-width: 1100px) { .grid { grid-template-columns: repeat(2,1fr); } }
-@media (max-width: 640px)  { .grid { grid-template-columns: 1fr; padding: 0 24px; } }
+@media (max-width: 1200px) { .grid { grid-template-columns: repeat(3,1fr); } }
+@media (max-width: 800px)  { .grid { grid-template-columns: repeat(2,1fr); } }
+@media (max-width: 520px)  { .grid { grid-template-columns: 1fr; padding: 0 24px; } }
 
 /* CARD */
 .card {
@@ -161,7 +162,7 @@ footer {
 <div class="hd">
   <div class="hd-logo"><span class="hd-dot"></span><span class="hd-name">TIME ARCHIVE</span></div>
   <h1 class="hd-title">홈페이지 시안 비교</h1>
-  <p class="hd-sub">네 가지 디자인 방향을 비교해보세요. 시안 B(아카이브)가 최종 확정됐습니다.</p>
+  <p class="hd-sub">다섯 가지 디자인 방향을 비교해보세요. 시안 B(아카이브)가 최종 확정됐습니다.</p>
 </div>
 
 <div class="grid">
@@ -247,19 +248,43 @@ footer {
       <span class="thumb-desc" style="color:rgba(229,229,234,.45);">Chrome</span>
       <div class="thumb-dots">
         <span class="dot" style="background:#1D1D1F;border:1px solid rgba(255,255,255,.2)"></span>
-        <span class="dot" style="background:#3A3A3C"></span>
-        <span class="dot" style="background:#C7C7CC"></span>
+        <span class="dot" style="background:#0066cc"></span>
+        <span class="dot" style="background:#f5f5f7;border:1px solid rgba(0,0,0,.1)"></span>
       </div>
     </div>
     <div class="card-body">
       <p class="card-name">시안 D · 크롬</p>
-      <p class="card-mood">Apple 디자인 시스템 적용. 무광택 크롬 모노크롬 팔레트에 교차 타일 레이아웃. 극도의 미니멀리즘.</p>
+      <p class="card-mood">Apple DESIGN.md 오리지날 토큰 적용. Action Blue #0066cc 단일 액센트. 타일 교차 + 필 버튼 시스템.</p>
       <div class="card-tags">
-        <span class="tag">무광택 크롬</span>
-        <span class="tag">모노크롬</span>
         <span class="tag">Apple 시스템</span>
+        <span class="tag">Action Blue</span>
+        <span class="tag">타일 교차</span>
       </div>
       <a class="card-cta cta-d" href="./design-d-chrome.html" target="_blank">열어보기 →</a>
+    </div>
+  </div>
+
+  <!-- 시안 E -->
+  <div class="card">
+    <div class="thumb" style="background:linear-gradient(145deg,#f0f0f2,#e8e8ea);">
+      <span class="thumb-badge" style="background:rgba(0,102,204,.1);color:#0066cc;border:1px solid rgba(0,102,204,.2);">Design E</span>
+      <span class="thumb-label" style="color:#1d1d1f;">스토어</span>
+      <span class="thumb-desc" style="color:rgba(29,29,31,.4);">Store</span>
+      <div class="thumb-dots">
+        <span class="dot" style="background:#f5f5f7;border:1px solid rgba(0,0,0,.15)"></span>
+        <span class="dot" style="background:#0066cc"></span>
+        <span class="dot" style="background:#1d1d1f"></span>
+      </div>
+    </div>
+    <div class="card-body">
+      <p class="card-name">시안 E · 스토어</p>
+      <p class="card-mood">Apple.com/store 레이아웃 그대로 적용. 메가타이틀 히어로, 카드 캐러셀, 카테고리 아이콘, 빠른 링크 칩.</p>
+      <div class="card-tags">
+        <span class="tag">Apple Store</span>
+        <span class="tag">카드 캐러셀</span>
+        <span class="tag">스토어 레이아웃</span>
+      </div>
+      <a class="card-cta" style="background:#0066cc;color:#fff;" href="./design-e-store.html" target="_blank">열어보기 →</a>
     </div>
   </div>
 
@@ -267,7 +292,7 @@ footer {
 
 <!-- 비교표 -->
 <div class="compare-wrap">
-  <p class="compare-title">네 시안 한눈에 비교</p>
+  <p class="compare-title">다섯 시안 한눈에 비교</p>
   <table class="compare-table">
     <thead>
       <tr>
@@ -276,57 +301,57 @@ footer {
         <th>시안 B · 아카이브 ✓</th>
         <th>시안 C · 에디토리얼</th>
         <th>시안 D · 크롬</th>
+        <th>시안 E · 스토어</th>
       </tr>
     </thead>
     <tbody>
       <tr>
         <td>배경</td>
-        <td>검정 (#0C0B09)</td>
-        <td>베이지 (#EDEAE3)</td>
-        <td>밝은 베이지 (#F9F7F3)</td>
-        <td>퓨어 화이트 / 다크 교차</td>
+        <td>검정</td>
+        <td>베이지</td>
+        <td>밝은 베이지</td>
+        <td>화이트/다크 교차</td>
+        <td>파치먼트 + 흰 카드</td>
       </tr>
       <tr>
         <td>액센트</td>
-        <td>레드 (#C8483C)</td>
-        <td>딥 그린 (#2C4A47)</td>
-        <td>골드 (#B8923A)</td>
-        <td>크롬 차콜 (#3A3A3C) 단일</td>
+        <td>레드</td>
+        <td>딥 그린</td>
+        <td>골드</td>
+        <td>Action Blue #0066cc</td>
+        <td>Action Blue #0066cc</td>
       </tr>
       <tr>
         <td>분위기</td>
         <td>강렬 · 몰입감</td>
         <td>차분 · 격조</td>
         <td>미니멀 · 현대적</td>
-        <td>무광택 · 고급 · 절제</td>
-      </tr>
-      <tr>
-        <td>타이포</td>
-        <td>고딕 Bold</td>
-        <td>명조 + 고딕 혼합</td>
-        <td>대형 고딕 에디토리얼</td>
-        <td>Apple-spec 타이트 네거티브 자간</td>
+        <td>Apple 제품 페이지</td>
+        <td>Apple 스토어 페이지</td>
       </tr>
       <tr>
         <td>레이아웃</td>
-        <td>React 번들</td>
-        <td>React 번들</td>
-        <td>Vanilla HTML (경량)</td>
-        <td>Vanilla HTML · Apple 타일 교차</td>
+        <td>React</td>
+        <td>React</td>
+        <td>Vanilla · 타일 교차</td>
+        <td>Vanilla · 타일 교차</td>
+        <td>Vanilla · 카드 캐러셀</td>
       </tr>
       <tr>
-        <td>참조</td>
-        <td>다크 포토그래피</td>
-        <td>클래식 아카이브</td>
-        <td>Apple · Compound.com</td>
-        <td>Apple DESIGN.md 직접 적용</td>
+        <td>핵심 패턴</td>
+        <td>풀블리드 히어로</td>
+        <td>풀블리드 히어로</td>
+        <td>에디토리얼 그리드</td>
+        <td>product-tile 교차</td>
+        <td>메가타이틀 + 수평 카드</td>
       </tr>
       <tr>
         <td>상태</td>
         <td>참고용</td>
         <td><span class="sel-mark">✓ 최종 확정</span></td>
         <td>참고용</td>
-        <td>신규 검토 중</td>
+        <td>검토 중</td>
+        <td>신규</td>
       </tr>
     </tbody>
   </table>

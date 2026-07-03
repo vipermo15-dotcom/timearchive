@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>타임아카이브 사진전문학원</title>
+<meta name="description" content="1999년 설립. 현직 상업 사진작가에게 1:1로 배우는 인천 사진학원.">
+<link rel="preconnect" href="https://cdn.jsdelivr.net">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css">
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+/* ── APPLE DESIGN SYSTEM TOKENS ─────────────────── */
+:root {
+  --primary:         #0066cc;
+  --primary-focus:   #0071e3;
+  --primary-on-dark: #2997ff;
+  --ink:             #1d1d1f;
+  --ink-muted-80:    #333333;
+  --ink-muted-48:    #7a7a7a;
+  --on-dark:         #ffffff;
+  --body-muted:      #cccccc;
+  --canvas:          #ffffff;
+  --parch:           #f5f5f7;
+  --tile-1:          #1d1d1f;
+  --tile-2:          #272729;
+  --nav-black:       #000000;
+  --hairline:        #e0e0e0;
+  --divider:         rgba(0,0,0,0.08);
+  --product-shadow:  rgba(0,0,0,0.22) 3px 5px 30px 0;
+  --r-sm: 8px; --r-md: 11px; --r-lg: 18px; --r-pill: 9999px;
+  --fn: 'Pretendard', system-ui, -apple-system, sans-serif;
+}
+html { scroll-behavior: smooth; }
+body { font-family: var(--fn); background: var(--parch); color: var(--ink); -webkit-font-smoothing: antialiased; }
+a { text-decoration: none; color: inherit; }
+ul { list-style: none; }
+
+/* ── TYPOGRAPHY (Apple DESIGN.md spec) ─────────── */
+.tn  { font-size:12px; font-weight:400; line-height:1.0;  letter-spacing:-0.12px; }
+.tc  { font-size:14px; font-weight:400; line-height:1.43; letter-spacing:-0.224px; }
+.tcs { font-size:14px; font-weight:600; line-height:1.29; letter-spacing:-0.224px; }
+.tb  { font-size:17px; font-weight:400; line-height:1.47; letter-spacing:-0.374px; }
+.tbs { font-size:17px; font-weight:600; line-height:1.24; letter-spacing:-0.374px; }
+.tdl { font-size:17px; font-weight:400; line-height:2.41; letter-spacing:0; }       /* dense-link */
+.ttg { font-size:21px; font-weight:600; line-height:1.19; letter-spacing:0.231px; } /* tagline */
+.tlg { font-size:clamp(19px,2.5vw,28px); font-weight:400; line-height:1.14; letter-spacing:0.196px; }
+.tdm { font-size:clamp(22px,3vw,34px);   font-weight:600; line-height:1.47; letter-spacing:-0.374px; }
+.td  { font-size:clamp(28px,4vw,40px);   font-weight:600; line-height:1.10; letter-spacing:0; }
+.th  { font-size:clamp(34px,5vw,56px);   font-weight:600; line-height:1.07; letter-spacing:-0.28px; }
+.tf  { font-size:12px; font-weight:400; line-height:1.0;  letter-spacing:-0.12px; }
+
+/* ── GLOBAL NAV (component.global-nav) ─────────── */
+/* true black / 44px / nav-link type */
+.gnav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 500;
+  height: 44px; display: flex; align-items: center;
+  background: rgba(0,0,0,0.88);
+  backdrop-filter: saturate(180%) blur(20px);
+  -webkit-backdrop-filter: saturate(180%) blur(20px);
+  padding: 0 22px;
+}
+.gnav-inner { width: 100%; max-width: 1440px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; }
+.gnav-logo { display: flex; align-items: center; gap: 9px; }
+.gnav-dot { width: 5px; height: 5px; border-radius: 50%; background: #86868b; }
+.gnav-name { font-size: 14px; font-weight: 600; letter-spacing: .06em; color: var(--on-dark); opacity: .88; }
+.gnav-links { display: flex; gap: 22px; }
+.gnav-links a { color: rgba(255,255,255,.68); transition: color .15s; }
+.gnav-links a:hover { color: #fff; }
+.gnav-action { color: var(--primary-on-dark); }
+.gnav-action:hover { text-decoration: underline; }
+
+/* ── ANNOUNCEMENT BAR (sub-nav-frosted adapted) ── */
+/* parchment-80% / frosted / 52px */
+.announce {
+  position: fixed; top: 44px; left: 0; right: 0; z-index: 400;
+  height: 52px; display: flex; align-items: center; justify-content: center; gap: 20px;
+  background: rgba(245,245,247,0.92);
+  backdrop-filter: saturate(180%) blur(20px);
+  -webkit-backdrop-filter: saturate(180%) blur(20px);
+  border-bottom: 1px solid var(--hairline);
+}
+.announce-arrow { width: 28px; height: 28px; border-radius: 50%; border: 1px solid rgba(0,0,0,.15); display: flex; align-items: center; justify-content: center; font-size: 11px; color: var(--ink-muted-80); cursor: pointer; background: transparent; }
+.announce-text { font-size: 13px; letter-spacing: -0.12px; color: var(--ink-muted-80); }
+.announce-text a { color: var(--primary); }
+.announce-text a:hover { text-decoration: underline; }
+
+/* ── PAGE BODY ─────────────────────────────────── */
+main { padding-top: calc(44px + 52px); }
+
+/* ── SECTION DIVIDER ────────────────────────────── */
+.hline { border: none; border-top: 1px solid var(--hairline); }
+
+/* ── HERO — Apple Store split layout ───────────── */
+/* "스토어" mega-title left / descriptive copy + links right */
+.hero {
+  background: var(--canvas);
+  padding: 56px 44px 48px;
+  display: grid; grid-template-columns: 1fr 1fr; gap: 32px; align-items: end;
+}
+.hero-title {
+  font-size: clamp(72px, 10vw, 140px);
+  font-weight: 600; line-height: 1.0; letter-spacing: -0.04em;
+  color: var(--ink);
+}
+.hero-right { padding-bottom: 4px; }
+.hero-desc {
+  font-size: clamp(19px, 2.2vw, 26px); font-weight: 600;
+  line-height: 1.14; letter-spacing: 0;
+  color: var(--ink); margin-bottom: 22px;
+}
+.hero-links { display: flex; flex-direction: column; gap: 4px; }
+.hero-link {
+  font-size: 17px; font-weight: 400; line-height: 1.47; letter-spacing: -0.374px;
+  color: var(--primary); display: inline-flex; align-items: center; gap: 4px;
+}
+.hero-link:hover { text-decoration: underline; }
+
+/* ── CATEGORY ICONS ROW (horizontal scroll) ─────── */
+.cat-section { background: var(--canvas); padding: 20px 0 28px; }
+.cat-scroll {
+  display: flex; gap: 4px; overflow-x: auto;
+  padding: 0 44px; scrollbar-width: none;
+}
+.cat-scroll::-webkit-scrollbar { display: none; }
+.cat-item {
+  display: flex; flex-direction: column; align-items: center; gap: 10px;
+  flex-shrink: 0; padding: 12px 16px; cursor: pointer;
+  transition: opacity .18s; min-width: 84px;
+  text-decoration: none;
+}
+.cat-item:hover { opacity: .7; }
+.cat-icon {
+  width: 64px; height: 64px; border-radius: 50%;
+  background: var(--parch);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 28px; overflow: hidden;
+  /* The one product shadow — applied to imagery */
+  box-shadow: var(--product-shadow);
+}
+.cat-name { font-size: 12px; font-weight: 400; letter-spacing: -0.12px; color: var(--ink); text-align: center; white-space: nowrap; }
+
+/* ── SECTION HEADER (Apple Store pattern) ────────── */
+/* "섹션명." ← underlined link, then " 설명." ← plain text, same line */
+.sec-head { padding: 0 44px; margin: 36px 0 20px; }
+.sec-head-title {
+  font-size: clamp(24px, 3vw, 32px); font-weight: 600; line-height: 1.1; letter-spacing: -0.02em;
+  color: var(--ink);
+}
+.sec-head-title .hl { text-decoration: underline; text-underline-offset: 3px; cursor: pointer; }
+.sec-head-title .hl:hover { opacity: .75; }
+.sec-head-title .desc { font-weight: 400; color: var(--ink); }
+
+/* ── COURSE CARD CAROUSEL (store-utility-card adapted) ── */
+.card-scroll {
+  display: flex; gap: 16px; overflow-x: auto;
+  padding: 0 44px 24px; scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+}
+.card-scroll::-webkit-scrollbar { display: none; }
+
+/* Base card: white / rounded.lg / hairline border */
+.s-card {
+  flex-shrink: 0; width: 380px; min-height: 480px; border-radius: var(--r-lg);
+  background: var(--canvas); border: 1px solid var(--hairline);
+  overflow: hidden; display: flex; flex-direction: column;
+  transition: box-shadow .2s;
+}
+.s-card:hover { box-shadow: 0 8px 30px rgba(0,0,0,.12); }
+
+/* Featured dark card */
+.s-card-dark { background: var(--tile-1); border-color: var(--tile-1); }
+.s-card-dark:hover { box-shadow: 0 8px 30px rgba(0,0,0,.4); }
+
+.s-card-body { padding: 28px 24px 0; flex: 1; display: flex; flex-direction: column; }
+.s-card-cat { color: var(--ink-muted-48); margin-bottom: 8px; letter-spacing: .06em; text-transform: uppercase; }
+.s-card-cat-dk { color: rgba(255,255,255,.5); margin-bottom: 8px; letter-spacing: .06em; text-transform: uppercase; }
+.s-card-title { font-size: clamp(22px,2.5vw,28px); font-weight: 600; line-height: 1.1; letter-spacing: -0.02em; color: var(--ink); margin-bottom: 6px; }
+.s-card-title-dk { color: var(--on-dark); margin-bottom: 6px; }
+.s-card-sub { color: var(--ink-muted-80); margin-bottom: 6px; }
+.s-card-sub-dk { color: var(--body-muted); margin-bottom: 6px; }
+.s-card-price { color: var(--ink-muted-80); }
+.s-card-price-dk { color: var(--body-muted); }
+.s-card-links { display: flex; flex-direction: column; gap: 2px; margin-top: 14px; }
+.s-card-link { color: var(--primary); display: inline-flex; align-items: center; gap: 3px; }
+.s-card-link:hover { text-decoration: underline; }
+.s-card-link-dk { color: var(--primary-on-dark); display: inline-flex; align-items: center; gap: 3px; }
+.s-card-link-dk:hover { text-decoration: underline; }
+
+/* Card image area — photography placeholder */
+/* Product shadow only here (DESIGN.md: the ONE shadow) */
+.s-card-img {
+  flex: 1; min-height: 180px; margin: 20px 16px 0;
+  border-radius: var(--r-sm) var(--r-sm) 0 0;
+  display: flex; align-items: center; justify-content: center;
+  position: relative; overflow: hidden;
+}
+.s-card-img-dk {
+  flex: 1; min-height: 200px; margin: 20px 16px 0;
+  border-radius: var(--r-sm) var(--r-sm) 0 0;
+  background: linear-gradient(160deg, #3a3a3c 0%, #2c2c2e 100%);
+  display: flex; align-items: center; justify-content: center;
+  overflow: hidden;
+}
+.ph { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; }
+.ph1 { background: linear-gradient(160deg, #e8e8ed 0%, #d1d1d6 100%); }
+.ph2 { background: linear-gradient(160deg, #ebebf0 0%, #d8d8de 100%); }
+.ph3 { background: linear-gradient(160deg, #e4e4e9 0%, #d0d0d5 100%); }
+.ph4 { background: linear-gradient(160deg, #eaeaef 0%, #d5d5da 100%); }
+.ph-txt { font-size: 9px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: rgba(0,0,0,.2); }
+.ph-kr  { font-size: 16px; font-weight: 300; color: rgba(0,0,0,.18); }
+.ph-txt-dk { font-size: 9px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: rgba(255,255,255,.15); }
+.ph-kr-dk  { font-size: 16px; font-weight: 300; color: rgba(255,255,255,.12); }
+
+/* ── PROMO / HIGHLIGHT CARDS (3-col grid) ────────── */
+/* Like Apple Store "할인 및 프로모션" section */
+.promo-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; padding: 0 44px; }
+.p-card {
+  border-radius: var(--r-lg); min-height: 360px;
+  background: var(--canvas); border: 1px solid var(--hairline);
+  padding: 28px; display: flex; flex-direction: column;
+  transition: box-shadow .2s;
+}
+.p-card:hover { box-shadow: 0 8px 30px rgba(0,0,0,.1); }
+.p-card-dark { background: var(--tile-1); border-color: var(--tile-1); }
+.p-card-dark:hover { box-shadow: 0 8px 30px rgba(0,0,0,.4); }
+.p-card-mid  { background: var(--tile-2); border-color: var(--tile-2); }
+.p-cat  { color: var(--ink-muted-48); letter-spacing: .06em; text-transform: uppercase; margin-bottom: 12px; }
+.p-cat-dk { color: rgba(255,255,255,.45); letter-spacing: .06em; text-transform: uppercase; margin-bottom: 12px; }
+.p-title  { font-size: clamp(20px,2vw,26px); font-weight: 600; line-height: 1.2; letter-spacing: -0.02em; color: var(--ink); margin-bottom: 12px; }
+.p-title-dk { color: var(--on-dark); margin-bottom: 12px; }
+.p-body  { color: var(--ink-muted-80); flex: 1; }
+.p-body-dk { color: var(--body-muted); flex: 1; }
+.p-link  { color: var(--primary); margin-top: 20px; display: inline-flex; align-items: center; gap: 3px; }
+.p-link:hover { text-decoration: underline; }
+.p-link-dk { color: var(--primary-on-dark); margin-top: 20px; display: inline-flex; align-items: center; gap: 3px; }
+.p-link-dk:hover { text-decoration: underline; }
+
+/* ── QUICK LINKS (pill chips) ────────────────────── */
+/* Apple Store "빠른 링크" section */
+.ql-section { padding: 36px 44px; }
+.ql-title { font-size: 21px; font-weight: 600; line-height: 1.19; letter-spacing: 0.231px; color: var(--ink); margin-bottom: 20px; }
+.ql-chips { display: flex; gap: 12px; flex-wrap: wrap; }
+.ql-chip {
+  padding: 12px 22px; border-radius: var(--r-pill);
+  background: rgba(0,0,0,.05); color: var(--ink);
+  font-size: 14px; font-weight: 400; letter-spacing: -0.224px;
+  border: 1px solid rgba(0,0,0,.08); cursor: pointer;
+  transition: background .15s;
+}
+.ql-chip:hover { background: rgba(0,0,0,.1); }
+
+/* ── FOOTER (component.footer) ──────────────────── */
+/* parchment / dense-link (17px/2.41) / fine-print / 64px padding */
+footer { background: var(--parch); padding: 52px 44px 28px; border-top: 1px solid var(--hairline); }
+.ft-wrap { max-width: 980px; margin: 0 auto; }
+.ft-cols { display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr; gap: 48px; margin-bottom: 40px; }
+.ft-brand-n { font-size: 14px; font-weight: 600; letter-spacing: .06em; color: var(--ink); }
+.ft-brand-s { font-size: 12px; letter-spacing: -0.12px; color: var(--ink-muted-80); margin-top: 12px; line-height: 1.8; }
+.ft-col-h { margin-bottom: 4px; color: var(--ink-muted-80); }
+.ft-col ul a { display: block; color: var(--ink-muted-80); transition: color .15s; }
+.ft-col ul a:hover { color: var(--ink); }
+.ft-hr { border: none; border-top: 1px solid var(--hairline); margin-bottom: 20px; }
+.ft-legal { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px; }
+.ft-legal p, .ft-legal a { color: var(--ink-muted-48); }
+
+/* ── RESPONSIVE ──────────────────────────────────── */
+@media (max-width: 1068px) {
+  .promo-grid { grid-template-columns: 1fr 1fr; }
+  .ft-cols { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 834px) {
+  .gnav-links { display: none; }
+  .hero { grid-template-columns: 1fr; padding: 44px 22px 36px; }
+  .promo-grid { grid-template-columns: 1fr; padding: 0 22px; }
+  .sec-head { padding: 0 22px; }
+  .card-scroll { padding: 0 22px 24px; }
+  .ql-section { padding: 36px 22px; }
+  footer { padding: 44px 22px 24px; }
+  .s-card { width: 300px; }
+  .cat-scroll { padding: 0 22px; }
+}
+@media (max-width: 640px) {
+  .hero { padding: 36px 22px 28px; }
+  .hero-title { font-size: 68px; }
+  .promo-grid { grid-template-columns: 1fr; }
+  .ft-cols { grid-template-columns: 1fr 1fr; }
+  .s-card { width: 280px; min-height: 400px; }
+  .p-card { min-height: 280px; }
+}
+</style>
+</head>
+<body>
+
+<!-- ══ GLOBAL NAV — component.global-nav ══ -->
+<nav class="gnav">
+  <div class="gnav-inner">
+    <div class="gnav-logo">
+      <span class="gnav-dot"></span>
+      <span class="gnav-name">TIME ARCHIVE</span>
+    </div>
+    <ul class="gnav-links">
+      <li><a href="#courses" class="tn">과정</a></li>
+      <li><a href="#highlights" class="tn">혜택</a></li>
+      <li><a href="#instructor" class="tn">강사</a></li>
+      <li><a href="#gallery" class="tn">갤러리</a></li>
+      <li><a href="#contact" class="tn">상담</a></li>
+    </ul>
+    <a href="tel:0254554457" class="tn gnav-action">전화 상담</a>
+  </div>
+</nav>
+
+<!-- ══ ANNOUNCEMENT BAR — sub-nav-frosted ══ -->
+<div class="announce">
+  <button class="announce-arrow">‹</button>
+  <p class="announce-text tc">1:1 맞춤 수업으로 내 속도에 맞게 배우세요. <a href="tel:0254554457">지금 상담하기 →</a></p>
+  <button class="announce-arrow">›</button>
+</div>
+
+<main>
+
+<!-- ══ HERO — Apple Store "스토어" split layout ══ -->
+<!-- Oversized title left / descriptive copy + arrow links right -->
+<section class="hero">
+  <div>
+    <h1 class="hero-title">타임<br>아카이브</h1>
+  </div>
+  <div class="hero-right">
+    <p class="hero-desc">현직 작가에게 배우는<br>가장 좋은 방법.</p>
+    <div class="hero-links">
+      <a href="tel:0254554457" class="hero-link tb">상담 신청하기 ↗</a>
+      <a href="#courses" class="hero-link tb">과정 알아보기 ↗</a>
+    </div>
+  </div>
+</section>
+
+<hr class="hline">
+
+<!-- ══ CATEGORY ICONS — horizontal scroll row ══ -->
+<!-- Photography genres as product categories -->
+<section class="cat-section">
+  <div class="cat-scroll">
+    <a href="#" class="cat-item">
+      <div class="cat-icon" style="font-size:26px;">🧑</div>
+      <span class="cat-name">인물</span>
+    </a>
+    <a href="#" class="cat-item">
+      <div class="cat-icon" style="font-size:26px;">📦</div>
+      <span class="cat-name">제품</span>
+    </a>
+    <a href="#" class="cat-item">
+      <div class="cat-icon" style="font-size:26px;">🍱</div>
+      <span class="cat-name">식품</span>
+    </a>
+    <a href="#" class="cat-item">
+      <div class="cat-icon" style="font-size:26px;">📸</div>
+      <span class="cat-name">광고</span>
+    </a>
+    <a href="#" class="cat-item">
+      <div class="cat-icon" style="font-size:26px;">💄</div>
+      <span class="cat-name">뷰티</span>
+    </a>
+    <a href="#" class="cat-item">
+      <div class="cat-icon" style="font-size:26px;">🌿</div>
+      <span class="cat-name">정물</span>
+    </a>
+    <a href="#" class="cat-item">
+      <div class="cat-icon" style="font-size:26px;">👗</div>
+      <span class="cat-name">패션</span>
+    </a>
+    <a href="#" class="cat-item">
+      <div class="cat-icon" style="font-size:26px;">🎬</div>
+      <span class="cat-name">영상</span>
+    </a>
+    <a href="#" class="cat-item">
+      <div class="cat-icon" style="font-size:26px;">📷</div>
+      <span class="cat-name">기초</span>
+    </a>
+  </div>
+</section>
+
+<hr class="hline">
+
+<!-- ══ COURSE CARDS — "최신 제품." pattern → "추천 과정." ══ -->
+<!-- Section heading: "추천 과정." (link underline) + " 내게 맞는 수업을 시작하세요." -->
+<section id="courses" style="padding: 8px 0 0;">
+  <div class="sec-head">
+    <p class="sec-head-title">
+      <a href="#" class="hl">추천 과정.</a>
+      <span class="desc"> 내게 맞는 수업을 시작하세요.</span>
+    </p>
+  </div>
+  <div class="card-scroll">
+
+    <!-- Card 1: Dark featured (like iPhone 17 Pro dark card) -->
+    <div class="s-card s-card-dark">
+      <div class="s-card-body">
+        <p class="tc s-card-cat-dk">1:1 개인 과정</p>
+        <h2 class="s-card-title-dk td" style="font-size:28px;">기초부터<br>심화까지.</h2>
+        <p class="tc s-card-sub-dk">현직 작가에게 1:1로.</p>
+        <p class="tc s-card-price-dk">수강료 문의</p>
+        <div class="s-card-links">
+          <a href="tel:0254554457" class="tc s-card-link-dk">전화 상담 →</a>
+        </div>
+      </div>
+      <div class="s-card-img-dk">
+        <div class="ph">
+          <span class="ph-txt-dk">Portrait</span>
+          <span class="ph-kr-dk">인물 사진</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 2: 기초 과정 -->
+    <div class="s-card">
+      <div class="s-card-body">
+        <p class="tc s-card-cat">기초 · 입문</p>
+        <h2 class="s-card-title td" style="font-size:26px;">처음 잡는<br>카메라.</h2>
+        <p class="tc s-card-sub">노출부터 구도까지 기본기를 다집니다.</p>
+        <p class="tc s-card-price">수강 문의</p>
+        <div class="s-card-links">
+          <a href="tel:0254554457" class="tc s-card-link">상담하기 →</a>
+          <a href="#" class="tc s-card-link">더 알아보기 →</a>
+        </div>
+      </div>
+      <div class="s-card-img ph1">
+        <div class="ph">
+          <span class="ph-txt">Basic</span>
+          <span class="ph-kr">기초 과정</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 3: 심화 과정 -->
+    <div class="s-card">
+      <div class="s-card-body">
+        <p class="tc s-card-cat">심화 · 장르</p>
+        <h2 class="s-card-title td" style="font-size:26px;">원하는 분야,<br>집중 훈련.</h2>
+        <p class="tc s-card-sub">상업·인물·제품·식품 중 선택해서 깊게.</p>
+        <p class="tc s-card-price">수강 문의</p>
+        <div class="s-card-links">
+          <a href="tel:0254554457" class="tc s-card-link">상담하기 →</a>
+        </div>
+      </div>
+      <div class="s-card-img ph2">
+        <div class="ph">
+          <span class="ph-txt">Advanced</span>
+          <span class="ph-kr">심화 과정</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 4: 그룹반 -->
+    <div class="s-card">
+      <div class="s-card-body">
+        <p class="tc s-card-cat">그룹반</p>
+        <h2 class="s-card-title td" style="font-size:26px;">함께 배우는<br>사진.</h2>
+        <p class="tc s-card-sub">소수 정예 4명 이하, 주 1회 · 총 4주.</p>
+        <p class="tc s-card-price">수강 문의</p>
+        <div class="s-card-links">
+          <a href="tel:0254554457" class="tc s-card-link">상담하기 →</a>
+        </div>
+      </div>
+      <div class="s-card-img ph3">
+        <div class="ph">
+          <span class="ph-txt">Group</span>
+          <span class="ph-kr">그룹반</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 5: 포트폴리오 -->
+    <div class="s-card">
+      <div class="s-card-body">
+        <p class="tc s-card-cat">포트폴리오</p>
+        <h2 class="s-card-title td" style="font-size:26px;">현업 진출을<br>위한 준비.</h2>
+        <p class="tc s-card-sub">최종 포트폴리오 완성 + 방향 상담.</p>
+        <p class="tc s-card-price">수강 문의</p>
+        <div class="s-card-links">
+          <a href="tel:0254554457" class="tc s-card-link">상담하기 →</a>
+        </div>
+      </div>
+      <div class="s-card-img ph4">
+        <div class="ph">
+          <span class="ph-txt">Portfolio</span>
+          <span class="ph-kr">포트폴리오</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<hr class="hline">
+
+<!-- ══ HIGHLIGHTS — "할인 및 프로모션." pattern → "강점 및 안내." ══ -->
+<!-- 3-column card grid with mixed dark/light cards -->
+<section id="highlights" style="padding: 8px 0 0;">
+  <div class="sec-head">
+    <p class="sec-head-title">
+      <a href="#" class="hl">강점 및 안내.</a>
+      <span class="desc"> 타임아카이브를 선택하는 이유.</span>
+    </p>
+  </div>
+  <div class="promo-grid" style="margin-bottom: 0; padding-bottom: 0;">
+
+    <!-- Light card 1 -->
+    <div class="p-card">
+      <p class="tc p-cat">현직 작가</p>
+      <h3 class="p-title tbs" style="font-size:22px;">교재가 아닌<br>현장의 언어로.</h3>
+      <p class="tc p-body">광고·잡지·브랜드 현장에서 실제로 찍고 있는 작가가 직접 가르칩니다. 지금 업계에서 쓰이는 기술만 배울 수 있습니다.</p>
+      <a href="#" class="tc p-link">강사 소개 →</a>
+    </div>
+
+    <!-- Light card 2 -->
+    <div class="p-card">
+      <p class="tc p-cat">1:1 맞춤 수업</p>
+      <h3 class="p-title tbs" style="font-size:22px;">내 속도에<br>맞게 배웁니다.</h3>
+      <p class="tc p-body">전 과정이 1:1 개인 맞춤입니다. 언제든 질문할 수 있고, 커리큘럼을 내 목표에 맞게 조정할 수 있습니다.</p>
+      <a href="tel:0254554457" class="tc p-link">상담 신청 →</a>
+    </div>
+
+    <!-- Dark card -->
+    <div class="p-card p-card-dark">
+      <p class="tc p-cat-dk">설립 1999년</p>
+      <h3 class="p-title-dk tbs" style="font-size:22px;">27년간<br>쌓아온 신뢰.</h3>
+      <p class="tc p-body-dk">1999년부터 같은 자리에서 같은 방식으로. 수많은 수강생이 이 곳에서 시작해 현장에 나갔습니다.</p>
+      <a href="#" class="tc p-link-dk">갤러리 보기 →</a>
+    </div>
+
+  </div>
+</section>
+
+<hr class="hline" style="margin-top: 48px;">
+
+<!-- ══ QUICK LINKS — Apple Store "빠른 링크" pattern ══ -->
+<section id="contact" class="ql-section">
+  <h2 class="ql-title">빠른 링크</h2>
+  <div class="ql-chips">
+    <a href="tel:0254554457" class="ql-chip">상담 신청</a>
+    <a href="#" class="ql-chip">과정 안내</a>
+    <a href="#" class="ql-chip">갤러리</a>
+    <a href="#" id="instructor" class="ql-chip">강사 소개</a>
+    <a href="#" class="ql-chip">위치 안내</a>
+  </div>
+</section>
+
+<hr class="hline">
+
+<!-- ══ GALLERY SECTION — like Apple "스토어 경험" ══ -->
+<section style="padding: 8px 0 0;" id="gallery">
+  <div class="sec-head">
+    <p class="sec-head-title">
+      <a href="https://timearchive.co.kr/gallery/" target="_blank" rel="noopener" class="hl">작품 갤러리.</a>
+      <span class="desc"> 수강생과 함께 만든 사진들.</span>
+    </p>
+  </div>
+  <div class="card-scroll">
+    <!-- Gallery photo cards — wider aspect for photography -->
+    <div style="flex-shrink:0;width:360px;height:320px;border-radius:var(--r-lg);overflow:hidden;border:1px solid var(--hairline);background:linear-gradient(160deg,#3a3a3c,#1d1d1f);display:flex;align-items:center;justify-content:center;">
+      <div style="text-align:center;"><p style="font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.15)">Portrait</p><p style="font-size:16px;font-weight:300;color:rgba(255,255,255,.12)">인물 사진</p></div>
+    </div>
+    <div style="flex-shrink:0;width:280px;height:320px;border-radius:var(--r-lg);overflow:hidden;border:1px solid var(--hairline);background:linear-gradient(160deg,#2e2e30,#1a1a1c);display:flex;align-items:center;justify-content:center;">
+      <div style="text-align:center;"><p style="font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.15)">Product</p><p style="font-size:16px;font-weight:300;color:rgba(255,255,255,.12)">제품 사진</p></div>
+    </div>
+    <div style="flex-shrink:0;width:320px;height:320px;border-radius:var(--r-lg);overflow:hidden;border:1px solid var(--hairline);background:linear-gradient(160deg,#343436,#202022);display:flex;align-items:center;justify-content:center;">
+      <div style="text-align:center;"><p style="font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.15)">Food</p><p style="font-size:16px;font-weight:300;color:rgba(255,255,255,.12)">식품 사진</p></div>
+    </div>
+    <div style="flex-shrink:0;width:280px;height:320px;border-radius:var(--r-lg);overflow:hidden;border:1px solid var(--hairline);background:linear-gradient(160deg,#282830,#1a1a1c);display:flex;align-items:center;justify-content:center;">
+      <div style="text-align:center;"><p style="font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.15)">Beauty</p><p style="font-size:16px;font-weight:300;color:rgba(255,255,255,.12)">뷰티 사진</p></div>
+    </div>
+    <div style="flex-shrink:0;width:360px;height:320px;border-radius:var(--r-lg);overflow:hidden;border:1px solid var(--hairline);background:linear-gradient(160deg,#2c2c2e,#1c1c1e);display:flex;align-items:center;justify-content:center;">
+      <div style="text-align:center;"><p style="font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.15)">Commercial</p><p style="font-size:16px;font-weight:300;color:rgba(255,255,255,.12)">광고 사진</p></div>
+    </div>
+  </div>
+</section>
+
+<hr class="hline" style="margin-top:32px;">
+
+<!-- ══ FOOTER — component.footer ══ -->
+<!-- parchment / dense-link (17px/2.41) / fine-print / 52px padding -->
+<footer>
+  <div class="ft-wrap">
+    <div class="ft-cols">
+      <div>
+        <p class="ft-brand-n">TIME ARCHIVE</p>
+        <p class="ft-brand-s">타임아카이브 사진전문학원<br>TEL 02-5455-4457<br>인천 · timearchive.co.kr</p>
+      </div>
+      <div class="ft-col">
+        <p class="tcs ft-col-h">과정</p>
+        <ul class="tdl">
+          <li><a href="#courses">1:1 개인 과정</a></li>
+          <li><a href="#courses">그룹반</a></li>
+          <li><a href="#courses">포트폴리오</a></li>
+        </ul>
+      </div>
+      <div class="ft-col">
+        <p class="tcs ft-col-h">학원</p>
+        <ul class="tdl">
+          <li><a href="#gallery">갤러리</a></li>
+          <li><a href="#instructor">강사 소개</a></li>
+          <li><a href="#contact">상담 신청</a></li>
+        </ul>
+      </div>
+      <div class="ft-col">
+        <p class="tcs ft-col-h">링크</p>
+        <ul class="tdl">
+          <li><a href="https://timearchive.co.kr" target="_blank">기존 홈페이지</a></li>
+          <li><a href="#" onclick="window.scrollTo({top:0,behavior:'smooth'});return false;">맨 위로 ↑</a></li>
+        </ul>
+      </div>
+    </div>
+    <hr class="ft-hr">
+    <div class="ft-legal">
+      <p class="tf">© 2026 타임아카이브 사진전문학원. All rights reserved.</p>
+      <p class="tf">Visual Art Photography Academy Since 1999</p>
+    </div>
+  </div>
+</footer>
+
+</main>
+</body>
+</html>
