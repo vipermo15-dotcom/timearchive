@@ -1,0 +1,734 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>타임아카이브 사진전문학원 — 현직 작가에게 직접 배웁니다</title>
+<meta name="description" content="1999년 설립. 현직 상업 사진작가에게 1:1로 배우는 인천 사진학원.">
+<link rel="preconnect" href="https://cdn.jsdelivr.net">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css">
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  /* Apple surface tokens */
+  --canvas:    #FFFFFF;
+  --parch:     #F5F5F7;
+  --tile-1:    #1D1D1F;
+  --tile-2:    #272729;
+  --tile-3:    #2A2A2C;
+  --nav:       #000000;
+
+  /* Text */
+  --ink:       #1D1D1F;
+  --ink-sub:   #6E6E73;
+  --ink-dim:   #AEAEB2;
+  --on-dk:     #FFFFFF;
+  --on-dk-sub: #CCCCCC;
+  --on-dk-dim: #86868B;
+
+  /* Borders */
+  --hairline:  #E0E0E0;
+  --div-dk:    rgba(255,255,255,0.13);
+  --div-lt:    rgba(0,0,0,0.08);
+
+  /* Chrome accent — single system-wide interaction color */
+  --chrome:    #3A3A3C;     /* matte dark chrome on light */
+  --chrome-lt: #E5E5EA;     /* matte light chrome on dark */
+  --chrome-md: #C7C7CC;     /* mid chrome / silver rule */
+
+  /* Only shadow: on imagery resting on a surface */
+  --img-shadow: rgba(0,0,0,0.22) 3px 5px 30px 0;
+
+  --fn: 'Pretendard', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+html { scroll-behavior: smooth; }
+body { font-family: var(--fn); background: var(--canvas); color: var(--ink); -webkit-font-smoothing: antialiased; }
+a { text-decoration: none; }
+
+/* ── APPLE GLOBAL NAV (true black, 44px) ── */
+.nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 300;
+  height: 44px; display: flex; align-items: center; justify-content: space-between;
+  padding: 0 22px;
+  background: rgba(0,0,0,0.85);
+  backdrop-filter: saturate(180%) blur(20px);
+  -webkit-backdrop-filter: saturate(180%) blur(20px);
+}
+.nav-logo { display: flex; align-items: center; gap: 9px; color: var(--on-dk); }
+.nav-rule { width: 1px; height: 16px; background: var(--div-dk); }
+.nav-wordmark { font-size: 12px; font-weight: 400; letter-spacing: .12em; color: var(--on-dk); opacity: .88; }
+.nav-links { display: flex; gap: 28px; list-style: none; }
+.nav-links a { font-size: 12px; color: rgba(255,255,255,.7); letter-spacing: -.01em; transition: color .2s; }
+.nav-links a:hover { color: var(--on-dk); }
+.nav-cta {
+  display: inline-flex; align-items: center;
+  padding: 7px 18px; background: var(--on-dk); color: var(--ink);
+  font-size: 12px; font-weight: 600; letter-spacing: -.01em;
+  border-radius: 999px; transition: background .18s;
+}
+.nav-cta:hover { background: var(--chrome-lt); }
+
+/* ── TILE BASE SYSTEM ── */
+.tile { padding: 100px 0; }
+.tile-w   { background: var(--canvas); color: var(--ink); }
+.tile-p   { background: var(--parch);  color: var(--ink); }
+.tile-d1  { background: var(--tile-1); color: var(--on-dk); }
+.tile-d2  { background: var(--tile-2); color: var(--on-dk); }
+.tile-d3  { background: var(--tile-3); color: var(--on-dk); }
+
+.wrap { max-width: 980px; margin: 0 auto; padding: 0 22px; }
+.wrap-wide { max-width: 1320px; margin: 0 auto; padding: 0 22px; }
+
+/* ── TYPOGRAPHY SYSTEM (Apple-spec) ── */
+.hero-display {
+  font-size: clamp(48px, 7vw, 80px); font-weight: 600;
+  line-height: 1.07; letter-spacing: -0.028em;
+}
+.display-lg {
+  font-size: clamp(32px, 4.5vw, 48px); font-weight: 600;
+  line-height: 1.1; letter-spacing: -0.02em;
+}
+.display-md {
+  font-size: clamp(24px, 3vw, 34px); font-weight: 600;
+  line-height: 1.47; letter-spacing: -0.374px;
+}
+.lead { font-size: clamp(18px, 2vw, 21px); font-weight: 400; line-height: 1.5; letter-spacing: 0; }
+.body-text { font-size: 17px; font-weight: 400; line-height: 1.47; letter-spacing: -0.374px; }
+.caption  { font-size: 14px; font-weight: 400; line-height: 1.43; letter-spacing: -0.224px; }
+.eyebrow  { font-size: 12px; font-weight: 400; letter-spacing: .08em; text-transform: uppercase; }
+
+/* ── PILL BUTTONS (single grammar: pill + chrome) ── */
+.btn {
+  display: inline-flex; align-items: center; gap: 6px;
+  border-radius: 999px; font-family: var(--fn); cursor: pointer;
+  transition: opacity .18s, transform .15s; border: none;
+  font-size: 17px; font-weight: 400; letter-spacing: -0.374px;
+}
+.btn:active { transform: scale(.97); }
+.btn-dark {
+  padding: 12px 24px; background: var(--chrome); color: var(--on-dk);
+}
+.btn-dark:hover { opacity: .82; }
+.btn-ghost-lt {
+  padding: 12px 24px; background: transparent; color: var(--chrome);
+  border: 1px solid var(--chrome);
+}
+.btn-ghost-lt:hover { background: rgba(58,58,60,.06); }
+.btn-light {
+  padding: 12px 24px; background: var(--chrome-lt); color: var(--ink);
+}
+.btn-light:hover { opacity: .88; }
+.btn-ghost-dk {
+  padding: 12px 24px; background: transparent; color: var(--chrome-lt);
+  border: 1px solid rgba(229,229,234,.35);
+}
+.btn-ghost-dk:hover { border-color: rgba(229,229,234,.7); }
+.btn-sm { font-size: 14px; padding: 8px 18px; letter-spacing: -0.224px; }
+
+/* ── HERO TILE (parchment) ── */
+.hero {
+  min-height: 100vh; display: flex; flex-direction: column;
+  justify-content: flex-end; padding-bottom: 96px;
+  position: relative;
+}
+.hero-inner { max-width: 900px; padding: 0 22px; }
+.hero-label { color: var(--ink-sub); margin-bottom: 20px; }
+.hero-title { color: var(--ink); margin-bottom: 20px; }
+.hero-title span { color: var(--ink-sub); }
+.hero-sub { color: var(--ink-sub); margin-bottom: 44px; max-width: 520px; }
+.hero-btns { display: flex; gap: 12px; flex-wrap: wrap; }
+.hero-scroll {
+  position: absolute; right: 22px; bottom: 44px;
+  display: flex; align-items: center; gap: 10px;
+  color: var(--ink-dim); font-size: 11px; letter-spacing: .14em; text-transform: uppercase;
+}
+.scroll-rule { width: 40px; height: 1px; background: var(--chrome-md); }
+
+/* ── CHROME SEPARATOR (Apple hairline rule) ── */
+.chrome-rule { width: 100%; height: 1px; background: var(--div-dk); }
+.chrome-rule-lt { width: 100%; height: 1px; background: var(--hairline); }
+
+/* ── GALLERY TILE ── */
+.gallery-hd {
+  display: flex; align-items: flex-end; justify-content: space-between;
+  padding: 0 22px; margin-bottom: 40px;
+}
+.gallery-grid {
+  display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr 1fr;
+  gap: 2px;
+}
+.g-item {
+  position: relative; overflow: hidden;
+  aspect-ratio: 3/4;
+  cursor: pointer;
+  transition: transform .4s cubic-bezier(.22,.68,0,1.2);
+}
+.g-item:first-child { aspect-ratio: auto; grid-row: span 2; }
+.g-item:hover { transform: scale(.985); }
+.g-bg { position: absolute; inset: 0; }
+.g-1 { background: linear-gradient(145deg, #3a3a3c, #1d1d1f); }
+.g-2 { background: linear-gradient(145deg, #48484a, #2c2c2e); }
+.g-3 { background: linear-gradient(145deg, #2c2c2e, #1a1a1c); }
+.g-4 { background: linear-gradient(145deg, #3d3d3f, #272729); }
+.g-5 { background: linear-gradient(145deg, #44444a, #2a2a30); }
+.g-6 { background: linear-gradient(145deg, #302e30, #1a181a); }
+/* subtle chrome sheen */
+.g-item::before {
+  content: ''; position: absolute; inset: 0; z-index: 1;
+  background: linear-gradient(135deg, rgba(255,255,255,.03) 0%, transparent 50%);
+}
+.g-overlay {
+  position: absolute; inset: 0; z-index: 2;
+  background: linear-gradient(to top, rgba(0,0,0,.6) 0%, transparent 50%);
+  opacity: 0; transition: opacity .3s;
+}
+.g-item:hover .g-overlay { opacity: 1; }
+.g-caption {
+  position: absolute; bottom: 18px; left: 18px; z-index: 3;
+  display: flex; flex-direction: column; gap: 2px;
+  opacity: 0; transform: translateY(4px); transition: all .3s;
+}
+.g-item:hover .g-caption { opacity: 1; transform: translateY(0); }
+.g-caption-en { font-size: 10px; font-weight: 600; letter-spacing: .16em; text-transform: uppercase; color: var(--on-dk-sub); }
+.g-caption-kr { font-size: 16px; font-weight: 300; color: var(--on-dk); }
+.g-ph {
+  position: absolute; inset: 0; z-index: 0;
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px;
+  color: rgba(255,255,255,.06);
+}
+.g-ph .en { font-size: 10px; font-weight: 600; letter-spacing: .2em; text-transform: uppercase; }
+.g-ph .kr { font-size: 18px; font-weight: 300; }
+.view-all {
+  color: var(--on-dk-dim); font-size: 12px; letter-spacing: -.01em;
+  display: flex; align-items: center; gap: 6px;
+  border-bottom: 1px solid rgba(134,134,139,.35); padding-bottom: 2px;
+  white-space: nowrap; transition: color .2s;
+}
+.view-all:hover { color: var(--on-dk); }
+
+/* ── MISSION TILE (white, 2-col) ── */
+.mission-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+.mission-quote {
+  font-size: clamp(24px, 3vw, 36px); font-weight: 400; line-height: 1.5;
+  letter-spacing: -0.02em; color: var(--ink);
+}
+.mission-quote strong { font-weight: 600; }
+.chrome-line { width: 40px; height: 2px; background: var(--chrome-md); margin: 32px 0; }
+.mission-body { color: var(--ink-sub); }
+
+/* ── STATS TILE (parchment) ── */
+.stats-row {
+  display: grid; grid-template-columns: repeat(4, 1fr);
+  border-top: 1px solid var(--hairline);
+  border-left: 1px solid var(--hairline);
+}
+.stat {
+  padding: 64px 40px;
+  border-right: 1px solid var(--hairline);
+  border-bottom: 1px solid var(--hairline);
+}
+.stat-n { font-size: clamp(48px, 6vw, 72px); font-weight: 600; line-height: 1; letter-spacing: -0.03em; color: var(--ink); }
+.stat-u { font-size: .5em; font-weight: 400; opacity: .5; }
+.stat-l { margin-top: 10px; color: var(--ink-sub); }
+
+/* ── CURRICULUM TILE (dark) ── */
+.curr-tabs { display: inline-flex; gap: 3px; padding: 3px; background: rgba(255,255,255,.1); border-radius: 999px; margin-top: 28px; }
+.ctab { padding: 9px 26px; border: none; background: transparent; font-family: var(--fn); font-size: 14px; font-weight: 400; color: rgba(255,255,255,.55); border-radius: 999px; cursor: pointer; transition: all .2s; letter-spacing: -0.224px; }
+.ctab.on { background: rgba(255,255,255,.15); color: var(--on-dk); }
+.cpanel { display: none; }
+.cpanel.on { display: grid; grid-template-columns: repeat(3,1fr); gap: 1px; margin-top: 40px; }
+.ccard {
+  background: rgba(255,255,255,.04); padding: 44px 36px;
+  border: 1px solid var(--div-dk);
+  transition: background .2s;
+}
+.ccard:hover { background: rgba(255,255,255,.08); }
+.ccard-num { color: var(--on-dk-dim); margin-bottom: 20px; }
+.ccard-name { color: var(--on-dk); margin-bottom: 10px; }
+.ccard-sub { color: var(--on-dk-sub); line-height: 1.6; margin-bottom: 28px; }
+.ccard-list { list-style: none; display: flex; flex-direction: column; gap: 9px; }
+.ccard-list li { font-size: 14px; color: var(--on-dk-dim); display: flex; align-items: center; gap: 10px; }
+.ccard-list li::before { content: ''; width: 3px; height: 3px; border-radius: 50%; background: var(--chrome-md); flex-shrink: 0; }
+.ccard-link { display: inline-flex; align-items: center; gap: 5px; margin-top: 32px; font-size: 14px; letter-spacing: -0.224px; color: var(--chrome-lt); transition: gap .2s; }
+.ccard-link:hover { gap: 9px; }
+
+/* ── INSTRUCTOR TILE (white) ── */
+.inst-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0; }
+.inst-left {
+  padding: 80px 64px; background: var(--parch);
+  display: flex; flex-direction: column; justify-content: flex-end;
+  position: relative; min-height: 560px;
+}
+.inst-ph {
+  position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
+}
+.inst-ph-box {
+  width: 180px; height: 240px; border: 1px solid var(--hairline); border-radius: 4px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 11px; font-weight: 400; letter-spacing: .1em; text-transform: uppercase;
+  color: var(--chrome-md);
+}
+.inst-content { position: relative; z-index: 2; }
+.inst-tag {
+  display: inline-block; padding: 5px 14px; border: 1px solid var(--chrome-md);
+  border-radius: 999px; font-size: 11px; letter-spacing: .1em; text-transform: uppercase;
+  color: var(--ink-sub); margin-bottom: 18px;
+}
+.inst-name { color: var(--ink); }
+.inst-right { padding: 80px 64px; display: flex; flex-direction: column; justify-content: center; }
+.inst-role { color: var(--ink-sub); margin-bottom: 28px; }
+.inst-bio { color: var(--ink-sub); margin-bottom: 40px; }
+.inst-list { list-style: none; display: flex; flex-direction: column; gap: 14px; }
+.inst-list li { display: flex; gap: 20px; align-items: baseline; }
+.inst-yr { font-size: 12px; color: var(--ink-dim); min-width: 36px; }
+.inst-item { font-size: 15px; letter-spacing: -0.374px; color: var(--ink); }
+
+/* ── PROCESS TILE (parchment) ── */
+.proc-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; margin-top: 56px; border: 1px solid var(--hairline); }
+.pstep { padding: 44px 32px; border-right: 1px solid var(--hairline); }
+.pstep:last-child { border-right: none; }
+.pstep-num { color: var(--ink-dim); margin-bottom: 20px; }
+.pstep-title { color: var(--ink); margin-bottom: 12px; }
+.pstep-body { color: var(--ink-sub); line-height: 1.7; }
+
+/* ── TESTIMONIALS TILE (dark) ── */
+.tcard-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1px; margin-top: 52px; }
+.tcard {
+  padding: 40px; background: rgba(255,255,255,.03);
+  border: 1px solid var(--div-dk);
+}
+.tcard-q {
+  font-size: 15px; line-height: 1.8; color: var(--on-dk-sub); margin-bottom: 32px;
+  font-style: italic;
+}
+.tcard-q::before { content: '"'; color: var(--chrome-md); font-style: normal; }
+.tcard-q::after  { content: '"'; color: var(--chrome-md); font-style: normal; }
+.tcard-who { font-size: 13px; font-weight: 600; color: var(--on-dk); letter-spacing: -0.12px; }
+.tcard-course { font-size: 12px; color: var(--on-dk-dim); margin-top: 4px; }
+
+/* ── CTA TILE (darkest) ── */
+.cta-inner { text-align: center; max-width: 640px; margin: 0 auto; }
+.cta-eyebrow { color: var(--on-dk-dim); margin-bottom: 24px; }
+.cta-title { color: var(--on-dk); margin-bottom: 20px; }
+.cta-sub { color: var(--on-dk-sub); margin-bottom: 52px; }
+.cta-btns { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+.cta-num { margin-top: 36px; color: var(--on-dk-dim); letter-spacing: .04em; }
+
+/* ── FOOTER (parchment, Apple-dense) ── */
+footer { background: var(--parch); padding: 56px 22px 24px; }
+.ft-inner { max-width: 980px; margin: 0 auto; display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr; gap: 48px; margin-bottom: 40px; }
+.ft-brand p { font-size: 12px; color: var(--ink-sub); line-height: 1.85; margin-top: 14px; }
+.ft-col h4 { font-size: 12px; font-weight: 600; letter-spacing: -0.12px; color: var(--ink); margin-bottom: 14px; }
+.ft-col ul { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+.ft-col ul a { font-size: 12px; color: var(--ink-sub); transition: color .18s; letter-spacing: -0.12px; }
+.ft-col ul a:hover { color: var(--ink); }
+.ft-bottom { max-width: 980px; margin: 0 auto; padding-top: 20px; border-top: 1px solid var(--hairline); display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px; }
+.ft-legal { font-size: 12px; color: var(--ink-dim); letter-spacing: -0.12px; }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 1040px) {
+  .gallery-grid { grid-template-columns: repeat(3,1fr); }
+  .g-item:first-child { grid-row: auto; aspect-ratio: 3/4; }
+  .mission-grid { grid-template-columns: 1fr; gap: 48px; }
+  .stats-row { grid-template-columns: 1fr 1fr; }
+  .stat:nth-child(2) { border-right: 1px solid var(--hairline); }
+  .stat:nth-child(3) { border-right: none; }
+  .cpanel.on { grid-template-columns: 1fr 1fr; }
+  .inst-grid { grid-template-columns: 1fr; }
+  .inst-left { min-height: 360px; padding: 56px 32px; }
+  .inst-right { padding: 56px 32px; }
+  .proc-grid { grid-template-columns: 1fr 1fr; }
+  .pstep:nth-child(2) { border-right: none; }
+  .tcard-grid { grid-template-columns: 1fr; }
+  .ft-inner { grid-template-columns: 1fr 1fr; }
+  .gallery-hd { padding: 0; }
+}
+@media (max-width: 680px) {
+  .tile { padding: 72px 0; }
+  .nav-links { display: none; }
+  .gallery-grid { grid-template-columns: 1fr 1fr; }
+  .stats-row { grid-template-columns: 1fr 1fr; }
+  .proc-grid { grid-template-columns: 1fr; }
+  .pstep { border-right: none; border-bottom: 1px solid var(--hairline); }
+  .cpanel.on { grid-template-columns: 1fr; }
+  .ft-inner { grid-template-columns: 1fr 1fr; }
+  .hero-scroll { display: none; }
+}
+</style>
+</head>
+<body>
+
+<!-- APPLE GLOBAL NAV -->
+<nav class="nav">
+  <div class="nav-logo">
+    <span style="width:6px;height:6px;border-radius:50%;background:var(--chrome-lt);display:block;"></span>
+    <span class="nav-rule"></span>
+    <span class="nav-wordmark">TIME ARCHIVE</span>
+  </div>
+  <ul class="nav-links">
+    <li><a href="#gallery">작품</a></li>
+    <li><a href="#courses">과정</a></li>
+    <li><a href="#instructor">강사</a></li>
+    <li><a href="#contact">상담</a></li>
+  </ul>
+  <a class="nav-cta" href="tel:0254554457">상담 신청</a>
+</nav>
+
+<!-- HERO TILE — parchment -->
+<section class="tile tile-p hero" id="top" style="padding-top:44px;">
+  <div class="hero-inner">
+    <p class="eyebrow hero-label" style="margin-bottom:20px;">Visual Art Photography Academy · Since 1999</p>
+    <h1 class="hero-display hero-title">
+      현직 작가에게<br>
+      <span>직접 배웁니다.</span>
+    </h1>
+    <p class="lead hero-sub" style="margin-top:20px;">
+      상업사진부터 인물·제품·식품 촬영까지.<br>
+      1:1 맞춤 과정, 내 속도에 맞게.
+    </p>
+    <div class="hero-btns">
+      <a class="btn btn-dark" href="tel:0254554457">전화 상담하기</a>
+      <a class="btn btn-ghost-lt" href="#gallery">작품 보기</a>
+    </div>
+  </div>
+  <div class="hero-scroll"><span class="scroll-rule"></span>SCROLL</div>
+</section>
+
+<!-- GALLERY TILE — dark 2 -->
+<section class="tile tile-d2" id="gallery" style="padding:80px 0;">
+  <div class="wrap-wide">
+    <div class="gallery-hd">
+      <div>
+        <p class="eyebrow" style="color:var(--on-dk-dim);margin-bottom:12px;">Our Works</p>
+        <h2 class="display-lg">수강생과 함께<br>만든 작품들</h2>
+      </div>
+      <a class="view-all" href="https://timearchive.co.kr/gallery/" target="_blank" rel="noopener">전체 갤러리 →</a>
+    </div>
+    <div class="gallery-grid">
+      <div class="g-item g-1">
+        <div class="g-ph"><span class="en">Portrait</span><span class="kr">인물</span></div>
+        <div class="g-overlay"></div>
+        <div class="g-caption"><span class="g-caption-en">Portrait</span><span class="g-caption-kr">인물 사진</span></div>
+      </div>
+      <div class="g-item g-2">
+        <div class="g-ph"><span class="en">Food</span><span class="kr">식품</span></div>
+        <div class="g-overlay"></div>
+        <div class="g-caption"><span class="g-caption-en">Food</span><span class="g-caption-kr">식품 사진</span></div>
+      </div>
+      <div class="g-item g-3">
+        <div class="g-ph"><span class="en">Product</span><span class="kr">제품</span></div>
+        <div class="g-overlay"></div>
+        <div class="g-caption"><span class="g-caption-en">Product</span><span class="g-caption-kr">제품 사진</span></div>
+      </div>
+      <div class="g-item g-4">
+        <div class="g-ph"><span class="en">Beauty</span><span class="kr">뷰티</span></div>
+        <div class="g-overlay"></div>
+        <div class="g-caption"><span class="g-caption-en">Beauty</span><span class="g-caption-kr">뷰티 사진</span></div>
+      </div>
+      <div class="g-item g-5">
+        <div class="g-ph"><span class="en">Still</span><span class="kr">정물</span></div>
+        <div class="g-overlay"></div>
+        <div class="g-caption"><span class="g-caption-en">Still Life</span><span class="g-caption-kr">정물 사진</span></div>
+      </div>
+      <div class="g-item g-6">
+        <div class="g-ph"><span class="en">Commercial</span><span class="kr">광고</span></div>
+        <div class="g-overlay"></div>
+        <div class="g-caption"><span class="g-caption-en">Commercial</span><span class="g-caption-kr">광고 사진</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MISSION TILE — white -->
+<section class="tile tile-w">
+  <div class="wrap">
+    <div class="mission-grid">
+      <div>
+        <p class="eyebrow" style="color:var(--ink-sub);margin-bottom:24px;">Why Time Archive</p>
+        <p class="mission-quote">
+          사진은 <strong>장비가 아니라<br>눈으로</strong> 찍습니다.
+        </p>
+        <div class="chrome-line"></div>
+        <p class="body-text mission-body">
+          1999년부터, 현직 상업 사진작가가<br>
+          직접 가르쳐 왔습니다.
+        </p>
+      </div>
+      <div>
+        <p style="font-size:clamp(18px,2.2vw,24px);font-weight:400;line-height:1.65;letter-spacing:-.01em;color:var(--ink);">
+          빠른 성과보다 <strong>오래 남는 실력</strong>을 만듭니다.<br><br>
+          교재가 아닌 현장의 언어로.<br>
+          스튜디오 라이팅, 현장 세팅, 포스트 보정 —<br>
+          <strong>실제로 쓰이는 것들만</strong> 가르칩니다.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STATS TILE — parchment -->
+<section class="tile tile-p" style="padding:0;">
+  <div class="wrap-wide">
+    <div class="stats-row">
+      <div class="stat">
+        <p class="stat-n">1999</p>
+        <p class="caption stat-l">설립 연도</p>
+      </div>
+      <div class="stat">
+        <p class="stat-n">27<span class="stat-u">년</span></p>
+        <p class="caption stat-l">학원 운영 역사</p>
+      </div>
+      <div class="stat">
+        <p class="stat-n">1:1</p>
+        <p class="caption stat-l">전 과정 개인 맞춤</p>
+      </div>
+      <div class="stat">
+        <p class="stat-n" style="font-size:clamp(28px,3.5vw,44px);">현직</p>
+        <p class="caption stat-l">상업 사진작가 직강</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CURRICULUM TILE — darkest -->
+<section class="tile tile-d1" id="courses">
+  <div class="wrap-wide">
+    <p class="eyebrow" style="color:var(--on-dk-dim);margin-bottom:16px;">Curriculum</p>
+    <h2 class="display-lg">배움의 과정</h2>
+    <div class="curr-tabs">
+      <button class="ctab on" onclick="switchCTab('ind',this)">1:1 개인 과정</button>
+      <button class="ctab" onclick="switchCTab('grp',this)">그룹반</button>
+    </div>
+
+    <div id="ci-ind" class="cpanel on">
+      <div class="ccard">
+        <p class="eyebrow ccard-num">STEP 01</p>
+        <h3 class="display-md ccard-name" style="font-size:22px;">기초 · 입문 과정</h3>
+        <p class="caption ccard-sub">카메라를 처음 잡는 분부터.<br>빛과 구도의 기본 원리를 배웁니다.</p>
+        <ul class="ccard-list">
+          <li>카메라 조작 &amp; 노출 이론</li>
+          <li>구도 &amp; 빛 읽기 실습</li>
+          <li>Lightroom 기초 후보정</li>
+        </ul>
+        <a class="ccard-link caption" href="tel:0254554457">상담하기 →</a>
+      </div>
+      <div class="ccard">
+        <p class="eyebrow ccard-num">STEP 02</p>
+        <h3 class="display-md ccard-name" style="font-size:22px;">심화 · 장르 과정</h3>
+        <p class="caption ccard-sub">목적에 맞는 장르 집중 훈련.<br>상업·인물·제품·식품 중 선택.</p>
+        <ul class="ccard-list">
+          <li>장르별 라이팅 세팅 실습</li>
+          <li>실전 촬영 진행 실습</li>
+          <li>포트폴리오 제작</li>
+        </ul>
+        <a class="ccard-link caption" href="tel:0254554457">상담하기 →</a>
+      </div>
+      <div class="ccard">
+        <p class="eyebrow ccard-num">RESULT</p>
+        <h3 class="display-md ccard-name" style="font-size:22px;">포트폴리오 · 수료</h3>
+        <p class="caption ccard-sub">현업 진출을 위한<br>포트폴리오 완성 &amp; 방향 상담.</p>
+        <ul class="ccard-list">
+          <li>최종 포트폴리오 리뷰</li>
+          <li>현업 진출 방향 상담</li>
+          <li>수료 후 질문 지원</li>
+        </ul>
+        <a class="ccard-link caption" href="tel:0254554457">상담하기 →</a>
+      </div>
+    </div>
+
+    <div id="ci-grp" class="cpanel">
+      <div class="ccard">
+        <p class="eyebrow ccard-num">GROUP 01</p>
+        <h3 class="display-md ccard-name" style="font-size:22px;">사진 그룹반</h3>
+        <p class="caption ccard-sub">소수 정예 소그룹 사진 과정.<br>서로의 시선을 나누며 성장합니다.</p>
+        <ul class="ccard-list">
+          <li>4명 이하 소그룹</li>
+          <li>주 1회 · 총 4주</li>
+          <li>라이팅 &amp; 촬영 실습</li>
+        </ul>
+        <a class="ccard-link caption" href="tel:0254554457">상담하기 →</a>
+      </div>
+      <div class="ccard">
+        <p class="eyebrow ccard-num">GROUP 02</p>
+        <h3 class="display-md ccard-name" style="font-size:22px;">영상 그룹반</h3>
+        <p class="caption ccard-sub">사진의 연장선에서 시작하는 영상.<br>기획부터 편집까지 실전으로.</p>
+        <ul class="ccard-list">
+          <li>4명 이하 소그룹</li>
+          <li>주 1회 · 총 6주</li>
+          <li>촬영 + 편집 실습</li>
+        </ul>
+        <a class="ccard-link caption" href="tel:0254554457">상담하기 →</a>
+      </div>
+      <div class="ccard">
+        <p class="eyebrow ccard-num">BENEFIT</p>
+        <h3 class="display-md ccard-name" style="font-size:22px;">그룹반 혜택</h3>
+        <p class="caption ccard-sub">그룹반 수강생에게 드리는<br>특별 혜택들입니다.</p>
+        <ul class="ccard-list">
+          <li>스튜디오 자유 촬영</li>
+          <li>수료 후 1:1 과정 할인</li>
+          <li>포트폴리오 리뷰 포함</li>
+        </ul>
+        <a class="ccard-link caption" href="tel:0254554457">상담하기 →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- INSTRUCTOR TILE — white (no tile padding override) -->
+<section style="background:var(--canvas);" id="instructor">
+  <div class="inst-grid">
+    <div class="inst-left">
+      <div class="inst-ph">
+        <div class="inst-ph-box">원장 프로필 사진</div>
+      </div>
+      <div class="inst-content">
+        <span class="inst-tag">Head Instructor</span>
+        <h2 class="display-lg inst-name">현직<br>작가.</h2>
+      </div>
+    </div>
+    <div class="inst-right">
+      <p class="eyebrow inst-role" style="margin-bottom:28px;">Chief Instructor · Commercial Photographer</p>
+      <p class="body-text inst-bio">
+        광고·잡지·브랜드 캠페인 현장에서<br>
+        직접 촬영하며 학생을 가르칩니다.<br><br>
+        교재가 아닌 현장 경험으로,<br>
+        지금 업계에서 통하는 기술을 전합니다.
+      </p>
+      <ul class="inst-list">
+        <li><span class="inst-yr">1999</span><span class="inst-item">타임아카이브 사진학원 설립</span></li>
+        <li><span class="inst-yr">현재</span><span class="inst-item">현직 상업 사진작가 활동 중</span></li>
+        <li><span class="inst-yr">다수</span><span class="inst-item">광고·잡지·브랜드 촬영 진행</span></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS TILE — parchment -->
+<section class="tile tile-p">
+  <div class="wrap">
+    <p class="eyebrow" style="color:var(--ink-sub);margin-bottom:16px;">How It Works</p>
+    <h2 class="display-lg">이런 순서로<br>진행됩니다</h2>
+    <div class="proc-grid">
+      <div class="pstep">
+        <p class="eyebrow pstep-num" style="margin-bottom:18px;">Step 01</p>
+        <h3 class="pstep-title" style="font-size:17px;font-weight:600;letter-spacing:-.374px;margin-bottom:10px;">전화 또는 카카오로 문의</h3>
+        <p class="caption pstep-body">지금 수준과 원하는 방향을 간단히 말씀해 주세요.</p>
+      </div>
+      <div class="pstep">
+        <p class="eyebrow pstep-num" style="margin-bottom:18px;">Step 02</p>
+        <h3 class="pstep-title" style="font-size:17px;font-weight:600;letter-spacing:-.374px;margin-bottom:10px;">1:1 상담 &amp; 레벨 체크</h3>
+        <p class="caption pstep-body">목표에 맞는 과정을 함께 정합니다. 장비 없어도 괜찮습니다.</p>
+      </div>
+      <div class="pstep">
+        <p class="eyebrow pstep-num" style="margin-bottom:18px;">Step 03</p>
+        <h3 class="pstep-title" style="font-size:17px;font-weight:600;letter-spacing:-.374px;margin-bottom:10px;">맞춤 수업 시작</h3>
+        <p class="caption pstep-body">1:1이라 언제든 질문하고 속도를 조정할 수 있습니다.</p>
+      </div>
+      <div class="pstep" style="border-right:none;">
+        <p class="eyebrow pstep-num" style="margin-bottom:18px;">Step 04</p>
+        <h3 class="pstep-title" style="font-size:17px;font-weight:600;letter-spacing:-.374px;margin-bottom:10px;">포트폴리오 &amp; 수료</h3>
+        <p class="caption pstep-body">수료 후에도 질문은 언제든 환영합니다.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS TILE — dark -->
+<section class="tile tile-d2">
+  <div class="wrap-wide">
+    <p class="eyebrow" style="color:var(--on-dk-dim);margin-bottom:16px;">수강생 이야기</p>
+    <h2 class="display-lg">함께한 분들의<br>이야기입니다</h2>
+    <div class="tcard-grid">
+      <div class="tcard">
+        <p class="tcard-q">처음엔 카메라 다루는 것도 몰랐는데, 몇 달 만에 포트폴리오가 생겼어요. 1:1이라 제 속도에 맞게 갔고, 궁금한 게 생길 때마다 바로 물어볼 수 있어서 좋았습니다.</p>
+        <p class="tcard-who">김 * * 수강생</p>
+        <p class="tcard-course">기초 → 심화 과정 수료</p>
+      </div>
+      <div class="tcard">
+        <p class="tcard-q">현직 작가분이 가르쳐 주시니 실제 현장에서 어떻게 하는지 바로 배울 수 있었어요. 이론보다 실습 위주라 실력이 확실히 늘었습니다.</p>
+        <p class="tcard-who">이 * * 수강생</p>
+        <p class="tcard-course">제품 사진 과정 수료</p>
+      </div>
+      <div class="tcard">
+        <p class="tcard-q">50대에 처음 배워도 괜찮을지 걱정이 많았는데, 전혀 그런 걱정 안 해도 됐어요. 나이나 경험에 상관없이 맞춰서 가르쳐 주십니다.</p>
+        <p class="tcard-who">박 * * 수강생</p>
+        <p class="tcard-course">시니어 기초 과정 수료</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA TILE — true dark -->
+<section class="tile tile-d1" id="contact">
+  <div class="cta-inner">
+    <p class="eyebrow cta-eyebrow" style="margin-bottom:24px;">Start Today</p>
+    <h2 class="hero-display cta-title">지금 바로<br>시작하세요.</h2>
+    <p class="lead cta-sub" style="margin-top:20px;">부담 없이 전화 한 통으로 시작할 수 있습니다.<br>현재 수준과 목표가 무엇이든 함께 맞춰 드립니다.</p>
+    <div class="cta-btns">
+      <a class="btn btn-light" href="tel:0254554457">전화 상담</a>
+      <a class="btn btn-ghost-dk" href="#">카카오로 문의</a>
+    </div>
+    <p class="caption cta-num">02 · 5455 · 4457 &nbsp;|&nbsp; 타임아카이브 사진전문학원</p>
+  </div>
+</section>
+
+<!-- FOOTER — parchment (Apple-dense) -->
+<footer>
+  <div class="ft-inner">
+    <div class="ft-brand">
+      <div style="display:flex;align-items:center;gap:8px;">
+        <span style="width:6px;height:6px;border-radius:50%;background:var(--chrome-md);display:block;"></span>
+        <span style="font-size:12px;font-weight:600;letter-spacing:.12em;color:var(--ink);">TIME ARCHIVE</span>
+      </div>
+      <p>타임아카이브 사진전문학원<br>TEL 02-5455-4457<br>timearchive.co.kr</p>
+    </div>
+    <div class="ft-col">
+      <h4>과정</h4>
+      <ul>
+        <li><a href="#courses">1:1 개인 과정</a></li>
+        <li><a href="#courses">그룹반</a></li>
+        <li><a href="#courses">포트폴리오</a></li>
+      </ul>
+    </div>
+    <div class="ft-col">
+      <h4>학원</h4>
+      <ul>
+        <li><a href="#gallery">갤러리</a></li>
+        <li><a href="#instructor">강사 소개</a></li>
+        <li><a href="#contact">상담 신청</a></li>
+      </ul>
+    </div>
+    <div class="ft-col">
+      <h4>링크</h4>
+      <ul>
+        <li><a href="https://timearchive.co.kr" target="_blank">기존 홈페이지</a></li>
+        <li><a href="#top">맨 위로 ↑</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="ft-bottom">
+    <span class="ft-legal">© 2026 타임아카이브 사진전문학원. All rights reserved.</span>
+    <span class="ft-legal">Visual Art Photography Academy Since 1999</span>
+  </div>
+</footer>
+
+<script>
+function switchCTab(id, btn) {
+  document.querySelectorAll('.ctab').forEach(b => b.classList.remove('on'));
+  btn.classList.add('on');
+  document.querySelectorAll('.cpanel').forEach(p => p.classList.remove('on'));
+  document.getElementById('ci-' + id).classList.add('on');
+}
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', e => {
+    const id = a.getAttribute('href').slice(1);
+    if (!id) return;
+    const el = document.getElementById(id);
+    if (el) { e.preventDefault(); el.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
+  });
+});
+</script>
+</body>
+</html>
