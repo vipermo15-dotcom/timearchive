@@ -315,6 +315,18 @@ html, body { height: 100%; overflow: hidden; font-family: -apple-system, 'Preten
         <span class="kbd">7</span>
       </button>
 
+      <button class="design-btn"
+        data-src="design-h-visual.html"
+        data-name="시안 H · 비주얼 핀터레스트"
+        data-color="#E60023">
+        <span class="d-dot" style="background:#E60023;">H</span>
+        <span class="d-meta">
+          <span class="d-id">Design H</span>
+          <span class="d-name">비주얼 핀터레스트</span>
+        </span>
+        <span class="kbd">8</span>
+      </button>
+
     </nav>
 
     <!-- Device switcher -->
@@ -425,6 +437,7 @@ const designs = [
   { id:'E', src:'design-e-store.html',      name:'시안 E · 스토어',              color:'#0066cc', dotBg:'#0066cc' },
   { id:'F', src:'design-f-editorial.html',  name:'시안 F · 에디토리얼 아카이브', color:'#2c4a47', dotBg:'#2c4a47' },
   { id:'G', src:'design-g-studio.html',     name:'시안 G · 스튜디오 和',         color:'#1c2a29', dotBg:'#1c2a29' },
+  { id:'H', src:'design-h-visual.html',    name:'시안 H · 비주얼 핀터레스트',   color:'#E60023', dotBg:'#E60023' },
 ];
 
 // State
@@ -549,7 +562,7 @@ compareBtn.addEventListener('click', toggleCompare);
 document.addEventListener('keydown', e => {
   if (e.target.tagName === 'SELECT') return;
   const key = e.key.toLowerCase();
-  if (key >= '1' && key <= '7') {
+  if (key >= '1' && key <= '8') {
     loadDesign(parseInt(key) - 1);
   } else if (key === 'd') {
     setDevice('desktop');

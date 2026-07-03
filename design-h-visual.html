@@ -1,0 +1,834 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>타임 아카이브 — 시안 H (비주얼 핀터레스트)</title>
+<style>
+/* ── GESTALT DESIGN TOKENS (Pinterest 오픈소스 기반) ─────── */
+:root {
+  /* Base — gray.roboflow */
+  --g-50:   #F9F9F9;
+  --g-100:  #F1F1F1;
+  --g-200:  #E9E9E9;
+  --g-300:  #CDCDCD;
+  --g-400:  #A5A5A5;
+  --g-500:  #767676;   /* AA 접근성 최소 명도 */
+  --g-700:  #2B2B2B;
+  /* Brand — red.pushpin */
+  --r-0:    #FFF7F7;
+  --r-50:   #FFEBEB;
+  --r-100:  #FFE0E0;
+  --r-300:  #F47171;
+  --r-450:  #E60023;   /* 브랜드 레드 (Pushpin-450) */
+  --r-500:  #B60000;   /* hover */
+  --r-active:#a3081a;
+  /* Semantic */
+  --canvas: #FFFFFF;
+  --surface:#F9F9F9;
+  --ink:    #111111;   /* black.cosmicore.900 */
+  --muted:  #767676;
+  --dim:    #A5A5A5;
+  --border: #E9E9E9;
+  --bord-m: #CDCDCD;
+  --accent: #E60023;
+  /* Layout */
+  --nav-h:  64px;
+  --r-sm:   8px;
+  --r-md:   12px;
+  --r-card: 16px;      /* rounding.400 — Pinterest 핀 카드 */
+  --r-pill: 999px;     /* rounding.pill */
+  --r-circ: 50%;
+  --h-pad:  clamp(16px, 3.5vw, 52px);
+  --fn: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
+body { font-family: var(--fn); background: var(--canvas); color: var(--ink); font-size: 16px; line-height: 1.5; }
+img  { display: block; width: 100%; object-fit: cover; }
+a    { color: inherit; text-decoration: none; }
+
+/* ── TYPE ──────────────────────────────────────────────── */
+.t-hero    { font-size: clamp(36px,5vw,56px); font-weight: 700; line-height:1.08; letter-spacing:-.025em; }
+.t-display { font-size: clamp(22px,3vw,36px); font-weight: 700; line-height:1.14; letter-spacing:-.015em; }
+.t-head    { font-size: clamp(18px,2.2vw,26px); font-weight: 700; line-height:1.22; }
+.t-lead    { font-size: 18px; font-weight: 400; line-height:1.7; }
+.t-body    { font-size: 16px; font-weight: 400; line-height:1.65; }
+.t-small   { font-size: 14px; font-weight: 400; line-height:1.5; }
+.t-label   { font-size: 12px; font-weight: 600; letter-spacing:.08em; text-transform:uppercase; }
+
+/* ── BUTTONS ───────────────────────────────────────────── */
+.btn {
+  display:inline-flex; align-items:center; justify-content:center; gap:6px;
+  font-family:var(--fn); font-size:16px; font-weight:700;
+  padding:13px 24px; border-radius:var(--r-pill); border:none;
+  cursor:pointer; transition:background .18s, transform .12s; text-decoration:none;
+}
+.btn-primary   { background:var(--accent); color:#fff; }
+.btn-primary:hover { background:var(--r-500); }
+.btn-secondary { background:var(--g-200); color:var(--ink); }
+.btn-secondary:hover { background:#e2e2e2; }
+.btn-outline   { background:transparent; color:var(--ink); border:2px solid var(--bord-m); }
+.btn-outline:hover { border-color:var(--g-500); }
+.btn-white     { background:#fff; color:var(--ink); }
+.btn-white:hover { background:#f0f0f0; }
+.btn-dark      { background:var(--ink); color:#fff; }
+.btn-dark:hover { background:#000; }
+.btn-sm { font-size:14px; padding:9px 18px; }
+.btn:active { transform:scale(.97); }
+
+/* ── NAV ───────────────────────────────────────────────── */
+.gnav {
+  position:fixed; top:0; left:0; right:0; z-index:200;
+  height:var(--nav-h); background:var(--canvas);
+  border-bottom:1px solid var(--border);
+  display:flex; align-items:center; gap:16px;
+  padding:0 var(--h-pad);
+}
+.gnav-logo {
+  display:flex; align-items:center; gap:10px;
+  font-size:17px; font-weight:700; color:var(--ink); flex-shrink:0;
+}
+.gnav-logo-mark {
+  width:34px; height:34px; border-radius:var(--r-circ);
+  background:var(--accent); flex-shrink:0;
+  display:flex; align-items:center; justify-content:center;
+}
+.gnav-logo-mark svg { width:18px; height:18px; }
+.gnav-search {
+  flex:1; max-width:540px; margin:0 auto;
+  background:var(--g-100); border-radius:var(--r-pill);
+  display:flex; align-items:center; gap:8px;
+  padding:10px 16px; border:1.5px solid transparent;
+  transition:background .15s, border-color .15s;
+}
+.gnav-search:hover { background:var(--g-200); }
+.gnav-search svg { color:var(--muted); flex-shrink:0; }
+.gnav-search-text { font-size:15px; color:var(--muted); }
+.gnav-links { display:flex; align-items:center; gap:4px; flex-shrink:0; }
+.gnav-link {
+  font-size:15px; font-weight:600; padding:8px 14px;
+  border-radius:var(--r-pill); transition:background .15s; color:var(--ink);
+}
+.gnav-link:hover { background:var(--g-100); }
+.gnav-cta { background:var(--r-50); color:var(--accent); font-size:13px; font-weight:700; padding:8px 16px; border-radius:var(--r-pill); }
+
+main { padding-top:var(--nav-h); }
+
+/* ── HERO ──────────────────────────────────────────────── */
+.hero {
+  padding:60px var(--h-pad) 52px;
+  display:grid; grid-template-columns:1fr 1fr;
+  gap:56px; align-items:center;
+  max-width:1400px; margin:0 auto;
+}
+.hero-eye   { color:var(--muted); margin-bottom:18px; }
+.hero-title { margin-bottom:20px; }
+.hero-title em { font-style:normal; color:var(--accent); }
+.hero-sub   { color:var(--muted); margin-bottom:32px; max-width:480px; }
+.hero-actions { display:flex; gap:12px; flex-wrap:wrap; align-items:center; }
+.hero-note  { font-size:13px; color:var(--muted); margin-top:8px; }
+.hero-nums  {
+  display:flex; gap:28px; margin-top:40px;
+  padding-top:32px; border-top:1px solid var(--border);
+}
+.h-num-val  { font-size:26px; font-weight:700; line-height:1; }
+.h-num-lab  { font-size:13px; color:var(--muted); margin-top:4px; }
+
+/* Hero visual: Pinterest-style pin collage */
+.hero-pins  { display:grid; grid-template-columns:1fr 1fr; gap:8px; }
+.h-pin      { border-radius:var(--r-card); overflow:hidden; position:relative; background:var(--g-100); }
+.h-pin-img  { width:100%; display:block; }
+.h-pin:first-child { grid-row:span 2; }
+.h-pin-save {
+  position:absolute; top:10px; right:10px;
+  background:var(--accent); color:#fff;
+  font-size:13px; font-weight:700;
+  padding:6px 14px; border-radius:var(--r-pill);
+  opacity:0; transition:opacity .15s;
+}
+.h-pin:hover .h-pin-save { opacity:1; }
+
+/* ── CHIPS ─────────────────────────────────────────────── */
+.chips-wrap {
+  border-top:1px solid var(--border);
+  border-bottom:1px solid var(--border);
+  padding:16px var(--h-pad);
+}
+.chips-row { display:flex; gap:8px; overflow-x:auto; scrollbar-width:none; padding-bottom:2px; }
+.chips-row::-webkit-scrollbar { display:none; }
+.chip {
+  display:inline-flex; align-items:center; gap:6px;
+  padding:9px 18px; border-radius:var(--r-pill);
+  font-size:14px; font-weight:600; white-space:nowrap;
+  cursor:pointer; flex-shrink:0; transition:opacity .15s;
+}
+.chip:hover { opacity:.75; }
+/* Pinterest search-guide 파스텔 칩 (실제 Gestalt 색상) */
+.c1 { background:#ABDBFF; color:#003C96; }
+.c2 { background:#A4F9AC; color:#00422C; }
+.c3 { background:#FFC58F; color:#662400; }
+.c4 { background:#FCBBBB; color:#660000; }
+.c5 { background:#D5C7FF; color:#2C0066; }
+.c6 { background:#75E4D5; color:#003440; }
+.c7 { background:#FAE600; color:#662400; }
+.c8 { background:#FE8EB1; color:#630233; }
+.c9 { background:var(--g-200); color:var(--g-700); }
+
+/* ── SHARED SECTION ─────────────────────────────────────── */
+.sec       { padding:56px var(--h-pad); }
+.sec-surf  { background:var(--surface); }
+.sec-hd    { display:flex; justify-content:space-between; align-items:flex-end; margin-bottom:28px; }
+.sec-lab   { color:var(--muted); margin-bottom:6px; }
+
+/* ── COURSE CARDS ───────────────────────────────────────── */
+.card-grid  { display:grid; grid-template-columns:repeat(3,1fr); gap:16px; }
+.p-card {
+  background:var(--canvas); border-radius:var(--r-card);
+  border:1px solid var(--border); overflow:hidden;
+  display:flex; flex-direction:column;
+  transition:box-shadow .2s, transform .2s; cursor:pointer;
+}
+.p-card:hover { box-shadow:0 8px 32px rgba(0,0,0,.1); transform:translateY(-2px); }
+.p-card-img { position:relative; overflow:hidden; }
+.p-card-img-inner { aspect-ratio:4/3; }
+.p-card-overlay {
+  position:absolute; inset:0;
+  display:flex; align-items:flex-start; justify-content:flex-end; padding:12px;
+  opacity:0; transition:opacity .15s;
+}
+.p-card:hover .p-card-overlay { opacity:1; }
+.p-card-save { background:var(--accent); color:#fff; font-size:13px; font-weight:700; padding:7px 14px; border-radius:var(--r-pill); }
+.p-card-body { padding:16px; flex:1; display:flex; flex-direction:column; }
+.p-card-tag  { font-size:11px; font-weight:700; letter-spacing:.08em; text-transform:uppercase; color:var(--muted); margin-bottom:6px; }
+.p-card-title { font-size:16px; font-weight:700; line-height:1.3; margin-bottom:8px; }
+.p-card-desc  { font-size:14px; line-height:1.58; color:var(--muted); flex:1; }
+.p-card-ft {
+  margin-top:16px; padding-top:12px;
+  border-top:1px solid var(--border);
+  display:flex; justify-content:space-between; align-items:center;
+}
+.p-card-price { font-size:14px; font-weight:700; }
+.p-card-cta   { font-size:13px; font-weight:600; color:var(--accent); }
+
+/* ── ABOUT ──────────────────────────────────────────────── */
+.about-grid { display:grid; grid-template-columns:5fr 7fr; gap:64px; align-items:center; }
+.about-photo {
+  aspect-ratio:3/4; border-radius:var(--r-card); overflow:hidden;
+  background:var(--g-100);
+}
+.about-eye   { color:var(--accent); margin-bottom:12px; }
+.about-title { margin-bottom:20px; }
+.about-body p { color:var(--muted); line-height:1.75; }
+.about-body p+p { margin-top:12px; }
+.about-nums  { display:flex; gap:32px; margin-top:28px; padding-top:24px; border-top:1px solid var(--border); }
+.a-num-val   { font-size:28px; font-weight:700; }
+.a-num-lab   { font-size:13px; color:var(--muted); margin-top:3px; }
+
+/* ── MASONRY GALLERY ────────────────────────────────────── */
+.masonry-hd  { padding:56px var(--h-pad) 20px; display:flex; justify-content:space-between; align-items:flex-end; }
+.masonry     { columns:5; column-gap:8px; padding:0 var(--h-pad) 56px; }
+@media(max-width:1200px){.masonry{columns:4}}
+@media(max-width:900px){.masonry{columns:3}}
+@media(max-width:600px){.masonry{columns:2}}
+.m-pin {
+  break-inside:avoid; margin-bottom:8px;
+  border-radius:var(--r-card); overflow:hidden;
+  position:relative; display:block; cursor:pointer;
+  background:var(--g-100);
+}
+.m-pin-img   { display:block; width:100%; }
+.m-pin-over  {
+  position:absolute; inset:0;
+  display:flex; align-items:flex-start; justify-content:flex-end; padding:10px;
+  opacity:0; transition:opacity .15s;
+  background:rgba(0,0,0,.03);
+}
+.m-pin:hover .m-pin-over { opacity:1; }
+.m-pin-sv    { background:var(--accent); color:#fff; font-size:12px; font-weight:700; padding:6px 13px; border-radius:var(--r-pill); }
+.m-pin-body  { padding:10px 12px 14px; background:var(--canvas); }
+.m-pin-t     { font-size:13px; font-weight:600; line-height:1.35; }
+.m-pin-s     { font-size:11px; color:var(--muted); margin-top:3px; }
+
+/* ── INSTRUCTOR ─────────────────────────────────────────── */
+.inst-wrap  { max-width:660px; margin:0 auto; }
+.inst-card  {
+  background:var(--canvas); border:1px solid var(--border);
+  border-radius:var(--r-card); padding:32px;
+  display:flex; gap:28px; align-items:flex-start;
+}
+.inst-avatar {
+  width:100px; height:100px; border-radius:var(--r-circ);
+  background:var(--g-200); flex-shrink:0; overflow:hidden;
+  box-shadow:0 0 0 3px var(--canvas), 0 0 0 5px var(--bord-m);
+}
+.inst-name  { font-size:21px; font-weight:700; margin-bottom:4px; }
+.inst-role  { font-size:13px; color:var(--muted); letter-spacing:.03em; margin-bottom:16px; }
+.inst-bio p { font-size:15px; line-height:1.78; color:var(--muted); }
+.inst-bio p+p { margin-top:12px; }
+.inst-tags  { display:flex; flex-wrap:wrap; gap:6px; margin-top:16px; }
+.inst-tag   { font-size:12px; font-weight:600; padding:4px 12px; background:var(--g-100); border-radius:var(--r-pill); color:var(--g-700); }
+
+/* ── STATS ──────────────────────────────────────────────── */
+.stats-grid { display:grid; grid-template-columns:repeat(4,1fr); }
+.stat-cell  {
+  padding:48px 32px;
+  border-right:1px solid var(--border);
+  text-align:center;
+}
+.stat-cell:last-child { border-right:none; }
+.stat-num   { font-size:clamp(36px,4.5vw,52px); font-weight:700; line-height:1; }
+.stat-unit  { font-size:18px; font-weight:400; }
+.stat-desc  { font-size:13px; color:var(--muted); margin-top:8px; }
+
+/* ── TESTIMONIALS ───────────────────────────────────────── */
+.rev-grid  { display:grid; grid-template-columns:repeat(3,1fr); gap:12px; }
+.r-card    { background:var(--canvas); border:1px solid var(--border); border-radius:var(--r-card); padding:24px; transition:box-shadow .2s; }
+.r-card:hover { box-shadow:0 4px 20px rgba(0,0,0,.07); }
+.r-stars   { color:var(--accent); font-size:13px; letter-spacing:2px; margin-bottom:12px; }
+.r-text    { font-size:15px; line-height:1.72; }
+.r-author  { margin-top:16px; display:flex; align-items:center; gap:10px; }
+.r-av      { width:36px; height:36px; border-radius:var(--r-circ); background:var(--g-200); flex-shrink:0; }
+.r-name    { font-size:13px; font-weight:700; }
+.r-course  { font-size:12px; color:var(--muted); }
+
+/* ── PROCESS ────────────────────────────────────────────── */
+.proc-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:12px; }
+.proc-card { background:var(--canvas); border:1px solid var(--border); border-radius:var(--r-card); padding:28px; }
+.proc-num  {
+  width:40px; height:40px; border-radius:var(--r-circ);
+  background:var(--r-50); color:var(--accent);
+  font-size:15px; font-weight:700;
+  display:flex; align-items:center; justify-content:center; margin-bottom:16px;
+}
+.proc-title { font-size:16px; font-weight:700; margin-bottom:8px; }
+.proc-desc  { font-size:14px; line-height:1.65; color:var(--muted); }
+
+/* ── CTA ────────────────────────────────────────────────── */
+.cta-sec   { background:var(--ink); padding:80px var(--h-pad); text-align:center; }
+.cta-inner { max-width:520px; margin:0 auto; }
+.cta-title { color:#fff; margin-bottom:14px; }
+.cta-sub   { font-size:17px; color:rgba(255,255,255,.6); line-height:1.65; margin-bottom:36px; }
+.cta-acts  { display:flex; gap:12px; justify-content:center; flex-wrap:wrap; }
+
+/* ── FOOTER ─────────────────────────────────────────────── */
+footer { background:var(--surface); border-top:1px solid var(--border); }
+.ft-top {
+  padding:48px var(--h-pad) 32px;
+  display:grid; grid-template-columns:2fr 1fr 1fr 1fr; gap:40px;
+}
+.ft-brand { display:flex; align-items:center; gap:8px; margin-bottom:12px; font-size:16px; font-weight:700; }
+.ft-brand-dot { width:22px; height:22px; border-radius:var(--r-circ); background:var(--accent); flex-shrink:0; }
+.ft-tag   { font-size:13px; color:var(--muted); line-height:1.7; }
+.ft-col h4 { font-size:11px; font-weight:700; letter-spacing:.09em; text-transform:uppercase; margin-bottom:14px; }
+.ft-col ul { list-style:none; }
+.ft-col li { margin-bottom:8px; }
+.ft-col a  { font-size:14px; color:var(--muted); transition:color .15s; }
+.ft-col a:hover { color:var(--ink); }
+.ft-btm {
+  border-top:1px solid var(--border); padding:18px var(--h-pad);
+  display:flex; justify-content:space-between;
+  font-size:12px; color:var(--dim);
+}
+
+/* RESPONSIVE */
+@media(max-width:960px){
+  .hero { grid-template-columns:1fr; }
+  .hero-pins { display:none; }
+  .about-grid { grid-template-columns:1fr; gap:36px; }
+  .card-grid { grid-template-columns:repeat(2,1fr); }
+  .rev-grid  { grid-template-columns:1fr; }
+  .proc-grid { grid-template-columns:repeat(2,1fr); }
+  .stats-grid { grid-template-columns:repeat(2,1fr); }
+  .stat-cell { border-right:none; border-bottom:1px solid var(--border); }
+  .ft-top { grid-template-columns:1fr 1fr; }
+}
+@media(max-width:600px){
+  .gnav-search { display:none; }
+  .card-grid { grid-template-columns:1fr; }
+  .proc-grid { grid-template-columns:1fr; }
+  .ft-top { grid-template-columns:1fr; }
+}
+</style>
+</head>
+<body>
+
+<!-- ══ GLOBAL NAV (Pinterest-style) ════════════════════════ -->
+<nav class="gnav">
+  <div class="gnav-logo">
+    <div class="gnav-logo-mark">
+      <!-- Camera lens icon (SVG) -->
+      <svg viewBox="0 0 18 18" fill="none" stroke="#fff" stroke-width="1.6" stroke-linecap="round">
+        <rect x="1.5" y="4.5" width="15" height="11" rx="2"/>
+        <path d="M6 4.5V3.5A1 1 0 0 1 7 2.5h4A1 1 0 0 1 12 3.5v1"/>
+        <circle cx="9" cy="10" r="3"/>
+        <circle cx="9" cy="10" r="1.2"/>
+        <circle cx="14" cy="6.5" r=".8" fill="#fff" stroke="none"/>
+      </svg>
+    </div>
+    TIME ARCHIVE
+  </div>
+
+  <div class="gnav-search">
+    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round">
+      <circle cx="6.5" cy="6.5" r="5"/><line x1="10.5" y1="10.5" x2="14" y2="14"/>
+    </svg>
+    <span class="gnav-search-text">과정, 분야, 강사 검색</span>
+  </div>
+
+  <div class="gnav-links">
+    <a href="#" class="gnav-link">과정</a>
+    <a href="#" class="gnav-link">강사</a>
+    <a href="#" class="gnav-link">갤러리</a>
+    <a href="#" class="gnav-cta">상담 신청</a>
+  </div>
+</nav>
+
+<main>
+
+<!-- ══ HERO ════════════════════════════════════════════════ -->
+<section class="hero">
+  <!-- Text -->
+  <div>
+    <p class="t-label hero-eye" style="color:var(--muted);">사진전문학원 · Time Archive</p>
+    <h1 class="t-hero hero-title">
+      현직 작가에게<br>배우는<br><em>사진의 언어.</em>
+    </h1>
+    <p class="t-lead hero-sub">광고·잡지·브랜드 현장에서 지금도 작업 중인 작가가<br>업계에서 통하는 기술만 가르칩니다.</p>
+    <div class="hero-actions">
+      <a href="#" class="btn btn-primary">상담 신청하기</a>
+      <a href="#" class="btn btn-secondary">과정 알아보기</a>
+    </div>
+    <p class="t-small hero-note" style="color:var(--muted);margin-top:16px;">✓ 무료 상담 &nbsp;·&nbsp; ✓ 1:1 맞춤 커리큘럼 &nbsp;·&nbsp; ✓ 강남 직영 스튜디오</p>
+    <div class="hero-nums">
+      <div><div class="h-num-val">27<span style="font-size:16px;font-weight:400;">년</span></div><div class="h-num-lab">현직 작가 경력</div></div>
+      <div><div class="h-num-val">1,200<span style="font-size:16px;font-weight:400;">+</span></div><div class="h-num-lab">누적 수료생</div></div>
+      <div><div class="h-num-val">9</div><div class="h-num-lab">전문 과정</div></div>
+      <div><div class="h-num-val">98<span style="font-size:16px;font-weight:400;">%</span></div><div class="h-num-lab">수강 만족도</div></div>
+    </div>
+  </div>
+
+  <!-- Pinterest pin collage -->
+  <div class="hero-pins">
+    <div class="h-pin" style="background:linear-gradient(160deg,#1a1a1a,#2d2d2d);">
+      <div class="h-pin-img" style="aspect-ratio:2/3;"></div>
+      <span class="h-pin-save">저장</span>
+    </div>
+    <div class="h-pin" style="background:linear-gradient(160deg,#2c1a0e,#1a1008);">
+      <div class="h-pin-img" style="aspect-ratio:4/3;"></div>
+      <span class="h-pin-save">저장</span>
+    </div>
+    <div class="h-pin" style="background:linear-gradient(160deg,#0a1e2a,#0d2435);">
+      <div class="h-pin-img" style="aspect-ratio:4/3;"></div>
+      <span class="h-pin-save">저장</span>
+    </div>
+  </div>
+</section>
+
+<!-- ══ CATEGORY CHIPS (Pinterest search-guide style) ════════ -->
+<div class="chips-wrap">
+  <div class="chips-row">
+    <span class="chip c1">
+      <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="7" cy="5" r="3"/><path d="M1 13c0-3.3 2.7-6 6-6s6 2.7 6 6"/></svg>
+      인물사진
+    </span>
+    <span class="chip c2">
+      <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M7 1l5 3v6L7 13 2 10V4z"/></svg>
+      제품사진
+    </span>
+    <span class="chip c3">
+      <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="5" y1="1" x2="5" y2="5"/><line x1="7" y1="1" x2="7" y2="5"/><line x1="9" y1="1" x2="9" y2="5"/><path d="M5 5c0 1.5 2 2 2 2v6M9 5c0 1.5-2 2-2 2"/></svg>
+      식품사진
+    </span>
+    <span class="chip c4">
+      <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 6v3h3l6 3.5V1L5 6H2z"/><path d="M11.5 5c.5 1 .5 3 0 4"/></svg>
+      광고사진
+    </span>
+    <span class="chip c5">
+      <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="7" cy="7" r="2"/><ellipse cx="7" cy="3" rx="1.5" ry="2.5" transform="rotate(0 7 7)"/><ellipse cx="7" cy="3" rx="1.5" ry="2.5" transform="rotate(60 7 7)"/><ellipse cx="7" cy="3" rx="1.5" ry="2.5" transform="rotate(120 7 7)"/></svg>
+      뷰티사진
+    </span>
+    <span class="chip c6">
+      <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 3h4M5 3c-.5 1.5-1 4-.5 6.5.5 1.5 1.5 3 2 3.5"/><path d="M9 3c.5 1.5 1 4 .5 6.5-.5 1.5-1.5 3-2 3.5"/></svg>
+      정물사진
+    </span>
+    <span class="chip c7">
+      <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M7 5C7 3.5 8 2.5 9.5 2.5S12 3.5 12 5"/><line x1="7" y1="5" x2="7" y2="7"/><path d="M7 7L1.5 12M7 7L12.5 12"/><line x1="1.5" y1="12" x2="12.5" y2="12"/></svg>
+      패션사진
+    </span>
+    <span class="chip c8">
+      <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="1.5" y="6" width="11" height="7" rx="1"/><rect x="1.5" y="3.5" width="11" height="3" rx=".8"/><line x1="4" y1="3.5" x2="2.5" y2="6.5"/><line x1="7" y1="3.5" x2="5.5" y2="6.5"/><line x1="10" y1="3.5" x2="8.5" y2="6.5"/></svg>
+      영상제작
+    </span>
+    <span class="chip c9">
+      <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="1" y="4.5" width="12" height="8" rx="1.5"/><path d="M4.5 4.5V3.5A.5.5 0 0 1 5 3h4a.5.5 0 0 1 .5.5v1"/><circle cx="7" cy="8.5" r="2.5"/><circle cx="7" cy="8.5" r="1.2"/></svg>
+      기초과정
+    </span>
+  </div>
+</div>
+
+<!-- ══ COURSE CARDS ═════════════════════════════════════════ -->
+<section class="sec sec-surf">
+  <div class="sec-hd">
+    <div>
+      <p class="t-label sec-lab">Curriculum</p>
+      <h2 class="t-display">추천 과정</h2>
+    </div>
+    <a href="#" class="btn btn-outline btn-sm">전체 과정 보기</a>
+  </div>
+  <div class="card-grid">
+
+    <div class="p-card">
+      <div class="p-card-img">
+        <div class="p-card-img-inner" style="background:linear-gradient(145deg,#1a1a1a,#2e2924);"></div>
+        <div class="p-card-overlay"><span class="p-card-save">저장</span></div>
+      </div>
+      <div class="p-card-body">
+        <span class="p-card-tag">심화 · 1:1</span>
+        <h3 class="p-card-title">인물 사진 심화</h3>
+        <p class="p-card-desc">자연광부터 스트로브 조명까지. 인물의 감정과 분위기를 포착하는 프로 촬영 기술.</p>
+        <div class="p-card-ft">
+          <span class="p-card-price">월 320,000원</span>
+          <a href="#" class="p-card-cta">자세히 보기 →</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="p-card">
+      <div class="p-card-img">
+        <div class="p-card-img-inner" style="background:linear-gradient(145deg,#3a3020,#241e14);"></div>
+        <div class="p-card-overlay"><span class="p-card-save">저장</span></div>
+      </div>
+      <div class="p-card-body">
+        <span class="p-card-tag">기초 · 입문</span>
+        <h3 class="p-card-title">처음 찍는 사진</h3>
+        <p class="p-card-desc">카메라를 처음 잡는 분을 위한 과정. 구도·빛·노출의 원리부터 실전까지.</p>
+        <div class="p-card-ft">
+          <span class="p-card-price">월 220,000원</span>
+          <a href="#" class="p-card-cta">자세히 보기 →</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="p-card">
+      <div class="p-card-img">
+        <div class="p-card-img-inner" style="background:linear-gradient(145deg,#1e2830,#141e28);"></div>
+        <div class="p-card-overlay"><span class="p-card-save">저장</span></div>
+      </div>
+      <div class="p-card-body">
+        <span class="p-card-tag">상업 · 전문</span>
+        <h3 class="p-card-title">제품 · 식품 사진</h3>
+        <p class="p-card-desc">브랜드·커머스가 요구하는 제품·식품 사진의 세팅, 조명, 후반 작업 전과정.</p>
+        <div class="p-card-ft">
+          <span class="p-card-price">월 360,000원</span>
+          <a href="#" class="p-card-cta">자세히 보기 →</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ══ ABOUT ════════════════════════════════════════════════ -->
+<section class="sec">
+  <div class="about-grid">
+    <div class="about-photo"></div>
+    <div>
+      <p class="t-label about-eye">About Time Archive</p>
+      <h2 class="t-display about-title">현직 작가가<br>직접 가르치는<br>유일한 방법.</h2>
+      <div class="about-body">
+        <p>광고·잡지·브랜드 현장에서 지금도 작업 중인 작가가 강의합니다. 교재가 아닌 현장의 언어로, 지금 업계에서 통하는 기술만 전달합니다.</p>
+        <p>단순 촬영 기법을 넘어 조명 설계, 세트 구성, 포스트 워크플로우까지 — 실제 촬영 현장과 동일한 환경에서 배웁니다.</p>
+        <p>1:1 맞춤 피드백 시스템으로 수강생 각자의 속도와 목표에 맞게 진행됩니다.</p>
+      </div>
+      <div class="about-nums">
+        <div><div class="a-num-val">27<span style="font-size:16px;font-weight:400">년</span></div><div class="a-num-lab">현직 작가 경력</div></div>
+        <div><div class="a-num-val">1,200<span style="font-size:16px;font-weight:400">+</span></div><div class="a-num-lab">누적 수료생</div></div>
+        <div><div class="a-num-val">9</div><div class="a-num-lab">전문 과정</div></div>
+      </div>
+      <a href="#" class="btn btn-dark" style="margin-top:28px;">학원 소개 보기</a>
+    </div>
+  </div>
+</section>
+
+<!-- ══ MASONRY GALLERY (Pinterest 핵심 레이아웃) ════════════ -->
+<div style="background:var(--surface); border-top:1px solid var(--border);">
+  <div class="masonry-hd">
+    <div>
+      <p class="t-label sec-lab">Gallery</p>
+      <h2 class="t-display">수강생 작품</h2>
+    </div>
+    <a href="#" class="btn btn-outline btn-sm">전체 보기</a>
+  </div>
+  <div class="masonry">
+
+    <div class="m-pin">
+      <div class="m-pin-img" style="aspect-ratio:2/3;background:linear-gradient(160deg,#1c1410,#241a0e);"></div>
+      <div class="m-pin-over"><span class="m-pin-sv">저장</span></div>
+      <div class="m-pin-body"><p class="m-pin-t">조명의 언어</p><p class="m-pin-s">인물사진 과정 · 타임아카이브</p></div>
+    </div>
+
+    <div class="m-pin">
+      <div class="m-pin-img" style="aspect-ratio:1/1;background:linear-gradient(160deg,#0d1a20,#122330);"></div>
+      <div class="m-pin-over"><span class="m-pin-sv">저장</span></div>
+      <div class="m-pin-body"><p class="m-pin-t">빛과 그림자</p><p class="m-pin-s">기초과정 · 타임아카이브</p></div>
+    </div>
+
+    <div class="m-pin">
+      <div class="m-pin-img" style="aspect-ratio:3/4;background:linear-gradient(160deg,#1e1a14,#28241a);"></div>
+      <div class="m-pin-over"><span class="m-pin-sv">저장</span></div>
+      <div class="m-pin-body"><p class="m-pin-t">제품의 결</p><p class="m-pin-s">제품사진 과정 · 타임아카이브</p></div>
+    </div>
+
+    <div class="m-pin">
+      <div class="m-pin-img" style="aspect-ratio:4/5;background:linear-gradient(160deg,#140e0a,#1e1410);"></div>
+      <div class="m-pin-over"><span class="m-pin-sv">저장</span></div>
+      <div class="m-pin-body"><p class="m-pin-t">포트레이트</p><p class="m-pin-s">인물사진 심화 · 타임아카이브</p></div>
+    </div>
+
+    <div class="m-pin">
+      <div class="m-pin-img" style="aspect-ratio:1/1;background:linear-gradient(160deg,#1a1a24,#22222e);"></div>
+      <div class="m-pin-over"><span class="m-pin-sv">저장</span></div>
+      <div class="m-pin-body"><p class="m-pin-t">컬러 스터디</p><p class="m-pin-s">뷰티사진 과정 · 타임아카이브</p></div>
+    </div>
+
+    <div class="m-pin">
+      <div class="m-pin-img" style="aspect-ratio:3/5;background:linear-gradient(160deg,#0a1410,#10201a);"></div>
+      <div class="m-pin-over"><span class="m-pin-sv">저장</span></div>
+      <div class="m-pin-body"><p class="m-pin-t">식물과 빛</p><p class="m-pin-s">정물사진 과정 · 타임아카이브</p></div>
+    </div>
+
+    <div class="m-pin">
+      <div class="m-pin-img" style="aspect-ratio:5/4;background:linear-gradient(160deg,#201414,#2a1a1a);"></div>
+      <div class="m-pin-over"><span class="m-pin-sv">저장</span></div>
+      <div class="m-pin-body"><p class="m-pin-t">광고 촬영의 현장</p><p class="m-pin-s">광고사진 과정 · 타임아카이브</p></div>
+    </div>
+
+    <div class="m-pin">
+      <div class="m-pin-img" style="aspect-ratio:2/3;background:linear-gradient(160deg,#101824,#18243a);"></div>
+      <div class="m-pin-over"><span class="m-pin-sv">저장</span></div>
+      <div class="m-pin-body"><p class="m-pin-t">패션 무드</p><p class="m-pin-s">패션사진 과정 · 타임아카이브</p></div>
+    </div>
+
+    <div class="m-pin">
+      <div class="m-pin-img" style="aspect-ratio:1/1;background:linear-gradient(160deg,#1e1410,#281a10);"></div>
+      <div class="m-pin-over"><span class="m-pin-sv">저장</span></div>
+      <div class="m-pin-body"><p class="m-pin-t">브랜드 식품 촬영</p><p class="m-pin-s">식품사진 과정 · 타임아카이브</p></div>
+    </div>
+
+    <div class="m-pin">
+      <div class="m-pin-img" style="aspect-ratio:3/4;background:linear-gradient(160deg,#1a1a1a,#242424);"></div>
+      <div class="m-pin-over"><span class="m-pin-sv">저장</span></div>
+      <div class="m-pin-body"><p class="m-pin-t">자연광의 마법</p><p class="m-pin-s">기초과정 · 타임아카이브</p></div>
+    </div>
+
+    <div class="m-pin">
+      <div class="m-pin-img" style="aspect-ratio:1/1;background:linear-gradient(160deg,#0e1a14,#162a1e);"></div>
+      <div class="m-pin-over"><span class="m-pin-sv">저장</span></div>
+      <div class="m-pin-body"><p class="m-pin-t">뷰티 클로즈업</p><p class="m-pin-s">뷰티사진 과정 · 타임아카이브</p></div>
+    </div>
+
+    <div class="m-pin">
+      <div class="m-pin-img" style="aspect-ratio:4/5;background:linear-gradient(160deg,#201c10,#2a2418);"></div>
+      <div class="m-pin-over"><span class="m-pin-sv">저장</span></div>
+      <div class="m-pin-body"><p class="m-pin-t">정물의 구성</p><p class="m-pin-s">정물사진 과정 · 타임아카이브</p></div>
+    </div>
+
+    <div class="m-pin">
+      <div class="m-pin-img" style="aspect-ratio:2/3;background:linear-gradient(160deg,#141020,#1e1830);"></div>
+      <div class="m-pin-over"><span class="m-pin-sv">저장</span></div>
+      <div class="m-pin-body"><p class="m-pin-t">영상 메이킹</p><p class="m-pin-s">영상제작 과정 · 타임아카이브</p></div>
+    </div>
+
+    <div class="m-pin">
+      <div class="m-pin-img" style="aspect-ratio:5/4;background:linear-gradient(160deg,#100e14,#18141e);"></div>
+      <div class="m-pin-over"><span class="m-pin-sv">저장</span></div>
+      <div class="m-pin-body"><p class="m-pin-t">스트리트 포토</p><p class="m-pin-s">기초과정 · 타임아카이브</p></div>
+    </div>
+
+    <div class="m-pin">
+      <div class="m-pin-img" style="aspect-ratio:3/4;background:linear-gradient(160deg,#1c1008,#281810);"></div>
+      <div class="m-pin-over"><span class="m-pin-sv">저장</span></div>
+      <div class="m-pin-body"><p class="m-pin-t">E-Commerce 세팅</p><p class="m-pin-s">제품사진 과정 · 타임아카이브</p></div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ══ INSTRUCTOR ═══════════════════════════════════════════ -->
+<section class="sec">
+  <div style="text-align:center;margin-bottom:32px;">
+    <p class="t-label sec-lab" style="margin-bottom:6px;">Instructor</p>
+    <h2 class="t-display">강사 소개</h2>
+  </div>
+  <div class="inst-wrap">
+    <div class="inst-card">
+      <div class="inst-avatar"></div>
+      <div>
+        <h3 class="inst-name">김현수 작가</h3>
+        <p class="inst-role">상업 사진 작가 · 前 스튜디오 모아 수석</p>
+        <div class="inst-bio">
+          <p>광고·뷰티·라이프스타일 분야에서 27년간 활동 중인 현직 상업 사진 작가. 삼성, LG, 아모레퍼시픽, 올리브영 등 국내 주요 브랜드와 협업했습니다.</p>
+          <p>가르치는 것은 기법이 아니라 시각입니다. 어떻게 보는지 배우면, 어떻게 찍는지는 따라옵니다.</p>
+        </div>
+        <div class="inst-tags">
+          <span class="inst-tag">인물</span>
+          <span class="inst-tag">제품</span>
+          <span class="inst-tag">광고</span>
+          <span class="inst-tag">뷰티</span>
+          <span class="inst-tag">패션</span>
+          <span class="inst-tag">영상</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ STATS ════════════════════════════════════════════════ -->
+<section style="background:var(--surface);border-top:1px solid var(--border);border-bottom:1px solid var(--border);">
+  <div class="stats-grid">
+    <div class="stat-cell">
+      <div class="stat-num">27<span class="stat-unit">년</span></div>
+      <p class="stat-desc">현직 작가 경력</p>
+    </div>
+    <div class="stat-cell">
+      <div class="stat-num">1,200<span class="stat-unit">+</span></div>
+      <p class="stat-desc">누적 수료생</p>
+    </div>
+    <div class="stat-cell">
+      <div class="stat-num">9</div>
+      <p class="stat-desc">전문 과정 수</p>
+    </div>
+    <div class="stat-cell">
+      <div class="stat-num">98<span class="stat-unit">%</span></div>
+      <p class="stat-desc">수강 만족도</p>
+    </div>
+  </div>
+</section>
+
+<!-- ══ TESTIMONIALS ═════════════════════════════════════════ -->
+<section class="sec">
+  <div class="sec-hd">
+    <div>
+      <p class="t-label sec-lab">Reviews</p>
+      <h2 class="t-display">수강생 후기</h2>
+    </div>
+  </div>
+  <div class="rev-grid">
+    <div class="r-card">
+      <div class="r-stars">★★★★★</div>
+      <p class="r-text">"단순 기술이 아니라 어떻게 빛을 읽고 공간을 구성하는지 사고 방식 자체를 배웠습니다. 수업 하나로 포트폴리오가 완전히 달라졌어요."</p>
+      <div class="r-author">
+        <div class="r-av"></div>
+        <div><p class="r-name">박지현</p><p class="r-course">제품사진 과정 수료</p></div>
+      </div>
+    </div>
+    <div class="r-card">
+      <div class="r-stars">★★★★★</div>
+      <p class="r-text">"강사님이 현직에서 뛰고 있는 분이라 배우는 내용이 실전과 완전히 일치합니다. 다른 학원과는 차원이 달랐어요."</p>
+      <div class="r-author">
+        <div class="r-av"></div>
+        <div><p class="r-name">이승민</p><p class="r-course">인물사진 과정 수료</p></div>
+      </div>
+    </div>
+    <div class="r-card">
+      <div class="r-stars">★★★★★</div>
+      <p class="r-text">"카메라를 어떻게 잡아야 할지도 몰랐는데, 6개월 후에 브랜드 협찬을 받을 수 있었습니다."</p>
+      <div class="r-author">
+        <div class="r-av"></div>
+        <div><p class="r-name">최민아</p><p class="r-course">기초→뷰티 과정 수료</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ PROCESS ══════════════════════════════════════════════ -->
+<section class="sec sec-surf" style="border-top:1px solid var(--border);">
+  <div class="sec-hd">
+    <div>
+      <p class="t-label sec-lab">How It Works</p>
+      <h2 class="t-display">수업 진행 방식</h2>
+    </div>
+  </div>
+  <div class="proc-grid">
+    <div class="proc-card">
+      <div class="proc-num">01</div>
+      <h3 class="proc-title">무료 상담</h3>
+      <p class="proc-desc">목표와 현재 수준을 파악하는 1:1 무료 상담. 딱 맞는 과정을 추천합니다.</p>
+    </div>
+    <div class="proc-card">
+      <div class="proc-num">02</div>
+      <h3 class="proc-title">과정 시작</h3>
+      <p class="proc-desc">소규모 정원으로 운영. 강사가 모든 수강생의 진도를 직접 확인합니다.</p>
+    </div>
+    <div class="proc-card">
+      <div class="proc-num">03</div>
+      <h3 class="proc-title">현장 실습</h3>
+      <p class="proc-desc">실제 촬영 현장과 동일한 스튜디오 환경에서 조명 장비를 직접 다룹니다.</p>
+    </div>
+    <div class="proc-card">
+      <div class="proc-num">04</div>
+      <h3 class="proc-title">포트폴리오</h3>
+      <p class="proc-desc">수료 후 취업·프리랜서 활동을 위한 포트폴리오 피드백을 제공합니다.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ══ CTA ══════════════════════════════════════════════════ -->
+<section class="cta-sec">
+  <div class="cta-inner">
+    <h2 class="t-display cta-title">지금 바로<br>시작하세요.</h2>
+    <p class="cta-sub">무료 상담 신청 후 첫 수업을 체험해보세요. 수강을 결정하지 않아도 괜찮습니다.</p>
+    <div class="cta-acts">
+      <a href="#" class="btn btn-primary">무료 상담 신청</a>
+      <a href="tel:0212345678" class="btn btn-white">02-1234-5678</a>
+    </div>
+  </div>
+</section>
+
+<!-- ══ FOOTER ════════════════════════════════════════════════ -->
+<footer>
+  <div class="ft-top">
+    <div>
+      <div class="ft-brand"><div class="ft-brand-dot"></div>TIME ARCHIVE</div>
+      <p class="ft-tag">찍고, 편집하고, 팔리게 만든다.<br>27년 경력 원장 직강, 100% 실습.</p>
+    </div>
+    <div class="ft-col">
+      <h4>과정</h4>
+      <ul>
+        <li><a href="#">인물사진</a></li>
+        <li><a href="#">제품사진</a></li>
+        <li><a href="#">식품사진</a></li>
+        <li><a href="#">광고사진</a></li>
+        <li><a href="#">영상제작</a></li>
+      </ul>
+    </div>
+    <div class="ft-col">
+      <h4>학원</h4>
+      <ul>
+        <li><a href="#">학원 소개</a></li>
+        <li><a href="#">강사 소개</a></li>
+        <li><a href="#">갤러리</a></li>
+        <li><a href="#">수강 후기</a></li>
+      </ul>
+    </div>
+    <div class="ft-col">
+      <h4>문의</h4>
+      <ul>
+        <li><a href="#">상담 신청</a></li>
+        <li><a href="#">오시는 길</a></li>
+        <li><a href="#">카카오톡 채널</a></li>
+        <li><a href="#">인스타그램</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="ft-btm">
+    <span>© 2026 타임아카이브 사진전문학원 · 서울 강남구 언주로 113길 13 성창빌딩 2층</span>
+    <span>개인정보처리방침 · 이용약관</span>
+  </div>
+</footer>
+
+</main>
+</body>
+</html>
