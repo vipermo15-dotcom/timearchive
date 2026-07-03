@@ -44,10 +44,11 @@ body { font-family: var(--fn); background: var(--bg); color: var(--text); -webki
 .grid {
   max-width: 1400px; margin: 0 auto 80px;
   padding: 0 48px;
-  display: grid; grid-template-columns: repeat(5, 1fr); gap: 18px;
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px;
 }
-@media (max-width: 1200px) { .grid { grid-template-columns: repeat(3,1fr); } }
-@media (max-width: 800px)  { .grid { grid-template-columns: repeat(2,1fr); } }
+@media (max-width: 1400px) { .grid { grid-template-columns: repeat(4,1fr); } }
+@media (max-width: 1000px) { .grid { grid-template-columns: repeat(3,1fr); } }
+@media (max-width: 700px)  { .grid { grid-template-columns: repeat(2,1fr); } }
 @media (max-width: 520px)  { .grid { grid-template-columns: 1fr; padding: 0 24px; } }
 
 /* CARD */
@@ -69,6 +70,8 @@ body { font-family: var(--fn); background: var(--bg); color: var(--text); -webki
 .thumb-b { background: linear-gradient(145deg, #d8d2c5, #EDEAE3); }
 .thumb-c { background: linear-gradient(145deg, #ede9e0, #F9F7F3); }
 .thumb-d { background: linear-gradient(145deg, #3a3a3c, #1D1D1F); }
+.thumb-f { background: linear-gradient(145deg, #e4ddd0, #faf8f3); }
+.thumb-g { background: linear-gradient(145deg, #edeae3, #f8f6f1); }
 
 .thumb-badge {
   font-size: 11px; font-weight: 700; letter-spacing: .18em; text-transform: uppercase;
@@ -162,7 +165,7 @@ footer {
 <div class="hd">
   <div class="hd-logo"><span class="hd-dot"></span><span class="hd-name">TIME ARCHIVE</span></div>
   <h1 class="hd-title">홈페이지 시안 비교</h1>
-  <p class="hd-sub">다섯 가지 디자인 방향을 비교해보세요. 시안 B(아카이브)가 최종 확정됐습니다.</p>
+  <p class="hd-sub">일곱 가지 디자인 방향을 비교해보세요. 시안 B(아카이브)가 최종 확정됐습니다.</p>
 </div>
 
 <div class="grid">
@@ -286,22 +289,73 @@ footer {
       </div>
       <a class="card-cta" style="background:#0066cc;color:#fff;" href="./design-e-store.html" target="_blank">열어보기 →</a>
     </div>
+    </div>
+
+  <!-- 시안 F -->
+  <div class="card">
+    <div class="thumb thumb-f">
+      <span class="thumb-badge" style="background:rgba(122,92,58,.12);color:#7a5c3a;border:1px solid rgba(122,92,58,.28);">Design F</span>
+      <span class="thumb-label" style="color:#1a1a18;">에디토리얼</span>
+      <span class="thumb-desc" style="color:rgba(26,26,24,.4);">Editorial Archive</span>
+      <div class="thumb-dots">
+        <span class="dot" style="background:#faf8f3;border:1px solid rgba(0,0,0,.15)"></span>
+        <span class="dot" style="background:#7a5c3a"></span>
+        <span class="dot" style="background:#1f1d1a"></span>
+      </div>
+    </div>
+    <div class="card-body">
+      <p class="card-name">시안 F · 에디토리얼 아카이브</p>
+      <p class="card-mood">Gowun Serif + 클레이 액센트. 사진 출판물(Aperture, Foam) 스타일. 96px 여백, 티커 스트립, 에디토리얼 그리드.</p>
+      <div class="card-tags">
+        <span class="tag">Gowun Serif</span>
+        <span class="tag">클레이 액센트</span>
+        <span class="tag">출판물 감성</span>
+      </div>
+      <a class="card-cta" style="background:#7a5c3a;color:#faf8f3;" href="./design-f-editorial.html" target="_blank">열어보기 →</a>
+    </div>
+  </div>
+
+  <!-- 시안 G -->
+  <div class="card">
+    <div class="thumb thumb-g">
+      <span class="thumb-badge" style="background:rgba(61,90,110,.12);color:#3d5a6e;border:1px solid rgba(61,90,110,.28);">Design G</span>
+      <span class="thumb-label" style="color:#1c1c1c;">스튜디오 和</span>
+      <span class="thumb-desc" style="color:rgba(28,28,28,.4);">Studio Wa</span>
+      <div class="thumb-dots">
+        <span class="dot" style="background:#f8f6f1;border:1px solid rgba(0,0,0,.15)"></span>
+        <span class="dot" style="background:#3d5a6e"></span>
+        <span class="dot" style="background:#1a1a1a"></span>
+      </div>
+    </div>
+    <div class="card-body">
+      <p class="card-name">시안 G · 스튜디오 和</p>
+      <p class="card-mood">Noto Serif KR + 인디고 액센트. 일본 사진 기관 스타일. 112px 간(間), 비대칭 히어로, 탑-보더 통계.</p>
+      <div class="card-tags">
+        <span class="tag">Noto Serif KR</span>
+        <span class="tag">인디고 액센트</span>
+        <span class="tag">기관 스타일</span>
+      </div>
+      <a class="card-cta" style="background:#3d5a6e;color:#f0ede6;" href="./design-g-studio.html" target="_blank">열어보기 →</a>
+    </div>
   </div>
 
 </div>
 
 <!-- 비교표 -->
 <div class="compare-wrap">
-  <p class="compare-title">다섯 시안 한눈에 비교</p>
+  <p class="compare-title">일곱 시안 한눈에 비교</p>
+  <div style="overflow-x:auto;">
   <table class="compare-table">
     <thead>
       <tr>
         <th>항목</th>
-        <th>시안 A · 다크룸</th>
-        <th>시안 B · 아카이브 ✓</th>
-        <th>시안 C · 에디토리얼</th>
-        <th>시안 D · 크롬</th>
-        <th>시안 E · 스토어</th>
+        <th>A · 다크룸</th>
+        <th>B · 아카이브 ✓</th>
+        <th>C · 에디토리얼</th>
+        <th>D · 크롬</th>
+        <th>E · 스토어</th>
+        <th>F · 에디토리얼 아카이브</th>
+        <th>G · 스튜디오 和</th>
       </tr>
     </thead>
     <tbody>
@@ -312,14 +366,18 @@ footer {
         <td>밝은 베이지</td>
         <td>화이트/다크 교차</td>
         <td>파치먼트 + 흰 카드</td>
+        <td>크림 화이트 #faf8f3</td>
+        <td>화시 화이트 #f8f6f1</td>
       </tr>
       <tr>
         <td>액센트</td>
         <td>레드</td>
         <td>딥 그린</td>
         <td>골드</td>
-        <td>Action Blue #0066cc</td>
-        <td>Action Blue #0066cc</td>
+        <td>Action Blue</td>
+        <td>Action Blue</td>
+        <td>클레이 #7a5c3a</td>
+        <td>인디고 #3d5a6e</td>
       </tr>
       <tr>
         <td>분위기</td>
@@ -328,14 +386,18 @@ footer {
         <td>미니멀 · 현대적</td>
         <td>Apple 제품 페이지</td>
         <td>Apple 스토어 페이지</td>
+        <td>사진 출판물 · 아카이브</td>
+        <td>일본 사진 기관 · 간(間)</td>
       </tr>
       <tr>
-        <td>레이아웃</td>
-        <td>React</td>
-        <td>React</td>
-        <td>Vanilla · 타일 교차</td>
-        <td>Vanilla · 타일 교차</td>
-        <td>Vanilla · 카드 캐러셀</td>
+        <td>서체</td>
+        <td>-</td>
+        <td>-</td>
+        <td>Pretendard</td>
+        <td>Pretendard</td>
+        <td>SF Pro</td>
+        <td>Gowun Serif</td>
+        <td>Noto Serif KR</td>
       </tr>
       <tr>
         <td>핵심 패턴</td>
@@ -343,7 +405,9 @@ footer {
         <td>풀블리드 히어로</td>
         <td>에디토리얼 그리드</td>
         <td>product-tile 교차</td>
-        <td>메가타이틀 + 수평 카드</td>
+        <td>메가타이틀 + 카드</td>
+        <td>티커 + 클레이 아이콘</td>
+        <td>비대칭 히어로 + 탑-보더</td>
       </tr>
       <tr>
         <td>상태</td>
@@ -352,9 +416,12 @@ footer {
         <td>참고용</td>
         <td>검토 중</td>
         <td>신규</td>
+        <td>신규</td>
+        <td>신규</td>
       </tr>
     </tbody>
   </table>
+  </div>
 </div>
 
 <footer>
