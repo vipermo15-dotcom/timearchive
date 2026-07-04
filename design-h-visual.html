@@ -341,8 +341,59 @@ footer { background:var(--surface); border-top:1px solid var(--border); }
   font-size:12px; color:var(--dim);
 }
 
+/* ── IG-ANALYSIS ADDITIONS (인스타 분석 반영) ─────────────── */
+.hero-badges { display:flex; flex-wrap:wrap; gap:8px; margin-top:20px; }
+.hbadge { display:inline-flex; align-items:center; gap:6px; padding:8px 15px; border-radius:var(--r-pill); font-size:13px; font-weight:700; background:var(--g-100); color:var(--g-700); }
+.hbadge-accent { background:var(--r-50); color:var(--accent); }
+
+/* 국비지원 밴드 */
+.fund { background:var(--r-0); border-top:1px solid var(--r-100); border-bottom:1px solid var(--r-100); padding:44px var(--h-pad); }
+.fund-inner { max-width:960px; margin:0 auto; display:flex; align-items:center; gap:28px; flex-wrap:wrap; justify-content:space-between; }
+.fund-badge { font-size:12px; font-weight:700; letter-spacing:.08em; color:var(--accent); text-transform:uppercase; }
+.fund-t { font-size:clamp(22px,3vw,30px); font-weight:700; line-height:1.2; margin:8px 0 6px; }
+.fund-d { font-size:15px; color:var(--muted); line-height:1.6; }
+
+/* AI 과정 밴드 */
+.ai-band { background:linear-gradient(135deg,#111,#2b2b2b); color:#fff; padding:64px var(--h-pad); }
+.ai-inner { max-width:1100px; margin:0 auto; display:grid; grid-template-columns:1fr 1fr; gap:48px; align-items:center; }
+.ai-eye { font-size:12px; font-weight:700; letter-spacing:.1em; text-transform:uppercase; color:var(--r-300); margin-bottom:14px; }
+.ai-t { font-size:clamp(26px,3.4vw,40px); font-weight:700; line-height:1.15; margin-bottom:18px; }
+.ai-d { font-size:16px; line-height:1.7; color:rgba(255,255,255,.72); margin-bottom:24px; }
+.ai-tags { display:flex; flex-wrap:wrap; gap:8px; }
+.ai-tag { font-size:13px; font-weight:600; padding:6px 14px; border-radius:var(--r-pill); background:rgba(255,255,255,.12); color:#fff; }
+.ai-pins { display:grid; grid-template-columns:1fr 1fr; gap:10px; }
+.ai-pin { aspect-ratio:3/4; border-radius:var(--r-card); background:linear-gradient(160deg,#3a2a3a,#1a1420); position:relative; overflow:hidden; }
+.ai-pin::after { content:attr(data-l); position:absolute; left:10px; bottom:10px; font-size:11px; font-weight:700; color:rgba(255,255,255,.85); }
+
+/* 작가 스토리 */
+.story-inner { max-width:960px; margin:0 auto; display:grid; grid-template-columns:5fr 7fr; gap:48px; align-items:center; }
+.story-photo { aspect-ratio:4/5; border-radius:var(--r-card); background:linear-gradient(160deg,#2a2018,#14100a); }
+.story-q { font-size:clamp(21px,2.8vw,28px); font-weight:700; line-height:1.35; margin-bottom:16px; letter-spacing:-.01em; }
+.story-b { font-size:16px; line-height:1.75; color:var(--muted); margin-bottom:22px; }
+
+/* 인스타 피드 */
+.ig { background:var(--surface); border-top:1px solid var(--border); padding:56px var(--h-pad); text-align:center; }
+.ig-h { display:flex; flex-direction:column; align-items:center; gap:6px; margin-bottom:24px; }
+.ig-handle { font-size:18px; font-weight:700; }
+.ig-follow { font-size:14px; color:var(--muted); }
+.ig-follow b { color:var(--ink); }
+.ig-grid { display:grid; grid-template-columns:repeat(6,1fr); gap:6px; max-width:1100px; margin:0 auto 24px; }
+.ig-cell { aspect-ratio:1/1; border-radius:var(--r-sm); }
+@media(max-width:700px){ .ig-grid{ grid-template-columns:repeat(3,1fr); } }
+
+/* 상담 폼 */
+.consult { max-width:480px; margin:0 auto 28px; text-align:left; }
+.consult-row { margin-bottom:12px; }
+.consult label { display:block; font-size:13px; font-weight:600; margin-bottom:6px; color:rgba(255,255,255,.8); }
+.consult input, .consult select { width:100%; padding:14px 16px; border-radius:var(--r-md); border:1.5px solid rgba(255,255,255,.22); background:rgba(255,255,255,.08); color:#fff; font-size:16px; font-family:var(--fn); }
+.consult input::placeholder { color:rgba(255,255,255,.4); }
+.consult select option { color:#111; }
+
 /* RESPONSIVE */
 @media(max-width:960px){
+  .ai-inner { grid-template-columns:1fr; gap:32px; }
+  .story-inner { grid-template-columns:1fr; gap:28px; }
+  .fund-inner { gap:18px; }
   .hero { grid-template-columns:1fr; }
   .hero-pins { display:none; }
   .about-grid { grid-template-columns:1fr; gap:36px; }
@@ -390,7 +441,7 @@ footer { background:var(--surface); border-top:1px solid var(--border); }
     <a href="#" class="gnav-link">과정</a>
     <a href="#" class="gnav-link">강사</a>
     <a href="#" class="gnav-link">갤러리</a>
-    <a href="#" class="gnav-cta">상담 신청</a>
+    <a href="#consult" class="gnav-cta">상담 신청</a>
   </div>
 </nav>
 
@@ -406,14 +457,19 @@ footer { background:var(--surface); border-top:1px solid var(--border); }
     </h1>
     <p class="t-lead hero-sub">광고·잡지·브랜드 현장에서 지금도 작업 중인 작가가<br>업계에서 통하는 기술만 가르칩니다.</p>
     <div class="hero-actions">
-      <a href="#" class="btn btn-primary">상담 신청하기</a>
+      <a href="#consult" class="btn btn-primary">상담 신청하기</a>
       <a href="#" class="btn btn-secondary">과정 알아보기</a>
     </div>
     <p class="t-small hero-note" style="color:var(--muted);margin-top:16px;">✓ 무료 상담 &nbsp;·&nbsp; ✓ 1:1 맞춤 커리큘럼 &nbsp;·&nbsp; ✓ 강남 직영 스튜디오</p>
+    <div class="hero-badges">
+      <span class="hbadge">📸 인스타 47K 팔로워</span>
+      <span class="hbadge hbadge-accent">💳 국비지원 가능</span>
+      <span class="hbadge">🎯 1:1 맞춤 실습</span>
+    </div>
     <div class="hero-nums">
       <div><div class="h-num-val">30<span style="font-size:16px;font-weight:400;">년</span></div><div class="h-num-lab">현직 원장 경력</div></div>
+      <div><div class="h-num-val">47K<span style="font-size:16px;font-weight:400;">+</span></div><div class="h-num-lab">인스타 팔로워</div></div>
       <div><div class="h-num-val">1,200<span style="font-size:16px;font-weight:400;">+</span></div><div class="h-num-lab">누적 수료생</div></div>
-      <div><div class="h-num-val">9</div><div class="h-num-lab">전문 과정</div></div>
       <div><div class="h-num-val">98<span style="font-size:16px;font-weight:400;">%</span></div><div class="h-num-lab">수강 만족도</div></div>
     </div>
   </div>
@@ -539,6 +595,42 @@ footer { background:var(--surface); border-top:1px solid var(--border); }
   </div>
 </section>
 
+<!-- ══ 국비지원 밴드 (전환 결정타) ══════════════════════════ -->
+<section class="fund">
+  <div class="fund-inner">
+    <div>
+      <p class="fund-badge">국비지원 · 내일배움카드</p>
+      <h2 class="fund-t">내일배움카드로 부담 없이 시작하세요.</h2>
+      <p class="fund-d">구직·재직 상관없이 지원 대상이면 수강료를 지원받습니다.<br>신청 자격과 지원 금액은 전화 한 통으로 바로 안내드립니다.</p>
+    </div>
+    <a href="tel:02-545-5457" class="btn btn-primary">국비지원 상담 02-545-5457</a>
+  </div>
+</section>
+
+<!-- ══ AI 사진 과정 (차별화 독립 섹션) ══════════════════════ -->
+<section class="ai-band">
+  <div class="ai-inner">
+    <div>
+      <p class="ai-eye">AI Photography</p>
+      <h2 class="ai-t">찍는 것을 넘어,<br>AI로 만든다.</h2>
+      <p class="ai-d">4주 완성 집중 촬영 + AI 생성형 이미지 실습. 제품·쇼핑몰·포트폴리오에 바로 쓰는 AI 리터칭까지, 현직 작가와 함께 배웁니다.</p>
+      <div class="ai-tags">
+        <span class="ai-tag"># AI 생성이미지</span>
+        <span class="ai-tag"># AI 리터칭</span>
+        <span class="ai-tag"># 4주완성</span>
+        <span class="ai-tag"># 포트폴리오</span>
+      </div>
+      <a href="#consult" class="btn btn-white" style="margin-top:26px;">AI 과정 상담 신청</a>
+    </div>
+    <div class="ai-pins">
+      <div class="ai-pin" data-l="Before → After"></div>
+      <div class="ai-pin" data-l="AI 생성 이미지" style="background:linear-gradient(160deg,#1a2440,#0e1628);"></div>
+      <div class="ai-pin" data-l="제품 리터칭" style="background:linear-gradient(160deg,#402a1a,#281810);"></div>
+      <div class="ai-pin" data-l="AI 포트폴리오" style="background:linear-gradient(160deg,#2a1a30,#160e1e);"></div>
+    </div>
+  </div>
+</section>
+
 <!-- ══ ABOUT ════════════════════════════════════════════════ -->
 <section class="sec">
   <div class="about-grid">
@@ -557,6 +649,22 @@ footer { background:var(--surface); border-top:1px solid var(--border); }
         <div><div class="a-num-val">9</div><div class="a-num-lab">전문 과정</div></div>
       </div>
       <a href="#" class="btn btn-dark" style="margin-top:28px;">학원 소개 보기</a>
+    </div>
+  </div>
+</section>
+
+<!-- ══ 작가·전시 스토리 (5060 커리어 전환) ══════════════════ -->
+<section class="sec sec-surf" style="border-top:1px solid var(--border);">
+  <div style="text-align:center;margin-bottom:36px;">
+    <p class="t-label sec-lab" style="margin-bottom:6px;">Second Life · 인생 2막</p>
+    <h2 class="t-display">사진으로 다시 시작합니다.</h2>
+  </div>
+  <div class="story-inner">
+    <div class="story-photo"></div>
+    <div>
+      <p class="story-q">"정년퇴직을 준비하던 분이,<br>사진작가가 되었습니다."</p>
+      <p class="story-b">타임에서 다시 시작해 개인전을 연 수강생들이 있습니다. 전국을 다니며 배우고 촬영한 기록 — 나이와 상관없이, 당신의 제2의 인생도 여기서 시작할 수 있습니다.</p>
+      <a href="#consult" class="btn btn-outline">작가 과정 알아보기</a>
     </div>
   </div>
 </section>
@@ -727,29 +835,55 @@ footer { background:var(--surface); border-top:1px solid var(--border); }
   <div class="rev-grid">
     <div class="r-card">
       <div class="r-stars">★★★★★</div>
-      <p class="r-text">"단순 기술이 아니라 어떻게 빛을 읽고 공간을 구성하는지 사고 방식 자체를 배웠습니다. 수업 하나로 포트폴리오가 완전히 달라졌어요."</p>
+      <p class="r-text">"전에는 그냥 셔터만 눌렀는데, 이젠 찍을 때 뭘 봐야 하는지 알게 됐어요. 원장님이 제 사진을 한 장씩 직접 봐주실 때가 제일 와닿았어요."</p>
       <div class="r-author">
         <div class="r-av"></div>
-        <div><p class="r-name">박지현</p><p class="r-course">제품사진 과정 수료</p></div>
+        <div><p class="r-name">입문반 수료생</p><p class="r-course">취미·기초 과정</p></div>
       </div>
     </div>
     <div class="r-card">
       <div class="r-stars">★★★★★</div>
-      <p class="r-text">"강사님이 현직에서 뛰고 있는 분이라 배우는 내용이 실전과 완전히 일치합니다. 다른 학원과는 차원이 달랐어요."</p>
+      <p class="r-text">"외주 촬영 비용이 아예 없어졌어요. 제가 직접 다 찍으니까요. 수료하고 나서 바로 제품 촬영 의뢰가 들어왔습니다."</p>
       <div class="r-author">
         <div class="r-av"></div>
-        <div><p class="r-name">이승민</p><p class="r-course">인물사진 과정 수료</p></div>
+        <div><p class="r-name">쇼핑몰 창업 수강생</p><p class="r-course">쇼핑몰·창업 과정</p></div>
       </div>
     </div>
     <div class="r-card">
       <div class="r-stars">★★★★★</div>
-      <p class="r-text">"카메라를 어떻게 잡아야 할지도 몰랐는데, 6개월 후에 브랜드 협찬을 받을 수 있었습니다."</p>
+      <p class="r-text">"퇴직하고 나서 새로운 걸 배우고 싶었어요. 오래전부터 해보고 싶던 사진을, 나이 걱정 없이 1:1로 배울 수 있었습니다."</p>
       <div class="r-author">
         <div class="r-av"></div>
-        <div><p class="r-name">최민아</p><p class="r-course">기초→뷰티 과정 수료</p></div>
+        <div><p class="r-name">시니어 수강생</p><p class="r-course">작가·인생 2막 과정</p></div>
       </div>
     </div>
   </div>
+  <p class="t-small" style="color:var(--dim);margin-top:16px;text-align:center;">※ 학원 수료생 인터뷰 기반. 게재 시 본인 동의 확보.</p>
+</section>
+
+<!-- ══ 인스타그램 실피드 (47K 소셜프루프) ══════════════════ -->
+<section class="ig">
+  <div class="ig-h">
+    <p class="t-label sec-lab" style="margin-bottom:2px;">Instagram</p>
+    <p class="ig-handle">@time_photoacademy</p>
+    <p class="ig-follow"><b>47K</b> 팔로워 · 학생과 선생님들의 촬영작을 실시간으로</p>
+  </div>
+  <div class="ig-grid">
+    <div class="ig-cell" style="background:linear-gradient(160deg,#1c1410,#241a0e);"></div>
+    <div class="ig-cell" style="background:linear-gradient(160deg,#0d1a20,#122330);"></div>
+    <div class="ig-cell" style="background:linear-gradient(160deg,#1e1a14,#28241a);"></div>
+    <div class="ig-cell" style="background:linear-gradient(160deg,#1a1a24,#22222e);"></div>
+    <div class="ig-cell" style="background:linear-gradient(160deg,#201414,#2a1a1a);"></div>
+    <div class="ig-cell" style="background:linear-gradient(160deg,#101824,#18243a);"></div>
+    <div class="ig-cell" style="background:linear-gradient(160deg,#0a1410,#10201a);"></div>
+    <div class="ig-cell" style="background:linear-gradient(160deg,#1e1410,#281a10);"></div>
+    <div class="ig-cell" style="background:linear-gradient(160deg,#141020,#1e1830);"></div>
+    <div class="ig-cell" style="background:linear-gradient(160deg,#1a1a1a,#242424);"></div>
+    <div class="ig-cell" style="background:linear-gradient(160deg,#0e1a14,#162a1e);"></div>
+    <div class="ig-cell" style="background:linear-gradient(160deg,#201c10,#2a2418);"></div>
+  </div>
+  <a href="https://www.instagram.com/time_photoacademy/" class="btn btn-outline btn-sm" target="_blank" rel="noopener">인스타그램에서 더 보기 →</a>
+  <p class="t-small" style="color:var(--dim);margin-top:12px;">※ 실제 피드는 Instagram 연동(Graph API) 후 자동 노출 — 현재는 예시</p>
 </section>
 
 <!-- ══ PROCESS ══════════════════════════════════════════════ -->
@@ -785,12 +919,40 @@ footer { background:var(--surface); border-top:1px solid var(--border); }
 </section>
 
 <!-- ══ CTA ══════════════════════════════════════════════════ -->
-<section class="cta-sec">
+<section class="cta-sec" id="consult">
   <div class="cta-inner">
     <h2 class="t-display cta-title">지금 바로<br>시작하세요.</h2>
-    <p class="cta-sub">무료 상담 신청 후 첫 수업을 체험해보세요. 수강을 결정하지 않아도 괜찮습니다.</p>
+    <p class="cta-sub">무료 상담 신청 후 첫 수업을 체험해보세요. 국비지원 자격도 함께 안내드립니다.</p>
+    <form id="consultForm" class="consult" onsubmit="alert('상담 신청이 접수되었습니다. 곧 연락드리겠습니다.');return false;">
+      <div class="consult-row">
+        <label>이름</label>
+        <input type="text" name="name" placeholder="성함을 입력하세요" required>
+      </div>
+      <div class="consult-row">
+        <label>연락처</label>
+        <input type="tel" name="phone" placeholder="010-0000-0000" required>
+      </div>
+      <div class="consult-row">
+        <label>관심 과정</label>
+        <select name="course">
+          <option>쇼핑몰·창업 과정</option>
+          <option>작가 과정 (인생 2막)</option>
+          <option>취미 과정</option>
+          <option>AI·1:1 개인레슨</option>
+        </select>
+      </div>
+      <div class="consult-row">
+        <label>어떻게 알고 오셨나요?</label>
+        <select name="source">
+          <option>인스타그램</option>
+          <option>네이버 검색</option>
+          <option>지인 추천</option>
+          <option>기타</option>
+        </select>
+      </div>
+    </form>
     <div class="cta-acts">
-      <a href="#" class="btn btn-primary">무료 상담 신청</a>
+      <button type="submit" form="consultForm" class="btn btn-primary">무료 상담 신청</button>
       <a href="tel:02-545-5457" class="btn btn-white">02-545-5457</a>
     </div>
   </div>
