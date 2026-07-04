@@ -5,10 +5,19 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>타임아카이브 사진전문학원</title>
 <meta name="description" content="1999년 설립. 현직 상업 사진작가에게 1:1로 배우는 인천 사진학원.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Pinyon+Script&display=swap" rel="stylesheet">
 <link rel="preconnect" href="https://cdn.jsdelivr.net">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css">
 <style>
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+/* TA Logo */
+.ta-logo { display:inline-flex; align-items:baseline; gap:5px; white-space:nowrap; }
+.ta-script { font-family:'Pinyon Script',cursive; font-size:22px; line-height:1; font-weight:400; }
+.ta-time { font-size:19px; font-weight:900; letter-spacing:-.02em; line-height:1; }
+.ta-archive { font-size:11px; font-weight:500; letter-spacing:.14em; line-height:1; }
+.ta-kr { font-size:10px; font-weight:400; letter-spacing:.04em; line-height:1; }
 
 /* ── APPLE DESIGN SYSTEM TOKENS ─────────────────── */
 :root {
@@ -297,7 +306,7 @@ footer { background: var(--parch); padding: 52px 44px 28px; border-top: 1px soli
   <div class="gnav-inner">
     <div class="gnav-logo">
       <span class="gnav-dot"></span>
-      <span class="gnav-name">TIME ARCHIVE</span>
+      <span class="ta-logo"><span class="ta-script">Visual Art</span><span class="ta-time">TIME</span><span class="ta-archive">ARCHIVE</span><span class="ta-kr">사진전문학원</span></span>
     </div>
     <ul class="gnav-links">
       <li><a href="#courses" class="tn">과정</a></li>
@@ -306,14 +315,14 @@ footer { background: var(--parch); padding: 52px 44px 28px; border-top: 1px soli
       <li><a href="#gallery" class="tn">갤러리</a></li>
       <li><a href="#contact" class="tn">상담</a></li>
     </ul>
-    <a href="tel:0254554457" class="tn gnav-action">전화 상담</a>
+    <a href="tel:02-545-5457" class="tn gnav-action">전화 상담</a>
   </div>
 </nav>
 
 <!-- ══ ANNOUNCEMENT BAR — sub-nav-frosted ══ -->
 <div class="announce">
   <button class="announce-arrow">‹</button>
-  <p class="announce-text tc">1:1 맞춤 수업으로 내 속도에 맞게 배우세요. <a href="tel:0254554457">지금 상담하기 →</a></p>
+  <p class="announce-text tc">1:1 맞춤 수업으로 내 속도에 맞게 배우세요. <a href="tel:02-545-5457">지금 상담하기 →</a></p>
   <button class="announce-arrow">›</button>
 </div>
 
@@ -328,7 +337,7 @@ footer { background: var(--parch); padding: 52px 44px 28px; border-top: 1px soli
   <div class="hero-right">
     <p class="hero-desc">현직 작가에게 배우는<br>가장 좋은 방법.</p>
     <div class="hero-links">
-      <a href="tel:0254554457" class="hero-link tb">상담 신청하기 ↗</a>
+      <a href="tel:02-545-5457" class="hero-link tb">상담 신청하기 ↗</a>
       <a href="#courses" class="hero-link tb">과정 알아보기 ↗</a>
     </div>
   </div>
@@ -484,7 +493,7 @@ footer { background: var(--parch); padding: 52px 44px 28px; border-top: 1px soli
         <p class="tc s-card-sub-dk">현직 작가에게 1:1로.</p>
         <p class="tc s-card-price-dk">수강료 문의</p>
         <div class="s-card-links">
-          <a href="tel:0254554457" class="tc s-card-link-dk">전화 상담 →</a>
+          <a href="tel:02-545-5457" class="tc s-card-link-dk">전화 상담 →</a>
         </div>
       </div>
       <div class="s-card-img-dk">
@@ -503,7 +512,7 @@ footer { background: var(--parch); padding: 52px 44px 28px; border-top: 1px soli
         <p class="tc s-card-sub">노출부터 구도까지 기본기를 다집니다.</p>
         <p class="tc s-card-price">수강 문의</p>
         <div class="s-card-links">
-          <a href="tel:0254554457" class="tc s-card-link">상담하기 →</a>
+          <a href="tel:02-545-5457" class="tc s-card-link">상담하기 →</a>
           <a href="#" class="tc s-card-link">더 알아보기 →</a>
         </div>
       </div>
@@ -523,7 +532,7 @@ footer { background: var(--parch); padding: 52px 44px 28px; border-top: 1px soli
         <p class="tc s-card-sub">상업·인물·제품·식품 중 선택해서 깊게.</p>
         <p class="tc s-card-price">수강 문의</p>
         <div class="s-card-links">
-          <a href="tel:0254554457" class="tc s-card-link">상담하기 →</a>
+          <a href="tel:02-545-5457" class="tc s-card-link">상담하기 →</a>
         </div>
       </div>
       <div class="s-card-img ph2">
@@ -542,7 +551,7 @@ footer { background: var(--parch); padding: 52px 44px 28px; border-top: 1px soli
         <p class="tc s-card-sub">소수 정예 4명 이하, 주 1회 · 총 4주.</p>
         <p class="tc s-card-price">수강 문의</p>
         <div class="s-card-links">
-          <a href="tel:0254554457" class="tc s-card-link">상담하기 →</a>
+          <a href="tel:02-545-5457" class="tc s-card-link">상담하기 →</a>
         </div>
       </div>
       <div class="s-card-img ph3">
@@ -561,7 +570,7 @@ footer { background: var(--parch); padding: 52px 44px 28px; border-top: 1px soli
         <p class="tc s-card-sub">최종 포트폴리오 완성 + 방향 상담.</p>
         <p class="tc s-card-price">수강 문의</p>
         <div class="s-card-links">
-          <a href="tel:0254554457" class="tc s-card-link">상담하기 →</a>
+          <a href="tel:02-545-5457" class="tc s-card-link">상담하기 →</a>
         </div>
       </div>
       <div class="s-card-img ph4">
@@ -601,7 +610,7 @@ footer { background: var(--parch); padding: 52px 44px 28px; border-top: 1px soli
       <p class="tc p-cat">1:1 맞춤 수업</p>
       <h3 class="p-title tbs" style="font-size:22px;">내 속도에<br>맞게 배웁니다.</h3>
       <p class="tc p-body">전 과정이 1:1 개인 맞춤입니다. 언제든 질문할 수 있고, 커리큘럼을 내 목표에 맞게 조정할 수 있습니다.</p>
-      <a href="tel:0254554457" class="tc p-link">상담 신청 →</a>
+      <a href="tel:02-545-5457" class="tc p-link">상담 신청 →</a>
     </div>
 
     <!-- Dark card -->
@@ -621,7 +630,7 @@ footer { background: var(--parch); padding: 52px 44px 28px; border-top: 1px soli
 <section id="contact" class="ql-section">
   <h2 class="ql-title">빠른 링크</h2>
   <div class="ql-chips">
-    <a href="tel:0254554457" class="ql-chip">상담 신청</a>
+    <a href="tel:02-545-5457" class="ql-chip">상담 신청</a>
     <a href="#" class="ql-chip">과정 안내</a>
     <a href="#" class="ql-chip">갤러리</a>
     <a href="#" id="instructor" class="ql-chip">강사 소개</a>
@@ -668,7 +677,7 @@ footer { background: var(--parch); padding: 52px 44px 28px; border-top: 1px soli
     <div class="ft-cols">
       <div>
         <p class="ft-brand-n">TIME ARCHIVE</p>
-        <p class="ft-brand-s">타임아카이브 사진전문학원<br>TEL 02-5455-4457<br>인천 · timearchive.co.kr</p>
+        <p class="ft-brand-s">타임아카이브 사진전문학원<br>TEL 02-545-5457<br>인천 · timearchive.co.kr</p>
       </div>
       <div class="ft-col">
         <p class="tcs ft-col-h">과정</p>

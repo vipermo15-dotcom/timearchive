@@ -4,6 +4,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>타임 아카이브 — 시안 H (비주얼 핀터레스트)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Pinyon+Script&display=swap" rel="stylesheet">
 <style>
 /* ── GESTALT DESIGN TOKENS (Pinterest 오픈소스 기반) ─────── */
 :root {
@@ -44,6 +47,12 @@
 }
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+/* TA Logo */
+.ta-logo { display:inline-flex; align-items:baseline; gap:5px; white-space:nowrap; }
+.ta-script { font-family:'Pinyon Script',cursive; font-size:22px; line-height:1; font-weight:400; }
+.ta-time { font-size:19px; font-weight:900; letter-spacing:-.02em; line-height:1; }
+.ta-archive { font-size:11px; font-weight:500; letter-spacing:.14em; line-height:1; }
+.ta-kr { font-size:10px; font-weight:400; letter-spacing:.04em; line-height:1; }
 html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
 body { font-family: var(--fn); background: var(--canvas); color: var(--ink); font-size: 16px; line-height: 1.5; }
 img  { display: block; width: 100%; object-fit: cover; }
@@ -367,7 +376,7 @@ footer { background:var(--surface); border-top:1px solid var(--border); }
         <circle cx="14" cy="6.5" r=".8" fill="#fff" stroke="none"/>
       </svg>
     </div>
-    TIME ARCHIVE
+    <span class="ta-logo"><span class="ta-script">Visual Art</span><span class="ta-time">TIME</span><span class="ta-archive">ARCHIVE</span><span class="ta-kr">사진전문학원</span></span>
   </div>
 
   <div class="gnav-search">
@@ -402,7 +411,7 @@ footer { background:var(--surface); border-top:1px solid var(--border); }
     </div>
     <p class="t-small hero-note" style="color:var(--muted);margin-top:16px;">✓ 무료 상담 &nbsp;·&nbsp; ✓ 1:1 맞춤 커리큘럼 &nbsp;·&nbsp; ✓ 강남 직영 스튜디오</p>
     <div class="hero-nums">
-      <div><div class="h-num-val">27<span style="font-size:16px;font-weight:400;">년</span></div><div class="h-num-lab">현직 작가 경력</div></div>
+      <div><div class="h-num-val">30<span style="font-size:16px;font-weight:400;">년</span></div><div class="h-num-lab">현직 원장 경력</div></div>
       <div><div class="h-num-val">1,200<span style="font-size:16px;font-weight:400;">+</span></div><div class="h-num-lab">누적 수료생</div></div>
       <div><div class="h-num-val">9</div><div class="h-num-lab">전문 과정</div></div>
       <div><div class="h-num-val">98<span style="font-size:16px;font-weight:400;">%</span></div><div class="h-num-lab">수강 만족도</div></div>
@@ -543,7 +552,7 @@ footer { background:var(--surface); border-top:1px solid var(--border); }
         <p>1:1 맞춤 피드백 시스템으로 수강생 각자의 속도와 목표에 맞게 진행됩니다.</p>
       </div>
       <div class="about-nums">
-        <div><div class="a-num-val">27<span style="font-size:16px;font-weight:400">년</span></div><div class="a-num-lab">현직 작가 경력</div></div>
+        <div><div class="a-num-val">30<span style="font-size:16px;font-weight:400">년</span></div><div class="a-num-lab">현직 원장 경력</div></div>
         <div><div class="a-num-val">1,200<span style="font-size:16px;font-weight:400">+</span></div><div class="a-num-lab">누적 수료생</div></div>
         <div><div class="a-num-val">9</div><div class="a-num-lab">전문 과정</div></div>
       </div>
@@ -666,10 +675,10 @@ footer { background:var(--surface); border-top:1px solid var(--border); }
     <div class="inst-card">
       <div class="inst-avatar"></div>
       <div>
-        <h3 class="inst-name">김현수 작가</h3>
-        <p class="inst-role">상업 사진 작가 · 前 스튜디오 모아 수석</p>
+        <h3 class="inst-name">박희수 원장</h3>
+        <p class="inst-role">사진전문학원 원장 · 30년 현장 경력</p>
         <div class="inst-bio">
-          <p>광고·뷰티·라이프스타일 분야에서 27년간 활동 중인 현직 상업 사진 작가. 삼성, LG, 아모레퍼시픽, 올리브영 등 국내 주요 브랜드와 협업했습니다.</p>
+          <p>광고·잡지·상업 사진 분야에서 30년간 활동 중인 현직 원장. 삼성전자·기아차·KB국민은행·GS홈쇼핑 등 국내 주요 브랜드와 협업했으며, 삼성 갤럭시 S10~S20 시리즈 제품 사진 및 제일기획 광고 작업으로 알려져 있습니다. 서울시립중부교육원 명예학과장.</p>
           <p>가르치는 것은 기법이 아니라 시각입니다. 어떻게 보는지 배우면, 어떻게 찍는지는 따라옵니다.</p>
         </div>
         <div class="inst-tags">
@@ -689,7 +698,7 @@ footer { background:var(--surface); border-top:1px solid var(--border); }
 <section style="background:var(--surface);border-top:1px solid var(--border);border-bottom:1px solid var(--border);">
   <div class="stats-grid">
     <div class="stat-cell">
-      <div class="stat-num">27<span class="stat-unit">년</span></div>
+      <div class="stat-num">30<span class="stat-unit">년</span></div>
       <p class="stat-desc">현직 작가 경력</p>
     </div>
     <div class="stat-cell">
@@ -782,7 +791,7 @@ footer { background:var(--surface); border-top:1px solid var(--border); }
     <p class="cta-sub">무료 상담 신청 후 첫 수업을 체험해보세요. 수강을 결정하지 않아도 괜찮습니다.</p>
     <div class="cta-acts">
       <a href="#" class="btn btn-primary">무료 상담 신청</a>
-      <a href="tel:0212345678" class="btn btn-white">02-1234-5678</a>
+      <a href="tel:02-545-5457" class="btn btn-white">02-545-5457</a>
     </div>
   </div>
 </section>
@@ -792,7 +801,7 @@ footer { background:var(--surface); border-top:1px solid var(--border); }
   <div class="ft-top">
     <div>
       <div class="ft-brand"><div class="ft-brand-dot"></div>TIME ARCHIVE</div>
-      <p class="ft-tag">찍고, 편집하고, 팔리게 만든다.<br>27년 경력 원장 직강, 100% 실습.</p>
+      <p class="ft-tag">찍고, 편집하고, 팔리게 만든다.<br>30년 경력 원장 직강, 100% 실습.</p>
     </div>
     <div class="ft-col">
       <h4>과정</h4>

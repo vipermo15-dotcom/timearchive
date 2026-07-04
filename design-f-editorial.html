@@ -6,7 +6,7 @@
 <title>타임 아카이브 — 시안 F (에디토리얼 아카이브 × B)</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Gowun+Serif:wght@400;700&family=Noto+Sans+KR:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Gowun+Serif:wght@400;700&family=Noto+Sans+KR:wght@300;400;500;600&family=Pinyon+Script&display=swap" rel="stylesheet">
 <style>
 /* ── EDITORIAL ARCHIVE DESIGN SYSTEM ─────────────────────── */
 :root {
@@ -31,6 +31,12 @@
 }
 
 *,*::before,*::after { box-sizing:border-box; margin:0; padding:0; }
+/* TA Logo */
+.ta-logo { display:inline-flex; align-items:baseline; gap:5px; white-space:nowrap; }
+.ta-script { font-family:'Pinyon Script',cursive; font-size:22px; line-height:1; font-weight:400; }
+.ta-time { font-size:19px; font-weight:900; letter-spacing:-.02em; line-height:1; }
+.ta-archive { font-size:11px; font-weight:500; letter-spacing:.14em; line-height:1; }
+.ta-kr { font-size:10px; font-weight:400; letter-spacing:.04em; line-height:1; }
 html { -webkit-font-smoothing:antialiased; scroll-behavior:smooth; }
 body {
   background: var(--canvas);
@@ -310,7 +316,7 @@ main { padding-top:52px; }
 
 <!-- ══ GLOBAL NAV ══════════════════════════════════════════════ -->
 <nav class="gnav">
-  <span class="gnav-logo">TIME ARCHIVE</span>
+  <span class="gnav-logo"><span class="ta-logo"><span class="ta-script">Visual Art</span><span class="ta-time">TIME</span><span class="ta-archive">ARCHIVE</span><span class="ta-kr">사진전문학원</span></span></span>
   <div class="gnav-links">
     <a href="#">과정</a>
     <a href="#">혜택</a>
@@ -318,7 +324,7 @@ main { padding-top:52px; }
     <a href="#">갤러리</a>
     <a href="#">상담</a>
   </div>
-  <a href="tel:0212345678" class="gnav-tel t-label">전화 상담</a>
+  <a href="tel:02-545-5457" class="gnav-tel t-label">전화 상담</a>
 </nav>
 
 <main>
@@ -463,10 +469,10 @@ main { padding-top:52px; }
     <div class="instructor-img"></div>
     <div>
       <p class="t-label inst-label" style="color:var(--ink-muted);">강사 소개</p>
-      <h2 class="inst-name">김현수 작가</h2>
-      <p class="inst-title">상업 사진 작가 · 前 스튜디오 모아 수석</p>
+      <h2 class="inst-name">박희수 원장</h2>
+      <p class="inst-title">사진전문학원 원장 · 30년 현장 경력</p>
       <div class="inst-bio">
-        <p>광고·뷰티·라이프스타일 분야에서 27년간 활동 중인 현직 상업 사진 작가. 삼성, LG, 아모레퍼시픽, 올리브영 등 국내 주요 브랜드와 협업했습니다.</p>
+        <p>광고·잡지·상업 사진 분야에서 30년간 활동 중인 현직 원장. 삼성전자·기아차·KB국민은행·GS홈쇼핑 등 국내 주요 브랜드와 협업했으며, 삼성 갤럭시 S10~S20 시리즈 제품 사진 및 제일기획 광고 작업으로 알려져 있습니다. 서울시립중부교육원 명예학과장.</p>
         <p>가르치는 것은 기법이 아니라 시각입니다. 어떻게 보는지 배우면, 어떻게 찍는지는 따라옵니다.</p>
       </div>
       <a href="#" class="btn btn-primary" style="margin-top:28px;">강사 더 알아보기</a>
@@ -479,7 +485,7 @@ main { padding-top:52px; }
   <div class="stats-grid">
     <div class="stat-cell">
       <div class="stat-num">27<span class="stat-unit">년</span></div>
-      <p class="stat-desc">현직 작가 경력</p>
+      <p class="stat-desc">현직 원장 경력</p>
     </div>
     <div class="stat-cell">
       <div class="stat-num">1,200<span class="stat-unit">+</span></div>
@@ -568,7 +574,7 @@ main { padding-top:52px; }
   <div class="footer-top">
     <div>
       <p class="footer-brand">TIME ARCHIVE</p>
-      <p class="footer-tagline">현직 작가에게 배우는 사진 전문 학원.<br>서울 강남구 · 02-1234-5678<br>평일 10:00 – 20:00</p>
+      <p class="footer-tagline">현직 작가에게 배우는 사진 전문 학원.<br>서울 강남구 · 02-545-5457<br>평일 10:00 – 20:00</p>
     </div>
     <div class="footer-col">
       <h4>과정</h4>
