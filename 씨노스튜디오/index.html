@@ -1,0 +1,380 @@
+<title>씨노스튜디오 — 디자인 시안 비교</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+  :root {
+    --font-body: -apple-system, 'Apple SD Gothic Neo', 'Pretendard', 'Noto Sans KR', sans-serif;
+  }
+
+  /* ===== 시안 1: 브라스 (기존 초안 · 다크네이비/브라스) ===== */
+  html[data-theme="brass"] {
+    --bg: #F9F8F6;
+    --bg-alt: #EDE9E3;
+    --surface: #FFFFFF;
+    --dark: #111418;
+    --text: #1D1D1D;
+    --text-dim: #6B7280;
+    --accent: #B8956A;
+    --accent-lt: #D4B896;
+    --line: #DDD9D3;
+    --font-display: var(--font-body);
+    --display-weight: 900;
+    --radius: 2px;
+    --btn-radius: 2px;
+    --tracking: -0.02em;
+  }
+
+  /* ===== 시안 2: 아카이브 (베이지 · 세리프) ===== */
+  html[data-theme="archive"] {
+    --bg: #EDEAE3;
+    --bg-alt: #E4E0D6;
+    --surface: #FFFFFF;
+    --dark: #1A1815;
+    --text: #1A1815;
+    --text-dim: rgba(26,24,21,0.62);
+    --accent: #2C4A47;
+    --accent-lt: #4C6E6A;
+    --line: rgba(26,24,21,0.14);
+    --font-display: 'Noto Serif KR', Georgia, serif;
+    --display-weight: 700;
+    --radius: 0px;
+    --btn-radius: 2px;
+    --tracking: -0.01em;
+    --gold: #9A7B4F;
+  }
+
+  /* ===== 시안 3: 핀터레스트 (크림 · 레드 필버튼) ===== */
+  html[data-theme="pinterest"] {
+    --bg: #FBFBF9;
+    --bg-alt: #F6F6F3;
+    --surface: #FFFFFF;
+    --dark: #211922;
+    --text: #211922;
+    --text-dim: #62625B;
+    --accent: #E60023;
+    --accent-lt: #FF4D6A;
+    --line: #DADAD3;
+    --font-display: var(--font-body);
+    --display-weight: 800;
+    --radius: 16px;
+    --btn-radius: 9999px;
+    --tracking: -0.01em;
+    --gold: #E60023;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { background: #DCD8CE; }
+  body {
+    font-family: var(--font-body);
+    color: var(--text);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .phone-wrap {
+    max-width: 460px;
+    margin: 0 auto;
+    background: var(--bg);
+    min-height: 100vh;
+    box-shadow: 0 0 40px rgba(0,0,0,0.15);
+    transition: background 0.3s ease;
+  }
+
+  /* ── 테마 스위처 ── */
+  .switcher {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    display: flex;
+    gap: 6px;
+    padding: 10px 14px;
+    background: rgba(0,0,0,0.85);
+    backdrop-filter: blur(8px);
+  }
+  .switcher button {
+    flex: 1;
+    border: none;
+    background: rgba(255,255,255,0.08);
+    color: rgba(255,255,255,0.55);
+    font-size: 13px;
+    font-weight: 700;
+    padding: 11px 6px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-family: var(--font-body);
+    transition: all 0.2s ease;
+  }
+  .switcher button.active { background: #fff; color: #111; }
+
+  .compare-caption {
+    text-align: center;
+    padding: 10px 16px 4px;
+    background: #000;
+  }
+  .compare-caption span { color: rgba(255,255,255,0.4); font-size: 11px; letter-spacing: 0.06em; }
+
+  /* ── HERO ── */
+  .hero { padding: 44px 22px 30px; background: var(--dark); transition: background 0.3s ease; }
+  html[data-theme="archive"] .hero,
+  html[data-theme="pinterest"] .hero { background: var(--bg); }
+  .eyebrow {
+    color: var(--accent-lt);
+    font-size: 11.5px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    margin-bottom: 16px;
+    display: block;
+  }
+  html[data-theme="archive"] .eyebrow,
+  html[data-theme="pinterest"] .eyebrow { color: var(--gold); }
+  .headline {
+    font-family: var(--font-display);
+    font-weight: var(--display-weight);
+    font-size: 32px;
+    line-height: 1.22;
+    color: #fff;
+    letter-spacing: var(--tracking);
+    margin-bottom: 8px;
+  }
+  html[data-theme="archive"] .headline,
+  html[data-theme="pinterest"] .headline { color: var(--text); }
+  .headline em { font-style: normal; color: var(--accent); }
+  html[data-theme="brass"] .headline em { color: var(--accent-lt); }
+  .hero-sub {
+    font-size: 12.5px; font-weight: 600; letter-spacing: 0.2em;
+    color: rgba(255,255,255,0.35); text-transform: uppercase; margin: 10px 0 18px;
+  }
+  html[data-theme="archive"] .hero-sub,
+  html[data-theme="pinterest"] .hero-sub { color: var(--text-dim); }
+  .sub { color: rgba(255,255,255,0.55); font-size: 15px; line-height: 1.75; margin-bottom: 26px; }
+  html[data-theme="archive"] .sub,
+  html[data-theme="pinterest"] .sub { color: var(--text-dim); }
+  .cta-row { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 20px; }
+  .btn-primary {
+    background: var(--accent); color: #fff; text-decoration: none; font-size: 15px; font-weight: 700;
+    padding: 15px 24px; border-radius: var(--btn-radius); display: inline-flex; align-items: center; min-height: 50px;
+  }
+  .btn-ghost {
+    background: transparent; color: #fff; text-decoration: none; font-size: 15px; font-weight: 600;
+    padding: 15px 22px; border: 1px solid rgba(255,255,255,0.25); border-radius: var(--btn-radius);
+    display: inline-flex; align-items: center; min-height: 50px;
+  }
+  html[data-theme="archive"] .btn-ghost,
+  html[data-theme="pinterest"] .btn-ghost { color: var(--text); border-color: var(--line); }
+  .badges { display: flex; gap: 8px; flex-wrap: wrap; }
+  .badge {
+    background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.14);
+    color: rgba(255,255,255,0.6); font-size: 11px; font-weight: 600; padding: 6px 11px; border-radius: 20px;
+  }
+  html[data-theme="archive"] .badge,
+  html[data-theme="pinterest"] .badge {
+    background: var(--surface); border-color: var(--line); color: var(--text-dim);
+  }
+
+  /* ── SECTION 공통 ── */
+  .section { padding: 36px 22px; background: var(--bg); }
+  .section-alt { background: var(--bg-alt); }
+  .sec-eyebrow { color: var(--gold, var(--accent)); font-size: 12px; font-weight: 700; letter-spacing: 0.12em; display: block; margin-bottom: 8px; }
+  .sec-title {
+    font-family: var(--font-display); font-weight: var(--display-weight); font-size: 22px;
+    color: var(--text); line-height: 1.35; margin-bottom: 14px; letter-spacing: var(--tracking);
+  }
+  .sec-desc { color: var(--text-dim); font-size: 14.5px; line-height: 1.75; margin-bottom: 20px; }
+
+  /* ── 서비스 카드 ── */
+  .svc-list { display: flex; flex-direction: column; gap: 12px; }
+  .svc-card {
+    background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius);
+    padding: 18px 20px; display: flex; justify-content: space-between; align-items: center; gap: 12px;
+  }
+  .svc-name { font-size: 16.5px; font-weight: 700; color: var(--text); margin-bottom: 4px; }
+  .svc-name-en { font-size: 11px; font-weight: 600; letter-spacing: 0.06em; color: var(--accent); margin-bottom: 6px; }
+  .svc-desc { font-size: 13px; color: var(--text-dim); line-height: 1.6; }
+  .svc-price { font-size: 20px; font-weight: 800; color: var(--text); white-space: nowrap; font-variant-numeric: tabular-nums; }
+  .svc-price span { font-size: 11.5px; font-weight: 500; color: var(--text-dim); }
+
+  /* ── WHY 4항목 ── */
+  .why-list { display: flex; flex-direction: column; gap: 16px; }
+  .why-item { border-top: 1px solid var(--line); padding-top: 14px; }
+  .why-item .n { color: var(--accent); font-size: 12px; font-weight: 800; }
+  .why-item h3 { font-size: 16px; font-weight: 700; color: var(--text); margin: 6px 0 5px; }
+  .why-item p { color: var(--text-dim); font-size: 13.5px; line-height: 1.65; }
+
+  /* ── 위치 정보 ── */
+  .info-list { display: flex; flex-direction: column; gap: 0; }
+  .info-row { display: flex; gap: 14px; padding: 13px 0; border-bottom: 1px solid var(--line); }
+  .info-row:last-child { border-bottom: none; }
+  .info-label { flex: 0 0 56px; font-size: 11px; font-weight: 700; letter-spacing: 0.05em; color: var(--accent); padding-top: 1px; }
+  .info-value { font-size: 13.5px; color: var(--text); line-height: 1.6; }
+  .info-value .en { display: block; font-size: 11.5px; color: var(--text-dim); margin-top: 2px; }
+
+  /* ── CTA 카드 ── */
+  .consult-card { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 22px 20px; }
+  .consult-card h3 { font-family: var(--font-display); font-weight: var(--display-weight); font-size: 19px; color: var(--text); margin-bottom: 8px; }
+  .consult-card p { color: var(--text-dim); font-size: 13.5px; line-height: 1.7; margin-bottom: 16px; }
+  .phone-box { display: flex; align-items: center; gap: 12px; background: var(--bg-alt); padding: 13px 15px; border-radius: var(--radius); margin-bottom: 12px; }
+  .phone-box b { font-size: 17px; color: var(--text); }
+  .phone-box span { display: block; color: var(--text-dim); font-size: 11.5px; }
+  .full-btn { display: block; width: 100%; text-align: center; background: var(--accent); color: #fff; text-decoration: none; font-size: 15px; font-weight: 700; padding: 15px; border-radius: var(--btn-radius); box-sizing: border-box; }
+
+  /* ── FOOTER ── */
+  .footer { padding: 26px 22px 100px; background: var(--bg-alt); border-top: 1px solid var(--line); }
+  .footer .logo { font-family: var(--font-display); font-weight: 800; font-size: 15px; color: var(--text); letter-spacing: 0.04em; margin-bottom: 6px; }
+  .footer p { color: var(--text-dim); font-size: 12.5px; line-height: 1.8; }
+
+  /* ── 플로팅 하단 CTA ── */
+  .floating { position: sticky; bottom: 0; z-index: 40; display: flex; gap: 8px; padding: 10px 14px; background: var(--surface); border-top: 1px solid var(--line); }
+  .floating a { flex: 1; text-align: center; padding: 14px; font-size: 14.5px; font-weight: 700; text-decoration: none; border-radius: var(--btn-radius); }
+  .floating .call { background: var(--bg-alt); color: var(--text); border: 1px solid var(--line); }
+  .floating .kakao { background: var(--accent); color: #fff; }
+
+  @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+</style>
+
+<html data-theme="brass">
+<div class="phone-wrap">
+
+  <div class="switcher">
+    <button data-theme-btn="brass" class="active" onclick="setTheme('brass', this)">브라스 (기존안)</button>
+    <button data-theme-btn="archive" onclick="setTheme('archive', this)">아카이브</button>
+    <button data-theme-btn="pinterest" onclick="setTheme('pinterest', this)">핀터레스트</button>
+  </div>
+  <div class="compare-caption"><span>탭을 눌러 3가지 시안을 한 화면에서 비교해보세요</span></div>
+
+  <!-- HERO -->
+  <section class="hero">
+    <span class="eyebrow">서울 종로구 · 자하문로 · 지하1층</span>
+    <h1 class="headline">순간을 정확하게<br><em>담습니다.</em></h1>
+    <p class="hero-sub">cenostudio · 씨노스튜디오</p>
+    <p class="sub">증명사진부터 비자·여권 사진, 프로필 사진까지.<br>정확한 규격과 섬세한 보정으로 당신의 순간을 기록합니다.</p>
+    <div class="cta-row">
+      <a href="#consult" class="btn-primary">카카오톡 예약하기</a>
+      <a href="#services" class="btn-ghost">서비스 보기</a>
+    </div>
+    <div class="badges">
+      <span class="badge">📋 당일 수령 가능</span>
+      <span class="badge">🌐 외국어 응대 가능</span>
+      <span class="badge">📍 경복궁 인근</span>
+    </div>
+  </section>
+
+  <!-- SERVICES -->
+  <section class="section" id="services">
+    <span class="sec-eyebrow">SERVICES &amp; PRICING</span>
+    <h2 class="sec-title">서비스 안내</h2>
+    <p class="sec-desc">모든 사진은 전문 장비와 경험 있는 스태프가 촬영합니다. 규격이 맞지 않으면 재촬영해드립니다.</p>
+    <div class="svc-list">
+      <div class="svc-card">
+        <div>
+          <div class="svc-name-en">ID · Passport · License</div>
+          <div class="svc-name">증명사진</div>
+          <div class="svc-desc">이력서·주민등록·여권·운전면허 규격 완벽 준수</div>
+        </div>
+        <div class="svc-price">30,000<span>원~</span></div>
+      </div>
+      <div class="svc-card">
+        <div>
+          <div class="svc-name-en">US · China Visa</div>
+          <div class="svc-name">비자사진</div>
+          <div class="svc-desc">미국·중국 비자 규격, 대사관 기준 정확히 맞춤</div>
+        </div>
+        <div class="svc-price">35,000<span>원~</span></div>
+      </div>
+      <div class="svc-card">
+        <div>
+          <div class="svc-name-en">Profile Portrait</div>
+          <div class="svc-name">프로필사진</div>
+          <div class="svc-desc">LinkedIn·사원증·SNS용 자연스러운 보정</div>
+        </div>
+        <div class="svc-price">80,000<span>원~</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHY -->
+  <section class="section section-alt" id="why">
+    <span class="sec-eyebrow">WHY CENOSTUDIO</span>
+    <h2 class="sec-title">씨노스튜디오를<br>선택하는 이유</h2>
+    <div class="why-list">
+      <div class="why-item">
+        <span class="n">01</span>
+        <h3>규격 정확성 보장</h3>
+        <p>여권·비자·증명사진별 픽셀·배경색·얼굴 비율을 정확히 준수합니다. 규격 불합격 시 무상 재촬영.</p>
+      </div>
+      <div class="why-item">
+        <span class="n">02</span>
+        <h3>외국어 응대 가능</h3>
+        <p>외국인 고객도 편하게. 미국·중국 비자 사진 규정을 정확히 이해하고 안내해드립니다.</p>
+      </div>
+      <div class="why-item">
+        <span class="n">03</span>
+        <h3>경복궁 인근 접근성</h3>
+        <p>종로구 자하문로 위치. 경복궁·부암동 방문과 함께 들르기 편리한 위치입니다.</p>
+      </div>
+      <div class="why-item">
+        <span class="n">04</span>
+        <h3>당일 수령</h3>
+        <p>촬영 당일 인화 및 디지털 파일 제공. 급한 서류 제출도 걱정 없습니다.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- LOCATION -->
+  <section class="section" id="location">
+    <span class="sec-eyebrow">LOCATION &amp; HOURS</span>
+    <h2 class="sec-title">오시는 길</h2>
+    <div class="info-list">
+      <div class="info-row">
+        <span class="info-label">주소</span>
+        <span class="info-value"><strong>서울 종로구 자하문로33다길 18, 지하1층</strong><span class="en">B1F, 18 Jahamun-ro 33-gil, Jongno-gu, Seoul</span></span>
+      </div>
+      <div class="info-row">
+        <span class="info-label">연락처</span>
+        <span class="info-value"><strong>0506-636-6568</strong><span class="en">카카오톡 채널 운영 중</span></span>
+      </div>
+      <div class="info-row">
+        <span class="info-label">휴무</span>
+        <span class="info-value">매주 일요일<span class="en">Closed on Sundays</span></span>
+      </div>
+      <div class="info-row">
+        <span class="info-label">교통</span>
+        <span class="info-value">경복궁역 3번 출구 버스 환승<span class="en">Bus from Gyeongbokgung Stn.</span></span>
+      </div>
+    </div>
+  </section>
+
+  <!-- 상담 -->
+  <section class="section section-alt" id="consult">
+    <span class="sec-eyebrow">RESERVATION</span>
+    <h2 class="sec-title">지금 바로<br>예약하세요</h2>
+    <div class="consult-card">
+      <h3>사진 촬영은 예약 고객<br>우선으로 진행됩니다</h3>
+      <p>빠른 상담은 카카오톡을 이용해주세요. 규격 문의도 함께 안내해드립니다.</p>
+      <div class="phone-box">
+        <span style="font-size:20px;">📞</span>
+        <div><span>전화 상담이 편하시면</span><b>0506-636-6568</b></div>
+      </div>
+      <a href="#" class="full-btn">카카오톡으로 예약하기</a>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <div class="footer">
+    <div class="logo">ceno.studio</div>
+    <p>씨노스튜디오 · 서울 종로구 자하문로33다길 18 지하1층<br>Tel. 0506-636-6568 · 일요일 휴무<br>© 2026 cenostudio. All rights reserved.</p>
+  </div>
+
+  <!-- 플로팅 하단 CTA -->
+  <div class="floating">
+    <a href="tel:05066366568" class="call">📞 전화 연결</a>
+    <a href="#consult" class="kakao">💬 카카오톡 상담</a>
+  </div>
+
+</div>
+
+<script>
+  function setTheme(name, btn) {
+    document.documentElement.setAttribute('data-theme', name);
+    document.querySelectorAll('[data-theme-btn]').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+  }
+</script>
+</html>
