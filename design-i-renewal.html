@@ -123,6 +123,13 @@ img{display:block;max-width:100%;}
 }
 
 /* Subject silhouette — product/portrait placeholder */
+
+/* Hero slide images */
+.slide-img{
+  position:absolute;inset:0;width:100%;height:100%;
+  object-fit:cover;object-position:center;z-index:0;
+}
+
 .slide-subject{
   position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
   font-size:clamp(80px,18vw,200px);opacity:.06;pointer-events:none;
@@ -690,22 +697,27 @@ footer{
   <div class="hero-slides" id="heroSlides">
     <!-- Slide 1: Product/Commercial -->
     <div class="hero-slide slide-1">
+      <img src="https://timearchive.co.kr/wp-content/uploads/2021/07/gallery5.jpg" alt="상업사진 · 화장품 광고" class="slide-img" loading="eager">
       <div class="slide-subject">◈</div>
     </div>
     <!-- Slide 2: Still Life / Steel -->
     <div class="hero-slide slide-2">
+      <img src="https://timearchive.co.kr/wp-content/uploads/2021/07/gallery10.jpg" alt="인물 사진" class="slide-img" loading="eager">
       <div class="slide-subject">◆</div>
     </div>
     <!-- Slide 3: Nature / Food -->
     <div class="hero-slide slide-3">
+      <img src="https://timearchive.co.kr/wp-content/uploads/2021/07/gallery9.jpg" alt="정물·과일 사진" class="slide-img" loading="eager">
       <div class="slide-subject">◉</div>
     </div>
     <!-- Slide 4: Portrait -->
     <div class="hero-slide slide-4">
+      <img src="https://timearchive.co.kr/wp-content/uploads/2021/07/gallery7.jpg" alt="상업·식품 사진" class="slide-img" loading="eager">
       <div class="slide-subject">◎</div>
     </div>
     <!-- Slide 5: Architecture -->
     <div class="hero-slide slide-5">
+      <img src="https://timearchive.co.kr/wp-content/uploads/2021/07/gallery8.jpg" alt="정물·자연 사진" class="slide-img" loading="eager">
       <div class="slide-subject">◇</div>
     </div>
   </div>
@@ -803,7 +815,7 @@ footer{
   <div class="courses-grid">
     <div class="course-card">
       <div class="course-thumb">
-        <div class="course-thumb-img ct-1"></div>
+        <img src="https://timearchive.co.kr/wp-content/uploads/2021/07/gallery4.jpg" alt="상업사진 심화과정" class="course-thumb-img" style="width:100%;height:100%;object-fit:cover;display:block;" loading="lazy">
         <span class="course-badge">인기</span>
       </div>
       <div class="course-body">
@@ -817,7 +829,7 @@ footer{
     </div>
     <div class="course-card">
       <div class="course-thumb">
-        <div class="course-thumb-img ct-2"></div>
+        <img src="https://timearchive.co.kr/wp-content/uploads/2021/07/gallery10.jpg" alt="취미사진 입문과정" class="course-thumb-img" style="width:100%;height:100%;object-fit:cover;display:block;" loading="lazy">
         <span class="course-badge gov">국비지원</span>
       </div>
       <div class="course-body">
@@ -831,7 +843,7 @@ footer{
     </div>
     <div class="course-card">
       <div class="course-thumb">
-        <div class="course-thumb-img ct-3"></div>
+        <img src="https://timearchive.co.kr/wp-content/uploads/2021/07/gallery6.jpg" alt="창업 포트폴리오 과정" class="course-thumb-img" style="width:100%;height:100%;object-fit:cover;display:block;" loading="lazy">
         <span class="course-badge">인기</span>
       </div>
       <div class="course-body">
@@ -845,7 +857,7 @@ footer{
     </div>
     <div class="course-card">
       <div class="course-thumb">
-        <div class="course-thumb-img ct-4"></div>
+        <img src="https://timearchive.co.kr/wp-content/uploads/2021/07/gallery7.jpg" alt="영상·영화 촬영과정" class="course-thumb-img" style="width:100%;height:100%;object-fit:cover;display:block;" loading="lazy">
         <span class="course-badge gov">국비지원</span>
       </div>
       <div class="course-body">
@@ -859,7 +871,7 @@ footer{
     </div>
     <div class="course-card">
       <div class="course-thumb">
-        <div class="course-thumb-img ct-5"></div>
+        <img src="https://timearchive.co.kr/wp-content/uploads/2021/07/gallery8.jpg" alt="AI 사진·영상 과정" class="course-thumb-img" style="width:100%;height:100%;object-fit:cover;display:block;" loading="lazy">
       </div>
       <div class="course-body">
         <div class="course-name">AI 사진·영상 과정</div>
@@ -872,7 +884,7 @@ footer{
     </div>
     <div class="course-card">
       <div class="course-thumb">
-        <div class="course-thumb-img ct-6"></div>
+        <img src="https://timearchive.co.kr/wp-content/uploads/2021/07/gallery9.jpg" alt="1:1 개인 레슨" class="course-thumb-img" style="width:100%;height:100%;object-fit:cover;display:block;" loading="lazy">
         <span class="course-badge gov">국비지원</span>
       </div>
       <div class="course-body">
@@ -898,24 +910,31 @@ footer{
   </div>
   <div class="gallery-grid">
     <div class="gal-item gal-a gp-1">
+      <img src="https://timearchive.co.kr/wp-content/uploads/2021/07/gallery2.jpg" alt="COMMERCIAL · 화장품" class="gal-thumb" loading="lazy">
       <div class="gallery-label"><div class="gallery-label-text">COMMERCIAL · 2024</div></div>
     </div>
     <div class="gal-item gal-b gp-2">
+      <img src="https://timearchive.co.kr/wp-content/uploads/2021/07/gallery10.jpg" alt="PORTRAIT · 인물" class="gal-thumb" loading="lazy">
       <div class="gallery-label"><div class="gallery-label-text">PORTRAIT · 2024</div></div>
     </div>
     <div class="gal-item gal-c gp-3">
+      <img src="https://timearchive.co.kr/wp-content/uploads/2021/07/gallery8.jpg" alt="NATURE · 정물" class="gal-thumb" loading="lazy">
       <div class="gallery-label"><div class="gallery-label-text">NATURE · 2024</div></div>
     </div>
     <div class="gal-item gal-d gp-4">
+      <img src="https://timearchive.co.kr/wp-content/uploads/2021/07/gallery9.jpg" alt="STILL LIFE · 과일" class="gal-thumb" loading="lazy">
       <div class="gallery-label"><div class="gallery-label-text">STILL LIFE · 2024</div></div>
     </div>
     <div class="gal-item gal-e gp-5">
+      <img src="https://timearchive.co.kr/wp-content/uploads/2021/07/gallery5.jpg" alt="FASHION · 뷰티" class="gal-thumb" loading="lazy">
       <div class="gallery-label"><div class="gallery-label-text">FASHION · 2024</div></div>
     </div>
     <div class="gal-item gal-f gp-6">
+      <img src="https://timearchive.co.kr/wp-content/uploads/2021/07/gallery3.jpg" alt="PRODUCT · 화장품" class="gal-thumb" loading="lazy">
       <div class="gallery-label"><div class="gallery-label-text">ARCHITECTURE · 2024</div></div>
     </div>
     <div class="gal-item gal-g gp-7">
+      <img src="https://timearchive.co.kr/wp-content/uploads/2021/07/gallery6.jpg" alt="EDITORIAL · 상업" class="gal-thumb" loading="lazy">
       <div class="gallery-label"><div class="gallery-label-text">EDITORIAL · 2024</div></div>
     </div>
   </div>
