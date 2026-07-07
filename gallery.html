@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>수료생 작품 — 타임아카이브 사진전문학원</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Pinyon+Script&display=swap" rel="stylesheet"><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css">
+<style>
+
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{font-family:'Pretendard',-apple-system,sans-serif;background:#080808;color:rgba(255,255,255,.92);-webkit-font-smoothing:antialiased;overflow-x:hidden;}
+a{text-decoration:none;color:inherit;}img{display:block;max-width:100%;}
+:root{--bg:#080808;--s1:#111;--s2:#181818;--s3:#222;--border:rgba(255,255,255,.1);
+  --cyan:#00C5E6;--cyan-h:#00AED0;--cyan-d:rgba(0,197,230,.12);
+  --w:#fff;--t1:rgba(255,255,255,.92);--t2:rgba(255,255,255,.60);--t3:rgba(255,255,255,.35);
+  --r:8px;--rp:999px;}
+
+.gnav{position:fixed;top:0;left:0;right:0;z-index:100;padding:0 28px;height:64px;
+  display:flex;align-items:center;justify-content:space-between;
+  background:rgba(8,8,8,.92);backdrop-filter:blur(14px);border-bottom:1px solid var(--border);}
+.gnav-logo{display:flex;flex-direction:column;align-items:flex-start;line-height:1;padding:8px 10px 8px 0;}
+.logo-va{font-family:'Pinyon Script',cursive;font-size:15px;color:#fff;opacity:.85;}
+.logo-time{font-size:22px;font-weight:900;letter-spacing:-.03em;color:#fff;line-height:.95;}
+.logo-archive{font-size:9px;font-weight:600;letter-spacing:.22em;color:#fff;opacity:.75;}
+.logo-kr{font-size:8px;color:rgba(255,255,255,.35);letter-spacing:.06em;margin-top:2px;}
+.gnav-links{list-style:none;display:flex;gap:28px;align-items:center;}
+.gnav-links a{font-size:13px;font-weight:500;color:rgba(255,255,255,.6);transition:color .2s;}
+.gnav-links a:hover,.gnav-links a.active{color:#fff;}
+.gnav-links .cta a{background:var(--cyan);color:#000;padding:7px 18px;border-radius:999px;font-weight:700;font-size:13px;}
+.gnav-links .cta a:hover{background:var(--cyan-h);}
+.gnav-burger{display:none;background:none;border:none;cursor:pointer;flex-direction:column;gap:5px;padding:6px;}
+.gnav-burger span{display:block;width:22px;height:1.5px;background:#fff;}
+.gnav-mobile{display:none;position:fixed;top:64px;left:0;right:0;background:rgba(8,8,8,.97);z-index:99;
+  padding:24px 28px 32px;flex-direction:column;gap:8px;border-top:1px solid var(--border);}
+.gnav-mobile.open{display:flex;}
+.gnav-mobile a{font-size:16px;font-weight:500;color:rgba(255,255,255,.92);padding:12px 0;border-bottom:1px solid var(--border);}
+.gnav-mobile a.em{color:var(--cyan);font-weight:700;}
+@media(max-width:900px){.gnav-links{display:none;}.gnav-burger{display:flex;}}
+
+footer{background:#050505;border-top:1px solid var(--border);padding:48px 40px;}
+.ft-inner{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr 1fr;gap:40px;}
+.ft-logo{display:flex;flex-direction:column;margin-bottom:14px;}
+.ft-logo .lv{font-family:'Pinyon Script',cursive;font-size:14px;color:rgba(255,255,255,.55);}
+.ft-logo .lt{font-size:20px;font-weight:900;letter-spacing:-.03em;color:#fff;line-height:.95;}
+.ft-logo .la{font-size:8px;font-weight:600;letter-spacing:.22em;color:rgba(255,255,255,.35);}
+.ft-desc{font-size:13px;color:rgba(255,255,255,.35);line-height:1.7;}
+.ft-contact{margin-top:14px;}
+.ft-contact a{display:block;font-size:14px;color:rgba(255,255,255,.6);margin-bottom:4px;}
+.ft-contact a:hover{color:var(--cyan);}
+.ft-col-title{font-size:11px;font-weight:700;letter-spacing:.18em;color:rgba(255,255,255,.35);text-transform:uppercase;margin-bottom:16px;}
+.ft-links{list-style:none;display:flex;flex-direction:column;gap:10px;}
+.ft-links a{font-size:14px;color:rgba(255,255,255,.6);}
+.ft-links a:hover{color:var(--cyan);}
+.ft-bottom{max-width:1100px;margin:28px auto 0;border-top:1px solid var(--border);padding-top:20px;
+  display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;font-size:12px;color:rgba(255,255,255,.3);}
+@media(max-width:900px){.ft-inner{grid-template-columns:1fr;}.ft-inner>div:nth-child(n+2){display:none;}}
+@media(max-width:600px){footer{padding:32px 20px;}}
+
+.pt{padding-top:64px;}
+.ph{background:var(--s1);border-bottom:1px solid var(--border);padding:72px 40px 48px;}
+.ph-inner{max-width:960px;margin:0 auto;}
+.ey{font-size:11px;font-weight:700;letter-spacing:.3em;color:var(--cyan);text-transform:uppercase;margin-bottom:16px;}
+.pt-title{font-size:clamp(28px,4vw,48px);font-weight:900;letter-spacing:-.03em;color:var(--w);margin-bottom:12px;}
+.pt-sub{font-size:15px;color:var(--t2);line-height:1.7;}
+.filter-bar{max-width:1100px;margin:0 auto;padding:32px 40px 0;display:flex;gap:10px;flex-wrap:wrap;}
+.chip{padding:8px 20px;border-radius:var(--rp);border:1px solid var(--border);background:transparent;
+  font-size:13px;font-weight:600;color:var(--t2);cursor:pointer;transition:all .2s;font-family:inherit;}
+.chip:hover{color:var(--w);border-color:rgba(255,255,255,.3);}
+.chip.on{background:var(--cyan);border-color:var(--cyan);color:#000;}
+.gal-sec{padding:32px 40px 80px;}
+.gal-grid{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:repeat(3,1fr);gap:12px;}
+.gc{position:relative;border-radius:var(--r);overflow:hidden;cursor:pointer;background:var(--s2);}
+.gc img{width:100%;aspect-ratio:4/3;object-fit:cover;transition:transform .5s;}
+.gc:hover img{transform:scale(1.04);}
+.gc-info{position:absolute;bottom:0;left:0;right:0;padding:24px 20px 16px;
+  background:linear-gradient(to top,rgba(0,0,0,.85),transparent);opacity:0;transition:opacity .3s;}
+.gc:hover .gc-info{opacity:1;}
+.gc-tag{font-size:10px;font-weight:700;letter-spacing:.14em;color:var(--cyan);text-transform:uppercase;margin-bottom:4px;}
+.gc-name{font-size:13px;font-weight:600;color:var(--w);}
+.lb{display:none;position:fixed;inset:0;z-index:200;background:rgba(0,0,0,.96);align-items:center;justify-content:center;}
+.lb.open{display:flex;}
+.lb img{max-width:90vw;max-height:90vh;object-fit:contain;border-radius:4px;}
+.lb-x{position:absolute;top:20px;right:24px;background:none;border:none;color:var(--t2);font-size:32px;cursor:pointer;line-height:1;}
+.lb-x:hover{color:#fff;}
+.lb-p,.lb-n{position:absolute;top:50%;transform:translateY(-50%);background:rgba(255,255,255,.1);border:none;
+  color:#fff;width:48px;height:48px;border-radius:50%;cursor:pointer;font-size:22px;transition:background .2s;}
+.lb-p{left:20px;}.lb-n{right:20px;}
+.lb-p:hover,.lb-n:hover{background:var(--cyan);color:#000;}
+.gal-cta{background:var(--s1);border-top:1px solid var(--border);padding:64px 40px;text-align:center;}
+.gal-cta h2{font-size:clamp(22px,3vw,32px);font-weight:800;color:var(--w);margin-bottom:12px;}
+.gal-cta p{font-size:15px;color:var(--t2);margin-bottom:32px;}
+.btn{display:inline-flex;align-items:center;gap:8px;background:var(--cyan);color:#000;
+  padding:14px 32px;border-radius:var(--rp);font-size:15px;font-weight:800;transition:background .2s;}
+.btn:hover{background:var(--cyan-h);}
+@media(max-width:900px){.gal-grid{grid-template-columns:repeat(2,1fr);}}
+@media(max-width:600px){.ph,.gal-sec,.gal-cta,.filter-bar{padding-left:20px;padding-right:20px;}.gal-grid{grid-template-columns:1fr;}}
+</style>
+</head>
+<body class="pt">
+<nav class="gnav" id="gnav">
+  <a href="./design-i-renewal.html" class="gnav-logo">
+    <span class="logo-va">Visual Art</span><span class="logo-time">TIME</span>
+    <span class="logo-archive">ARCHIVE</span><span class="logo-kr">사진전문학원</span>
+  </a>
+  <ul class="gnav-links">
+    <li><a href="./gallery.html"  class='active'>작품보기</a></li>
+    <li><a href="./courses.html">수강과정</a></li>
+    <li class="cta"><a href="./government-support.html">국비지원 문의</a></li>
+    <li class="cta"><a href="./contact.html" style="background:#fff;color:#000;">1:1 상담신청</a></li>
+  </ul>
+  <button class="gnav-burger" id="burger"><span></span><span></span><span></span></button>
+</nav>
+<div class="gnav-mobile" id="mobileMenu">
+  <a href="./gallery.html">작품보기</a>
+  <a href="./courses.html">수강과정</a>
+  <a href="./instructor.html">강사 소개</a>
+  <a href="./government-support.html" class="em">국비지원 문의</a>
+  <a href="./contact.html" class="em">1:1 상담신청</a>
+</div>
+<section class="ph"><div class="ph-inner">
+  <p class="ey">Portfolio</p>
+  <h1 class="pt-title">수료생 작품</h1>
+  <p class="pt-sub">타임아카이브에서 배운 수강생들의 실제 촬영 작품입니다.<br>상업사진·인물·정물·식품 등 다양한 장르를 현장 기법으로 완성했습니다.</p>
+</div></section>
+<div class="filter-bar">
+  <button class="chip on" data-f="all">전체</button>
+  <button class="chip" data-f="commercial">상업사진</button>
+  <button class="chip" data-f="portrait">인물</button>
+  <button class="chip" data-f="still">정물·자연</button>
+  <button class="chip" data-f="food">식품</button>
+</div>
+<section class="gal-sec"><div class="gal-grid" id="gg">
+  <div class="gc" data-cat="commercial" data-img="https://timearchive.co.kr/wp-content/uploads/2021/07/gallery2.jpg"><img src="https://timearchive.co.kr/wp-content/uploads/2021/07/gallery2.jpg" alt="화장품 상업사진" loading="lazy"><div class="gc-info"><div class="gc-tag">Commercial</div><div class="gc-name">뷰티·코스메틱 광고</div></div></div>
+  <div class="gc" data-cat="commercial" data-img="https://timearchive.co.kr/wp-content/uploads/2021/07/gallery3.jpg"><img src="https://timearchive.co.kr/wp-content/uploads/2021/07/gallery3.jpg" alt="스킨케어 제품사진" loading="lazy"><div class="gc-info"><div class="gc-tag">Commercial</div><div class="gc-name">스킨케어 제품 촬영</div></div></div>
+  <div class="gc" data-cat="commercial" data-img="https://timearchive.co.kr/wp-content/uploads/2021/07/gallery4.jpg"><img src="https://timearchive.co.kr/wp-content/uploads/2021/07/gallery4.jpg" alt="에센스 패키지" loading="lazy"><div class="gc-info"><div class="gc-tag">Commercial</div><div class="gc-name">에센스 패키지 촬영</div></div></div>
+  <div class="gc" data-cat="commercial" data-img="https://timearchive.co.kr/wp-content/uploads/2021/07/gallery5.jpg"><img src="https://timearchive.co.kr/wp-content/uploads/2021/07/gallery5.jpg" alt="화장품 라인업" loading="lazy"><div class="gc-info"><div class="gc-tag">Commercial</div><div class="gc-name">뷰티 제품 라인업</div></div></div>
+  <div class="gc" data-cat="commercial" data-img="https://timearchive.co.kr/wp-content/uploads/2021/07/gallery6.jpg"><img src="https://timearchive.co.kr/wp-content/uploads/2021/07/gallery6.jpg" alt="코스메틱 광고" loading="lazy"><div class="gc-info"><div class="gc-tag">Commercial</div><div class="gc-name">코스메틱 브랜드 촬영</div></div></div>
+  <div class="gc" data-cat="food" data-img="https://timearchive.co.kr/wp-content/uploads/2021/07/gallery7.jpg"><img src="https://timearchive.co.kr/wp-content/uploads/2021/07/gallery7.jpg" alt="식품·시리얼" loading="lazy"><div class="gc-info"><div class="gc-tag">Food</div><div class="gc-name">식품·시리얼 상업사진</div></div></div>
+  <div class="gc" data-cat="still" data-img="https://timearchive.co.kr/wp-content/uploads/2021/07/gallery8.jpg"><img src="https://timearchive.co.kr/wp-content/uploads/2021/07/gallery8.jpg" alt="자연 정물" loading="lazy"><div class="gc-info"><div class="gc-tag">Still Life</div><div class="gc-name">자연 정물 촬영</div></div></div>
+  <div class="gc" data-cat="still" data-img="https://timearchive.co.kr/wp-content/uploads/2021/07/gallery9.jpg"><img src="https://timearchive.co.kr/wp-content/uploads/2021/07/gallery9.jpg" alt="과일 정물" loading="lazy"><div class="gc-info"><div class="gc-tag">Still Life</div><div class="gc-name">과일·자연물 정물</div></div></div>
+  <div class="gc" data-cat="portrait" data-img="https://timearchive.co.kr/wp-content/uploads/2021/07/gallery10.jpg"><img src="https://timearchive.co.kr/wp-content/uploads/2021/07/gallery10.jpg" alt="인물 사진" loading="lazy"><div class="gc-info"><div class="gc-tag">Portrait</div><div class="gc-name">인물 스튜디오 촬영</div></div></div>
+</div></section>
+<div class="lb" id="lb"><button class="lb-x" id="lbx">✕</button><button class="lb-p" id="lbp">&#8249;</button><img src="" alt="" id="lbi"><button class="lb-n" id="lbn">&#8250;</button></div>
+<section class="gal-cta"><h2>나도 이런 사진을 찍을 수 있습니다.</h2><p>30년 현장 경력의 원장이 1:1로 가르칩니다. 지금 바로 상담하세요.</p><a href="./contact.html" class="btn">1:1 상담신청 →</a></section>
+<footer>
+  <div class="ft-inner">
+    <div>
+      <div class="ft-logo"><span class="lv">Visual Art</span><span class="lt">TIME</span><span class="la">ARCHIVE</span></div>
+      <p class="ft-desc">30년 현장 경력 원장이 직접 가르치는 1:1 맞춤 사진전문학원.</p>
+      <div class="ft-contact"><a href="tel:0255455457">☎ 02-545-5457</a><a href="./contact.html#location">서울 강남구 언주로 113길 13 성창빌딩 2층</a></div>
+    </div>
+    <div>
+      <p class="ft-col-title">수강 과정</p>
+      <ul class="ft-links">
+        <li><a href="./courses.html#commercial">상업사진 심화과정</a></li>
+        <li><a href="./courses.html#hobby">취미사진 입문과정</a></li>
+        <li><a href="./courses.html#startup">창업 포트폴리오 과정</a></li>
+        <li><a href="./courses.html#video">영상·영화 촬영과정</a></li>
+        <li><a href="./courses.html#ai">AI 사진·영상 과정</a></li>
+        <li><a href="./courses.html#private">1:1 개인 레슨</a></li>
+      </ul>
+    </div>
+    <div>
+      <p class="ft-col-title">안내</p>
+      <ul class="ft-links">
+        <li><a href="./government-support.html">국비지원 문의</a></li>
+        <li><a href="./instructor.html">강사 소개</a></li>
+        <li><a href="./gallery.html">수료생 작품</a></li>
+        <li><a href="./contact.html">1:1 상담신청</a></li>
+        <li><a href="./contact.html#location">찾아오시는 길</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="ft-bottom">
+    <span>© 2025 Visual Art TIME ARCHIVE 사진전문학원. All rights reserved.</span>
+    <span>대표: 박희수 · 서울 강남구 언주로 113길 13</span>
+  </div>
+</footer>
+<script>
+const b=document.getElementById('burger'),m=document.getElementById('mobileMenu');
+if(b)b.addEventListener('click',()=>m.classList.toggle('open'));
+</script>
+<script>
+const chips=document.querySelectorAll('.chip'),cards=document.querySelectorAll('.gc');
+chips.forEach(c=>c.addEventListener('click',()=>{chips.forEach(x=>x.classList.remove('on'));c.classList.add('on');const f=c.dataset.f;cards.forEach(card=>{card.style.display=(f==='all'||card.dataset.cat===f)?'':'none';}); }));
+const lb=document.getElementById('lb'),lbi=document.getElementById('lbi');
+const vis=()=>[...cards].filter(c=>c.style.display!=='none');
+cards.forEach(c=>c.addEventListener('click',()=>{lbi.src=c.dataset.img;lb.classList.add('open');}));
+document.getElementById('lbx').addEventListener('click',()=>lb.classList.remove('open'));
+lb.addEventListener('click',e=>{if(e.target===lb)lb.classList.remove('open');});
+function lbMove(d){const v=vis();const i=v.findIndex(c=>c.dataset.img===lbi.src);lbi.src=v[(i+d+v.length)%v.length].dataset.img;}
+document.getElementById('lbp').addEventListener('click',()=>lbMove(-1));
+document.getElementById('lbn').addEventListener('click',()=>lbMove(1));
+document.addEventListener('keydown',e=>{if(!lb.classList.contains('open'))return;if(e.key==='Escape')lb.classList.remove('open');if(e.key==='ArrowLeft')lbMove(-1);if(e.key==='ArrowRight')lbMove(1);});
+</script>
+</body></html>

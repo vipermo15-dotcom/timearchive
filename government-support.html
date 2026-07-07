@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>국비지원 안내 — 타임아카이브 사진전문학원</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Pinyon+Script&display=swap" rel="stylesheet"><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css">
+<style>
+
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{font-family:'Pretendard',-apple-system,sans-serif;background:#080808;color:rgba(255,255,255,.92);-webkit-font-smoothing:antialiased;overflow-x:hidden;}
+a{text-decoration:none;color:inherit;}img{display:block;max-width:100%;}
+:root{--bg:#080808;--s1:#111;--s2:#181818;--s3:#222;--border:rgba(255,255,255,.1);
+  --cyan:#00C5E6;--cyan-h:#00AED0;--cyan-d:rgba(0,197,230,.12);
+  --w:#fff;--t1:rgba(255,255,255,.92);--t2:rgba(255,255,255,.60);--t3:rgba(255,255,255,.35);
+  --r:8px;--rp:999px;}
+
+.gnav{position:fixed;top:0;left:0;right:0;z-index:100;padding:0 28px;height:64px;
+  display:flex;align-items:center;justify-content:space-between;
+  background:rgba(8,8,8,.92);backdrop-filter:blur(14px);border-bottom:1px solid var(--border);}
+.gnav-logo{display:flex;flex-direction:column;align-items:flex-start;line-height:1;padding:8px 10px 8px 0;}
+.logo-va{font-family:'Pinyon Script',cursive;font-size:15px;color:#fff;opacity:.85;}
+.logo-time{font-size:22px;font-weight:900;letter-spacing:-.03em;color:#fff;line-height:.95;}
+.logo-archive{font-size:9px;font-weight:600;letter-spacing:.22em;color:#fff;opacity:.75;}
+.logo-kr{font-size:8px;color:rgba(255,255,255,.35);letter-spacing:.06em;margin-top:2px;}
+.gnav-links{list-style:none;display:flex;gap:28px;align-items:center;}
+.gnav-links a{font-size:13px;font-weight:500;color:rgba(255,255,255,.6);transition:color .2s;}
+.gnav-links a:hover,.gnav-links a.active{color:#fff;}
+.gnav-links .cta a{background:var(--cyan);color:#000;padding:7px 18px;border-radius:999px;font-weight:700;font-size:13px;}
+.gnav-links .cta a:hover{background:var(--cyan-h);}
+.gnav-burger{display:none;background:none;border:none;cursor:pointer;flex-direction:column;gap:5px;padding:6px;}
+.gnav-burger span{display:block;width:22px;height:1.5px;background:#fff;}
+.gnav-mobile{display:none;position:fixed;top:64px;left:0;right:0;background:rgba(8,8,8,.97);z-index:99;
+  padding:24px 28px 32px;flex-direction:column;gap:8px;border-top:1px solid var(--border);}
+.gnav-mobile.open{display:flex;}
+.gnav-mobile a{font-size:16px;font-weight:500;color:rgba(255,255,255,.92);padding:12px 0;border-bottom:1px solid var(--border);}
+.gnav-mobile a.em{color:var(--cyan);font-weight:700;}
+@media(max-width:900px){.gnav-links{display:none;}.gnav-burger{display:flex;}}
+
+footer{background:#050505;border-top:1px solid var(--border);padding:48px 40px;}
+.ft-inner{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr 1fr;gap:40px;}
+.ft-logo{display:flex;flex-direction:column;margin-bottom:14px;}
+.ft-logo .lv{font-family:'Pinyon Script',cursive;font-size:14px;color:rgba(255,255,255,.55);}
+.ft-logo .lt{font-size:20px;font-weight:900;letter-spacing:-.03em;color:#fff;line-height:.95;}
+.ft-logo .la{font-size:8px;font-weight:600;letter-spacing:.22em;color:rgba(255,255,255,.35);}
+.ft-desc{font-size:13px;color:rgba(255,255,255,.35);line-height:1.7;}
+.ft-contact{margin-top:14px;}
+.ft-contact a{display:block;font-size:14px;color:rgba(255,255,255,.6);margin-bottom:4px;}
+.ft-contact a:hover{color:var(--cyan);}
+.ft-col-title{font-size:11px;font-weight:700;letter-spacing:.18em;color:rgba(255,255,255,.35);text-transform:uppercase;margin-bottom:16px;}
+.ft-links{list-style:none;display:flex;flex-direction:column;gap:10px;}
+.ft-links a{font-size:14px;color:rgba(255,255,255,.6);}
+.ft-links a:hover{color:var(--cyan);}
+.ft-bottom{max-width:1100px;margin:28px auto 0;border-top:1px solid var(--border);padding-top:20px;
+  display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;font-size:12px;color:rgba(255,255,255,.3);}
+@media(max-width:900px){.ft-inner{grid-template-columns:1fr;}.ft-inner>div:nth-child(n+2){display:none;}}
+@media(max-width:600px){footer{padding:32px 20px;}}
+
+.pt{padding-top:64px;}
+.ph{background:var(--s1);border-bottom:1px solid var(--border);padding:72px 40px 48px;}
+.ph-inner{max-width:960px;margin:0 auto;}
+.ey{font-size:11px;font-weight:700;letter-spacing:.3em;color:var(--cyan);text-transform:uppercase;margin-bottom:16px;}
+.pt-title{font-size:clamp(28px,4vw,48px);font-weight:900;letter-spacing:-.03em;color:#fff;margin-bottom:12px;}
+.pt-sub{font-size:15px;color:rgba(255,255,255,.6);line-height:1.7;}
+.sec{padding:64px 40px;}
+.sec-inner{max-width:960px;margin:0 auto;}
+.sec-title{font-size:clamp(22px,3vw,32px);font-weight:800;color:#fff;letter-spacing:-.02em;margin-bottom:32px;}
+/* What card */
+.what-card{background:var(--s1);border:1px solid var(--border);border-radius:var(--r);padding:36px;display:grid;grid-template-columns:1fr 1fr;gap:32px;margin-bottom:48px;}
+.wc-label{font-size:11px;font-weight:700;letter-spacing:.2em;color:var(--cyan);text-transform:uppercase;margin-bottom:12px;}
+.wc-text{font-size:15px;color:rgba(255,255,255,.75);line-height:1.8;}
+.highlight-box{background:rgba(0,197,230,.08);border:1px solid rgba(0,197,230,.2);border-radius:var(--r);padding:20px 24px;}
+.highlight-box .wc-label{color:var(--cyan);}
+.highlight-box .big{font-size:28px;font-weight:900;color:var(--cyan);margin:8px 0;}
+/* Steps */
+.steps{display:flex;flex-direction:column;gap:0;border:1px solid var(--border);border-radius:var(--r);overflow:hidden;margin-bottom:64px;}
+.step{display:flex;align-items:flex-start;gap:24px;padding:28px 32px;border-bottom:1px solid var(--border);transition:background .2s;}
+.step:last-child{border-bottom:none;}
+.step:hover{background:rgba(0,197,230,.05);}
+.step-num{width:36px;height:36px;border-radius:50%;background:var(--cyan);color:#000;
+  display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:800;flex-shrink:0;margin-top:2px;}
+.step-title{font-size:16px;font-weight:700;color:#fff;margin-bottom:6px;}
+.step-desc{font-size:14px;color:rgba(255,255,255,.6);line-height:1.6;}
+/* Eligible courses */
+.course-chips{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:48px;}
+.course-chip{background:var(--s2);border:1px solid var(--border);border-radius:var(--rp);
+  padding:10px 20px;font-size:14px;font-weight:600;color:rgba(255,255,255,.8);
+  transition:all .2s;}
+.course-chip:hover{border-color:var(--cyan);color:var(--cyan);}
+.course-chip.yes{border-color:rgba(0,197,230,.3);color:var(--cyan);background:rgba(0,197,230,.06);}
+/* FAQ */
+.faq{display:flex;flex-direction:column;gap:0;border:1px solid var(--border);border-radius:var(--r);overflow:hidden;}
+.faq-item{border-bottom:1px solid var(--border);}
+.faq-item:last-child{border-bottom:none;}
+.faq-q{width:100%;background:none;border:none;text-align:left;padding:22px 28px;cursor:pointer;
+  display:flex;justify-content:space-between;align-items:center;gap:16px;font-family:inherit;}
+.faq-q-text{font-size:15px;font-weight:600;color:#fff;}
+.faq-icon{font-size:20px;color:var(--cyan);flex-shrink:0;transition:transform .3s;}
+.faq-item.open .faq-icon{transform:rotate(45deg);}
+.faq-a{display:none;padding:0 28px 22px;font-size:14px;color:rgba(255,255,255,.6);line-height:1.75;}
+.faq-item.open .faq-a{display:block;}
+/* CTA */
+.gov-cta{background:linear-gradient(135deg,#000d12,#001520);border-top:1px solid rgba(0,197,230,.2);
+  padding:80px 40px;text-align:center;}
+.gov-cta h2{font-size:clamp(24px,3.5vw,40px);font-weight:900;color:#fff;margin-bottom:14px;}
+.gov-cta p{font-size:15px;color:rgba(255,255,255,.6);margin-bottom:40px;}
+.btns{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;}
+.btn-c{display:inline-flex;padding:15px 32px;border-radius:999px;font-size:15px;font-weight:800;transition:all .2s;}
+.btn-c.primary{background:var(--cyan);color:#000;}
+.btn-c.primary:hover{background:var(--cyan-h);}
+.btn-c.secondary{border:1.5px solid rgba(255,255,255,.25);color:rgba(255,255,255,.9);}
+.btn-c.secondary:hover{border-color:var(--cyan);background:rgba(0,197,230,.1);}
+@media(max-width:700px){.what-card{grid-template-columns:1fr;}}
+@media(max-width:600px){.ph,.sec,.gov-cta{padding-left:20px;padding-right:20px;}.step{padding:20px;}.faq-q{padding:18px 20px;}.faq-a{padding:0 20px 18px;}}
+</style>
+</head>
+<body class="pt">
+<nav class="gnav" id="gnav">
+  <a href="./design-i-renewal.html" class="gnav-logo">
+    <span class="logo-va">Visual Art</span><span class="logo-time">TIME</span>
+    <span class="logo-archive">ARCHIVE</span><span class="logo-kr">사진전문학원</span>
+  </a>
+  <ul class="gnav-links">
+    <li><a href="./gallery.html">작품보기</a></li>
+    <li><a href="./courses.html">수강과정</a></li>
+    <li class="cta"><a href="./government-support.html"  class='active'>국비지원 문의</a></li>
+    <li class="cta"><a href="./contact.html" style="background:#fff;color:#000;">1:1 상담신청</a></li>
+  </ul>
+  <button class="gnav-burger" id="burger"><span></span><span></span><span></span></button>
+</nav>
+<div class="gnav-mobile" id="mobileMenu">
+  <a href="./gallery.html">작품보기</a>
+  <a href="./courses.html">수강과정</a>
+  <a href="./instructor.html">강사 소개</a>
+  <a href="./government-support.html" class="em">국비지원 문의</a>
+  <a href="./contact.html" class="em">1:1 상담신청</a>
+</div>
+<section class="ph"><div class="ph-inner">
+  <p class="ey">Government Support</p>
+  <h1 class="pt-title">국비지원 안내</h1>
+  <p class="pt-sub">국민내일배움카드(내일배움카드)를 보유하신 분은 수강료의 최대 80%를 지원받을 수 있습니다.<br>궁금한 점은 무료 상담으로 확인하세요.</p>
+</div></section>
+
+<section class="sec" style="background:var(--bg);">
+<div class="sec-inner">
+  <h2 class="sec-title">국민내일배움카드란?</h2>
+  <div class="what-card">
+    <div>
+      <p class="wc-label">제도 소개</p>
+      <p class="wc-text">고용노동부에서 지원하는 직업능력 개발 훈련 제도입니다. 취업준비생, 재직자, 자영업자 등 다양한 분들이 이용할 수 있으며, 국비 지원을 받아 사진·영상 기술을 배울 수 있습니다.</p>
+    </div>
+    <div>
+      <div class="highlight-box">
+        <p class="wc-label">지원 한도</p>
+        <p class="big">최대 80%</p>
+        <p class="wc-text" style="font-size:14px;">5년간 300~500만원 한도 내에서 수강료를 지원받을 수 있습니다.</p>
+      </div>
+    </div>
+  </div>
+
+  <h2 class="sec-title">신청 방법</h2>
+  <div class="steps">
+    <div class="step"><div class="step-num">1</div><div><div class="step-title">내일배움카드 발급</div><div class="step-desc">고용24(www.work24.go.kr) 또는 가까운 고용센터에서 카드를 신청합니다. 발급까지 약 1~2주 소요됩니다.</div></div></div>
+    <div class="step"><div class="step-num">2</div><div><div class="step-title">타임아카이브 상담</div><div class="step-desc">02-545-5457로 전화하시거나 온라인 상담 신청을 해주세요. 카드 보유 여부와 관심 과정을 알려주시면 됩니다.</div></div></div>
+    <div class="step"><div class="step-num">3</div><div><div class="step-title">지원 가능 과정 확인</div><div class="step-desc">상담을 통해 본인의 카드로 지원받을 수 있는 과정을 안내드립니다. 과정에 따라 지원율이 다를 수 있습니다.</div></div></div>
+    <div class="step"><div class="step-num">4</div><div><div class="step-title">수강 등록</div><div class="step-desc">고용24에서 훈련 과정에 등록합니다. 등록 완료 후 수업이 시작됩니다.</div></div></div>
+    <div class="step"><div class="step-num">5</div><div><div class="step-title">수강 시작</div><div class="step-desc">지원금을 제외한 자기부담금만 납부하고 수업을 시작합니다. 출결 관리에 유의하세요.</div></div></div>
+  </div>
+
+  <h2 class="sec-title">국비지원 가능 과정</h2>
+  <div class="course-chips">
+    <a href="./courses.html#hobby" class="course-chip yes">✓ 취미사진 입문과정</a>
+    <a href="./courses.html#video" class="course-chip yes">✓ 영상·영화 촬영과정</a>
+    <a href="./courses.html#private" class="course-chip yes">✓ 1:1 개인 레슨 (일부)</a>
+    <a href="./courses.html#commercial" class="course-chip">상업사진 심화과정 (문의)</a>
+    <a href="./courses.html#startup" class="course-chip">창업 포트폴리오 과정 (문의)</a>
+    <a href="./courses.html#ai" class="course-chip">AI 사진·영상 과정 (문의)</a>
+  </div>
+
+  <h2 class="sec-title">자주 묻는 질문</h2>
+  <div class="faq">
+    <div class="faq-item"><button class="faq-q"><span class="faq-q-text">내일배움카드가 없어도 국비지원을 받을 수 있나요?</span><span class="faq-icon">+</span></button><div class="faq-a">내일배움카드 발급이 필요합니다. 취업준비생, 재직자, 자영업자 모두 신청 가능하며, 고용24(www.work24.go.kr)에서 발급받을 수 있습니다.</div></div>
+    <div class="faq-item"><button class="faq-q"><span class="faq-q-text">재직 중에도 신청할 수 있나요?</span><span class="faq-icon">+</span></button><div class="faq-a">네, 재직자도 신청 가능합니다. 단, 사업주 훈련(사업주 지원 직업능력개발훈련)과 구분되므로 상담을 통해 본인 상황에 맞는 방법을 안내받으세요.</div></div>
+    <div class="faq-item"><button class="faq-q"><span class="faq-q-text">지원금 외에 추가 비용이 있나요?</span><span class="faq-icon">+</span></button><div class="faq-a">자기부담금(총 수강료의 20~45%)이 발생합니다. 정확한 금액은 과정별로 다르므로 상담 시 안내드립니다.</div></div>
+    <div class="faq-item"><button class="faq-q"><span class="faq-q-text">수업을 빠지면 어떻게 되나요?</span><span class="faq-icon">+</span></button><div class="faq-a">출석률이 80% 미만이 되면 지원금이 환수될 수 있습니다. 수업 일정 조율이 필요하시면 사전에 상담해 주세요.</div></div>
+    <div class="faq-item"><button class="faq-q"><span class="faq-q-text">카드 발급에서 수업 시작까지 얼마나 걸리나요?</span><span class="faq-icon">+</span></button><div class="faq-a">카드 발급 약 1~2주 + 등록 절차 약 1주, 총 2~3주 정도 소요됩니다. 미리 상담 후 준비하시면 빠르게 시작할 수 있습니다.</div></div>
+  </div>
+</div>
+</section>
+
+<section class="gov-cta">
+  <h2>국비지원 가능한지 바로 확인하세요.</h2>
+  <p>무료 상담을 통해 지원 여부와 과정을 안내드립니다.</p>
+  <div class="btns">
+    <a href="./contact.html" class="btn-c primary">온라인 상담 신청</a>
+    <a href="tel:0255455457" class="btn-c secondary">☎ 02-545-5457</a>
+  </div>
+</section>
+<footer>
+  <div class="ft-inner">
+    <div>
+      <div class="ft-logo"><span class="lv">Visual Art</span><span class="lt">TIME</span><span class="la">ARCHIVE</span></div>
+      <p class="ft-desc">30년 현장 경력 원장이 직접 가르치는 1:1 맞춤 사진전문학원.</p>
+      <div class="ft-contact"><a href="tel:0255455457">☎ 02-545-5457</a><a href="./contact.html#location">서울 강남구 언주로 113길 13 성창빌딩 2층</a></div>
+    </div>
+    <div>
+      <p class="ft-col-title">수강 과정</p>
+      <ul class="ft-links">
+        <li><a href="./courses.html#commercial">상업사진 심화과정</a></li>
+        <li><a href="./courses.html#hobby">취미사진 입문과정</a></li>
+        <li><a href="./courses.html#startup">창업 포트폴리오 과정</a></li>
+        <li><a href="./courses.html#video">영상·영화 촬영과정</a></li>
+        <li><a href="./courses.html#ai">AI 사진·영상 과정</a></li>
+        <li><a href="./courses.html#private">1:1 개인 레슨</a></li>
+      </ul>
+    </div>
+    <div>
+      <p class="ft-col-title">안내</p>
+      <ul class="ft-links">
+        <li><a href="./government-support.html">국비지원 문의</a></li>
+        <li><a href="./instructor.html">강사 소개</a></li>
+        <li><a href="./gallery.html">수료생 작품</a></li>
+        <li><a href="./contact.html">1:1 상담신청</a></li>
+        <li><a href="./contact.html#location">찾아오시는 길</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="ft-bottom">
+    <span>© 2025 Visual Art TIME ARCHIVE 사진전문학원. All rights reserved.</span>
+    <span>대표: 박희수 · 서울 강남구 언주로 113길 13</span>
+  </div>
+</footer>
+<script>
+const b=document.getElementById('burger'),m=document.getElementById('mobileMenu');
+if(b)b.addEventListener('click',()=>m.classList.toggle('open'));
+</script>
+<script>
+document.querySelectorAll('.faq-q').forEach(btn=>btn.addEventListener('click',()=>{
+  const item=btn.closest('.faq-item');
+  item.classList.toggle('open');
+}));
+</script>
+</body></html>
