@@ -1,0 +1,324 @@
+<title>씨노스튜디오 산학협력 과제 안내서</title>
+<style>
+  :root {
+    --ink:        #1C2333;
+    --ink-light:  #4A5568;
+    --ink-faint:  #9AA3B0;
+    --rule:       #D1D5DB;
+    --fill-dark:  #1C2333;
+    --fill-mid:   #4A5568;
+    --fill-light: #F4F5F7;
+    --white:      #FFFFFF;
+    --accent:     #2B4C7E;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Apple SD Gothic Neo', 'Noto Sans KR', 'Malgun Gothic', sans-serif;
+    font-size: 9pt;
+    color: var(--ink);
+    background: #E5E7EB;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  .page {
+    width: 210mm;
+    min-height: 297mm;
+    margin: 24px auto;
+    background: var(--white);
+    padding: 14mm 16mm 12mm;
+    box-shadow: 0 8px 40px rgba(0,0,0,.18);
+  }
+
+  /* ── 헤더 ── */
+  .doc-header {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: end;
+    gap: 12px;
+    padding-bottom: 9px;
+    border-bottom: 2px solid var(--ink);
+    margin-bottom: 9px;
+  }
+  .doc-header .eyebrow {
+    font-size: 7pt;
+    font-weight: 700;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    margin-bottom: 3px;
+  }
+  .doc-header h1 {
+    font-size: 20pt;
+    font-weight: 900;
+    letter-spacing: -1px;
+    line-height: 1.1;
+    color: var(--ink);
+  }
+  .doc-header .meta {
+    text-align: right;
+    font-size: 8pt;
+    color: var(--ink-light);
+    line-height: 1.75;
+  }
+  .doc-header .meta strong { color: var(--ink); font-weight: 700; }
+
+  /* ── 정보 바 ── */
+  .info-bar {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    border: 1px solid var(--ink);
+    margin-bottom: 11px;
+  }
+  .info-cell { padding: 5px 10px; border-right: 1px solid var(--rule); }
+  .info-cell:last-child { border-right: none; }
+  .info-cell .lbl {
+    font-size: 6.5pt; font-weight: 700; letter-spacing: 1.5px;
+    text-transform: uppercase; color: var(--ink-faint); margin-bottom: 1px;
+  }
+  .info-cell .val { font-size: 8.5pt; font-weight: 700; color: var(--ink); }
+
+  /* ── 섹션 ── */
+  .section { margin-bottom: 9px; break-inside: avoid; }
+  .sec-head {
+    background: var(--fill-dark); color: var(--white);
+    display: flex; align-items: center; gap: 10px; padding: 4px 10px;
+  }
+  .sec-head .tag {
+    font-size: 6.5pt; font-weight: 700; letter-spacing: 2px;
+    text-transform: uppercase; opacity: 0.5; white-space: nowrap;
+  }
+  .sec-head .name { font-size: 10pt; font-weight: 800; letter-spacing: -0.3px; }
+  .sec-body { border: 1px solid var(--ink); border-top: none; padding: 8px 11px; }
+  .sec-body p { font-size: 8.5pt; line-height: 1.75; color: var(--ink-light); }
+  .sec-body p + p { margin-top: 4px; }
+
+  /* ── 표 ── */
+  table { width: 100%; border-collapse: collapse; font-size: 8.3pt; }
+  table th, table td {
+    border: 0.7px solid var(--rule);
+    padding: 5px 8px;
+    text-align: left;
+    line-height: 1.5;
+  }
+  table th {
+    background: var(--fill-light);
+    font-size: 7.3pt;
+    font-weight: 700;
+    letter-spacing: 0.3px;
+    color: var(--ink-light);
+    text-transform: uppercase;
+  }
+  table td.num { text-align: center; font-variant-numeric: tabular-nums; }
+  table td.strong { font-weight: 700; color: var(--ink); }
+
+  /* ── 서브섹션 (제작 가이드라인) ── */
+  .guide-item + .guide-item { margin-top: 7px; padding-top: 7px; border-top: 0.5px solid var(--rule); }
+  .guide-title {
+    font-size: 8.7pt; font-weight: 800; color: var(--ink);
+    display: flex; align-items: center; gap: 6px; margin-bottom: 4px;
+  }
+  .guide-letter {
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 16px; height: 16px; background: var(--accent); color: var(--white);
+    font-size: 7.5pt; font-weight: 800; border-radius: 2px; flex-shrink: 0;
+  }
+  .guide-list { list-style: none; }
+  .guide-list li {
+    font-size: 8.3pt; line-height: 1.7; color: var(--ink-light);
+    padding-left: 11px; position: relative;
+  }
+  .guide-list li::before {
+    content: '–'; position: absolute; left: 0; color: var(--ink-faint);
+  }
+  .guide-list li strong { color: var(--ink); font-weight: 700; }
+
+  /* ── 주의사항 리스트 ── */
+  .note-list { list-style: none; }
+  .note-list li {
+    font-size: 8.3pt; line-height: 1.75; color: var(--ink-light);
+    padding-left: 12px; position: relative;
+  }
+  .note-list li::before { content: '▸'; position: absolute; left: 0; color: var(--accent); font-size: 7.5pt; }
+
+  /* ── 푸터 ── */
+  .footer {
+    display: flex; justify-content: space-between;
+    margin-top: 9px; padding-top: 5px; border-top: 0.5px solid var(--rule);
+    font-size: 7pt; color: var(--ink-faint); letter-spacing: 0.3px;
+  }
+
+  @media print {
+    body { background: white; }
+    .page { margin: 0; box-shadow: none; width: 100%; padding: 12mm 15mm; }
+    @page { size: A4; margin: 0; }
+  }
+</style>
+
+<div class="page">
+
+  <header class="doc-header">
+    <div>
+      <p class="eyebrow">Industry-Academia Cooperation · Student Assignment Guide</p>
+      <h1>산학협력 프로젝트<br>과제 안내서 — 씨노스튜디오</h1>
+    </div>
+    <div class="meta">
+      <strong>서울시기술교육원 중부캠퍼스</strong><br>
+      컴퓨터그래픽디자인과<br>
+      협력업체: 씨노스튜디오 (cenostudio)<br>
+      2026. 07. 08 배포
+    </div>
+  </header>
+
+  <div class="info-bar">
+    <div class="info-cell"><div class="lbl">협력 업체</div><div class="val">씨노스튜디오 (cenostudio)</div></div>
+    <div class="info-cell"><div class="lbl">업체 주소</div><div class="val">종로구 자하문로33다길 18 B1</div></div>
+    <div class="info-cell"><div class="lbl">과제 기간</div><div class="val">8주 (Week 1–8)</div></div>
+    <div class="info-cell"><div class="lbl">제출 형식</div><div class="val">AI 원본 + PDF/PNG + 포트폴리오</div></div>
+  </div>
+
+  <!-- 1. 프로젝트 소개 -->
+  <div class="section">
+    <div class="sec-head"><span class="tag">01</span><span class="name">프로젝트 소개</span></div>
+    <div class="sec-body">
+      <p>씨노스튜디오는 서울 종로구에 위치한 사진 스튜디오로, 증명·여권·비자 사진부터 프로필 사진까지 다양한 서비스를 제공합니다.</p>
+      <p>이번 산학협력 과제에서는 <strong style="color:var(--ink);font-weight:700;">매장 홍보물·SNS 콘텐츠·온라인 배너</strong>를 제작하여 실제 업체 운영에 활용될 수 있는 결과물을 납품합니다. 소규모 서비스업 브랜드의 온·오프라인 접점 디자인을 경험하는 것이 목표입니다.</p>
+      <p>2026-07-07 대표님 면담 결과, <strong style="color:var(--ink);font-weight:700;">"수익모델보다 브랜드 정체성"</strong>, <strong style="color:var(--ink);font-weight:700;">"정성·정확성의 사진관 철학"</strong>이 핵심 방향으로 확인되었습니다. 모든 결과물은 가격·프로모션보다 이 신뢰 메시지를 우선하여 제작합니다.</p>
+    </div>
+  </div>
+
+  <!-- 2. 과제 목록 -->
+  <div class="section">
+    <div class="sec-head"><span class="tag">02</span><span class="name">과제 목록</span></div>
+    <div class="sec-body">
+      <table>
+        <thead><tr><th style="width:8%;">#</th><th>과제명</th><th style="width:12%;">수량</th><th style="width:14%;">마감</th></tr></thead>
+        <tbody>
+          <tr><td class="num strong">A</td><td>매장 서비스 안내판·가격표 시안</td><td class="num">2종</td><td class="num">Week 6</td></tr>
+          <tr><td class="num strong">B</td><td>포스터 또는 현수막 초안</td><td class="num">1종</td><td class="num">Week 6</td></tr>
+          <tr><td class="num strong">C</td><td>인스타그램 피드 콘텐츠</td><td class="num">4종</td><td class="num">Week 6</td></tr>
+          <tr><td class="num strong">D</td><td>네이버 플레이스 배너 초안</td><td class="num">2종</td><td class="num">Week 6</td></tr>
+          <tr><td class="num strong">E</td><td>브랜드 스타일 가이드 1페이지</td><td class="num">1종</td><td class="num">Week 7</td></tr>
+          <tr><td class="num strong">F</td><td>포트폴리오 PDF</td><td class="num">1종</td><td class="num">Week 7</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- 3. 제작 가이드라인 -->
+  <div class="section">
+    <div class="sec-head"><span class="tag">03</span><span class="name">제작 가이드라인</span></div>
+    <div class="sec-body">
+
+      <div class="guide-item">
+        <div class="guide-title"><span class="guide-letter">A</span>매장 서비스 안내판·가격표</div>
+        <ul class="guide-list">
+          <li>사이즈: A3 또는 A4 (세로형)</li>
+          <li>서비스 항목 및 가격 명확히 표기 — <strong>증명·여권·운전면허 30,000원</strong> / <strong>미국·중국 비자 35,000원</strong> / <strong>프로필 80,000원</strong></li>
+          <li>인쇄 300dpi, CMYK · 제출: AI(원본) + PDF(인쇄용)</li>
+        </ul>
+      </div>
+
+      <div class="guide-item">
+        <div class="guide-title"><span class="guide-letter">B</span>포스터 또는 현수막</div>
+        <ul class="guide-list">
+          <li>포스터: A2 또는 B2 / 현수막: 가로 1800×세로 600mm (기본형)</li>
+          <li>주요 서비스 1가지를 중심으로 임팩트 있게 구성 · 제출: AI(원본) + PDF</li>
+        </ul>
+      </div>
+
+      <div class="guide-item">
+        <div class="guide-title"><span class="guide-letter">C</span>인스타그램 피드 콘텐츠</div>
+        <ul class="guide-list">
+          <li>사이즈: 1080×1080px · 4종 시리즈로 통일감 있게 제작</li>
+          <li>주제 예시: 서비스 소개 / 촬영 후기 유도 / 규격 안내 / 위치 안내 등 자유 선택</li>
+          <li>제출: PNG(최종) + AI(원본)</li>
+        </ul>
+      </div>
+
+      <div class="guide-item">
+        <div class="guide-title"><span class="guide-letter">D</span>네이버 플레이스 배너</div>
+        <ul class="guide-list">
+          <li>사이즈: 1080×720px 또는 업체 요청 사이즈</li>
+          <li>스튜디오 분위기를 잘 표현하는 배너 2종 (메인용·서비스 소개용)</li>
+          <li>제출: PNG(최종) + AI(원본)</li>
+        </ul>
+      </div>
+
+      <div class="guide-item">
+        <div class="guide-title"><span class="guide-letter">E</span>브랜드 스타일 가이드</div>
+        <ul class="guide-list">
+          <li>A4 1페이지 분량 · 브랜드 컬러(HEX), 메인/서브 폰트, 이미지 톤 방향 포함</li>
+          <li>참고: 강사 제공 <strong>브랜드스타일가이드_씨노스튜디오.md</strong> 방향(정확성·정성·신뢰 톤, 브라스/네이비 팔레트 제안)을 우선 검토 후 발전시킬 것</li>
+          <li>제출: PDF</li>
+        </ul>
+      </div>
+
+      <div class="guide-item">
+        <div class="guide-title"><span class="guide-letter">F</span>포트폴리오 PDF</div>
+        <ul class="guide-list">
+          <li>A4 세로 기준, 표지 포함 10페이지 이내</li>
+          <li>프로젝트 소개 → 과정(무드보드·스케치) → 최종 결과물 순서 구성</li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- 4. 평가 기준 -->
+  <div class="section">
+    <div class="sec-head"><span class="tag">04</span><span class="name">평가 기준</span></div>
+    <div class="sec-body">
+      <table>
+        <thead><tr><th>항목</th><th style="width:20%;">배점</th></tr></thead>
+        <tbody>
+          <tr><td>브랜드·서비스 특성 반영</td><td class="num">30점</td></tr>
+          <tr><td>디자인 완성도</td><td class="num">30점</td></tr>
+          <tr><td>온·오프라인 적용 가능성</td><td class="num">20점</td></tr>
+          <tr><td>포트폴리오 구성</td><td class="num">20점</td></tr>
+          <tr><td class="strong">합계</td><td class="num strong">100점</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- 5. 제출 방법 -->
+  <div class="section">
+    <div class="sec-head"><span class="tag">05</span><span class="name">제출 방법 및 주의사항</span></div>
+    <div class="sec-body">
+      <ul class="note-list">
+        <li>모든 파일은 <strong style="color:var(--ink);">씨노스튜디오_[과제번호]_[이름]</strong> 형식으로 저장 (예: 씨노스튜디오_A_홍길동.ai)</li>
+        <li>폰트는 아웃라인 처리 후 제출</li>
+        <li>인쇄용 파일: 300dpi, CMYK / 화면용 파일: 72–96dpi, RGB 구분</li>
+        <li>업체 제공 사진·로고 외부 유출 금지</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- 6. 주요 일정 -->
+  <div class="section">
+    <div class="sec-head"><span class="tag">06</span><span class="name">주요 일정</span></div>
+    <div class="sec-body">
+      <table>
+        <thead><tr><th style="width:10%;">Week</th><th>주요 내용</th></tr></thead>
+        <tbody>
+          <tr><td class="num strong">1</td><td>킥오프 브리핑, 현장 분석, 레퍼런스 수집</td></tr>
+          <tr><td class="num strong">2</td><td>콘셉트 기획, 레이아웃 스케치</td></tr>
+          <tr><td class="num strong">3–4</td><td>1차 시안 제작</td></tr>
+          <tr><td class="num strong">5</td><td>업체 발표 및 피드백 수렴</td></tr>
+          <tr><td class="num strong">6</td><td>최종 수정 및 파일 납품</td></tr>
+          <tr><td class="num strong">7</td><td>포트폴리오·스타일 가이드 정리 및 제출</td></tr>
+          <tr><td class="num strong">8</td><td>결과 발표회</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="footer">
+    <span>서울시기술교육원 중부캠퍼스 컴퓨터그래픽디자인과 · 산학협력 프로젝트</span>
+    <span>씨노스튜디오 × 서울시기술교육원 — 2026. 07. 08 배포</span>
+  </div>
+
+</div>
