@@ -49,15 +49,16 @@ img{display:block;max-width:100%;}
 }
 /* Square stacked logo */
 .gnav-logo{
-  display:flex;flex-direction:column;align-items:flex-start;
-  gap:0;line-height:1;
-  padding:8px 10px 8px 0;
+  display:flex;align-items:center;
+  padding:10px 10px 10px 0;
   flex-shrink:0;
 }
-.logo-va{font-family:var(--fn-sc);font-size:15px;color:var(--w);opacity:.85;letter-spacing:.01em;}
-.logo-time{font-size:22px;font-weight:900;letter-spacing:-.03em;color:var(--w);line-height:.95;}
-.logo-archive{font-size:9px;font-weight:600;letter-spacing:.22em;color:var(--w);opacity:.75;}
-.logo-kr{font-size:8px;font-weight:400;color:var(--t3);letter-spacing:.06em;margin-top:2px;}
+.gnav-logo-img{
+  height:36px;
+  width:auto;
+  mix-blend-mode:screen;
+  display:block;
+}
 
 .gnav-links{
   list-style:none;display:flex;gap:28px;align-items:center;
@@ -668,10 +669,7 @@ footer{
 <!-- NAV -->
 <nav class="gnav" id="gnav">
   <a href="./index.html" class="gnav-logo">
-    <span class="logo-va">Visual Art</span>
-    <span class="logo-time">TIME</span>
-    <span class="logo-archive">ARCHIVE</span>
-    <span class="logo-kr">사진전문학원</span>
+    <img src="assets/images/logo.jpeg" alt="Visual Art TIME ARCHIVE 사진전문학원" class="gnav-logo-img">
   </a>
   <ul class="gnav-links">
     <li><a href="./gallery.html">작품보기</a></li>
