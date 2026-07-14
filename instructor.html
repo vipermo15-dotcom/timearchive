@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>강사 소개 — 타임아카이브 사진전문학원</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Pinyon+Script&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{font-family:'Pretendard',-apple-system,sans-serif;background:#080808;color:rgba(255,255,255,.92);-webkit-font-smoothing:antialiased;overflow-x:hidden;}
+a{text-decoration:none;color:inherit;}
+img{display:block;max-width:100%;}
+:root{
+  --bg:#080808;--s1:#111;--s2:#181818;--s3:#222;
+  --border:rgba(255,255,255,.1);
+  --cyan:#00C5E6;--cyan-h:#00AED0;--cyan-d:rgba(0,197,230,.12);
+  --w:#fff;--t1:rgba(255,255,255,.92);--t2:rgba(255,255,255,.60);--t3:rgba(255,255,255,.35);
+  --r:8px;--rp:999px;
+}
+/* NAV */
+.gnav{position:fixed;top:0;left:0;right:0;z-index:100;padding:0 28px;height:64px;
+  display:flex;align-items:center;justify-content:space-between;
+  background:rgba(8,8,8,.92);backdrop-filter:blur(14px);
+  border-bottom:1px solid var(--border);}
+.gnav-logo{display:flex;align-items:center;padding:10px 10px 10px 0;flex-shrink:0;}
+.gnav-logo-img{height:36px;width:auto;display:block;}
+.gnav-links{list-style:none;display:flex;gap:28px;align-items:center;}
+.gnav-links a{font-size:13px;font-weight:500;color:rgba(255,255,255,.6);transition:color .2s;}
+.gnav-links a:hover,.gnav-links a.active{color:#fff;}
+.gnav-links .cta a{background:var(--cyan);color:#000;padding:7px 18px;border-radius:999px;font-weight:700;font-size:13px;}
+.gnav-links .cta a:hover{background:var(--cyan-h);}
+.gnav-burger{display:none;background:none;border:none;cursor:pointer;flex-direction:column;gap:5px;padding:6px;}
+.gnav-burger span{display:block;width:22px;height:1.5px;background:#fff;}
+.gnav-mobile{display:none;position:fixed;top:64px;left:0;right:0;
+  background:rgba(8,8,8,.97);z-index:99;padding:24px 28px 32px;
+  flex-direction:column;gap:8px;border-top:1px solid var(--border);}
+.gnav-mobile.open{display:flex;}
+.gnav-mobile a{font-size:16px;font-weight:500;color:var(--t1);padding:12px 0;border-bottom:1px solid var(--border);}
+.gnav-mobile a.em{color:var(--cyan);font-weight:700;}
+@media(max-width:900px){.gnav-links{display:none;}.gnav-burger{display:flex;}}
+/* FOOTER */
+footer{background:#050505;border-top:1px solid var(--border);padding:48px 40px;}
+.ft-inner{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr 1fr;gap:40px;}
+.ft-brand-img{height:28px;width:auto;opacity:.6;margin-bottom:10px;}
+.ft-desc{font-size:13px;color:var(--t3);line-height:1.7;}
+.ft-contact a{display:block;font-size:14px;color:var(--t2);margin-top:6px;}
+.ft-contact a:hover{color:var(--cyan);}
+.ft-col-title{font-size:11px;font-weight:700;letter-spacing:.18em;color:var(--t3);text-transform:uppercase;margin-bottom:16px;}
+.ft-links{list-style:none;display:flex;flex-direction:column;gap:10px;}
+.ft-links a{font-size:14px;color:var(--t2);}
+.ft-links a:hover{color:var(--cyan);}
+.ft-bottom{max-width:1100px;margin:28px auto 0;border-top:1px solid var(--border);padding-top:20px;
+  display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;font-size:12px;color:var(--t3);}
+@media(max-width:900px){.ft-inner{grid-template-columns:1fr;}.ft-inner>div:nth-child(n+2){display:none;}}
+@media(max-width:600px){footer{padding:32px 20px;}}
+/* LAYOUT */
+.pt{padding-top:64px;}
+.ph{background:var(--s1);border-bottom:1px solid var(--border);padding:72px 40px 48px;}
+.ph-inner{max-width:1100px;margin:0 auto;}
+.ph-tag{font-size:11px;font-weight:700;letter-spacing:.22em;color:var(--cyan);text-transform:uppercase;margin-bottom:12px;}
+.ph-title{font-size:clamp(32px,5vw,52px);font-weight:900;letter-spacing:-.03em;}
+.ph-sub{font-size:16px;color:var(--t2);margin-top:12px;line-height:1.7;}
+.sec{max-width:1100px;margin:0 auto;padding:80px 40px;}
+.sec-tag{font-size:11px;font-weight:700;letter-spacing:.22em;color:var(--cyan);text-transform:uppercase;margin-bottom:10px;}
+.sec-title{font-size:clamp(22px,3vw,32px);font-weight:900;letter-spacing:-.02em;margin-bottom:28px;}
+.cta-band{background:linear-gradient(135deg,var(--s2),var(--s3));border-top:1px solid var(--border);border-bottom:1px solid var(--border);}
+.cta-band-inner{max-width:1100px;margin:0 auto;padding:64px 40px;text-align:center;}
+.cta-band h2{font-size:clamp(24px,4vw,38px);font-weight:900;letter-spacing:-.02em;margin-bottom:12px;}
+.cta-band p{font-size:16px;color:var(--t2);margin-bottom:32px;}
+.btn-group{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;}
+.btn-primary{background:var(--cyan);color:#000;padding:14px 32px;border-radius:var(--rp);font-weight:700;font-size:15px;transition:background .2s;}
+.btn-primary:hover{background:var(--cyan-h);}
+.btn-outline{border:1px solid rgba(255,255,255,.3);color:var(--t1);padding:14px 32px;border-radius:var(--rp);font-weight:500;font-size:15px;transition:border-color .2s,color .2s;}
+.btn-outline:hover{border-color:#fff;color:#fff;}
+@media(max-width:600px){.ph{padding:60px 20px 36px;}.sec{padding:56px 20px;}.cta-band-inner{padding:48px 20px;}}
+
+.inst-wrap{max-width:1100px;margin:0 auto;padding:80px 40px;}
+.inst-block{display:grid;grid-template-columns:300px 1fr;gap:56px;align-items:start;padding-bottom:72px;border-bottom:1px solid var(--border);margin-bottom:72px;}
+.inst-block:last-child{border-bottom:none;margin-bottom:0;padding-bottom:0;}
+.inst-photo{width:100%;aspect-ratio:3/4;border-radius:12px;background:var(--s2);display:flex;align-items:center;justify-content:center;font-size:72px;color:var(--t3);border:1px solid var(--border);}
+.inst-kicker{font-size:11px;font-weight:700;letter-spacing:.22em;color:var(--cyan);text-transform:uppercase;margin-bottom:10px;}
+.inst-name{font-size:clamp(30px,4vw,44px);font-weight:900;letter-spacing:-.02em;}
+.inst-role{font-size:14px;color:var(--t2);margin:6px 0 24px;}
+.inst-stats{display:flex;gap:36px;margin-bottom:28px;flex-wrap:wrap;}
+.stat-n{font-size:30px;font-weight:900;color:var(--cyan);}
+.stat-l{font-size:11px;color:var(--t3);margin-top:2px;}
+.career{list-style:none;display:flex;flex-direction:column;gap:9px;margin-bottom:28px;}
+.career li{font-size:15px;color:var(--t2);padding-left:18px;position:relative;line-height:1.6;}
+.career li::before{content:"—";position:absolute;left:0;color:var(--cyan);}
+.quote{border-left:3px solid var(--cyan);padding:16px 20px;background:var(--s2);border-radius:0 8px 8px 0;font-size:15px;color:var(--t1);line-height:1.85;font-style:italic;}
+@media(max-width:900px){.inst-block{grid-template-columns:1fr;}.inst-photo{max-width:200px;aspect-ratio:1;}}
+@media(max-width:600px){.inst-wrap{padding:56px 20px;}}
+
+</style>
+</head>
+<body>
+<nav class="gnav">
+  <a href="./design-i-renewal.html" class="gnav-logo">
+    <img src="assets/images/logo.png" alt="Visual Art TIME ARCHIVE 사진전문학원" class="gnav-logo-img">
+  </a>
+  <ul class="gnav-links">
+    <li><a href="./gallery.html">수료생 작품</a></li>
+    <li><a href="./courses.html">수강 과정</a></li>
+    <li><a href="./instructor.html" class="active">강사 소개</a></li>
+    <li><a href="./government-support.html">국비지원</a></li>
+    <li class="cta"><a href="./contact.html">1:1 상담신청</a></li>
+  </ul>
+  <button class="gnav-burger" id="burger"><span></span><span></span><span></span></button>
+</nav>
+<div class="gnav-mobile" id="mob">
+  <a href="./gallery.html">수료생 작품</a>
+  <a href="./courses.html">수강 과정</a>
+  <a href="./instructor.html">강사 소개</a>
+  <a href="./government-support.html">국비지원</a>
+  <a href="./contact.html" class="em">1:1 상담신청</a>
+</div>
+<div class="pt">
+
+<div class="ph">
+  <div class="ph-inner">
+    <p class="ph-tag">Instructor</p>
+    <h1 class="ph-title">강사 소개</h1>
+    <p class="ph-sub">40년 현장 경력의 전문가가 직접 가르칩니다.</p>
+  </div>
+</div>
+
+<div class="inst-wrap">
+  <div class="inst-block">
+    <div class="inst-photo">📷</div>
+    <div>
+      <p class="inst-kicker">Director</p>
+      <h2 class="inst-name">박희수</h2>
+      <p class="inst-role">원장 · 수석 강사</p>
+      <div class="inst-stats">
+        <div><div class="stat-n">40년</div><div class="stat-l">현장 경력</div></div>
+        <div><div class="stat-n">1991</div><div class="stat-l">설립 연도</div></div>
+        <div><div class="stat-n">1:1</div><div class="stat-l">맞춤 교육</div></div>
+      </div>
+      <ul class="career">
+        <li>삼성전자·기아자동차·KB국민은행·GS홈쇼핑 광고 촬영</li>
+        <li>삼성 갤럭시 S10~S20 시리즈 제품 사진 (제일기획 협업)</li>
+        <li>서울시립중부교육원 명예학과장</li>
+        <li>상업·광고·패션·식품·제품 전 장르 40년 실전 경력</li>
+        <li>1991년 타임아카이브 사진전문학원 설립</li>
+      </ul>
+      <blockquote class="quote">
+        "사진은 기술과 감성의 집합체입니다.<br>
+        40년 현장 경험과 인문학을 통한 수업으로<br>
+        꼭 필요한 기술과 감성을 집약합니다."
+      </blockquote>
+    </div>
+  </div>
+
+  <div class="inst-block">
+    <div class="inst-photo">🎬</div>
+    <div>
+      <p class="inst-kicker">Vice Director</p>
+      <h2 class="inst-name">조영상</h2>
+      <p class="inst-role">부원장 · 영상·영화 전담 강사</p>
+      <ul class="career">
+        <li>Chapman University (미국) 영화·사진학 전공</li>
+        <li>대통령선거 전속 촬영감독</li>
+        <li>영상·영화 촬영과정 전담 강의</li>
+        <li>다큐멘터리·광고·뮤직비디오 연출 경력</li>
+      </ul>
+      <blockquote class="quote">
+        "영상은 사진의 연장선입니다.<br>
+        빛을 이해하면 카메라 언어가 열립니다."
+      </blockquote>
+    </div>
+  </div>
+</div>
+
+<div class="cta-band">
+  <div class="cta-band-inner">
+    <h2>직접 만나 상담 받아보세요</h2>
+    <p>수강 과정·목표·일정을 함께 설계합니다.</p>
+    <div class="btn-group">
+      <a href="./contact.html" class="btn-primary">1:1 상담신청</a>
+      <a href="./courses.html" class="btn-outline">수강 과정 보기</a>
+    </div>
+  </div>
+</div>
+
+</div>
+<footer>
+  <div class="ft-inner">
+    <div>
+      <img src="assets/images/logo.png" alt="TIME ARCHIVE" class="ft-brand-img">
+      <p class="ft-desc">40년 현장 경력의 원장이 직접 가르치는<br>1:1 맞춤 사진전문학원.</p>
+      <div class="ft-contact">
+        <a href="tel:02-545-5457">02-545-5457</a>
+        <a href="./contact.html">1:1 상담신청 →</a>
+      </div>
+    </div>
+    <div>
+      <p class="ft-col-title">과정</p>
+      <ul class="ft-links">
+        <li><a href="./course-commercial.html">상업사진 심화과정</a></li>
+        <li><a href="./course-hobby.html">취미사진 입문과정</a></li>
+        <li><a href="./course-startup.html">창업 포트폴리오 과정</a></li>
+        <li><a href="./course-video.html">영상·영화 촬영과정</a></li>
+        <li><a href="./course-ai.html">AI 사진·영상 과정</a></li>
+        <li><a href="./course-private.html">1:1 개인 레슨</a></li>
+      </ul>
+    </div>
+    <div>
+      <p class="ft-col-title">안내</p>
+      <ul class="ft-links">
+        <li><a href="./instructor.html">강사 소개</a></li>
+        <li><a href="./government-support.html">국비지원 안내</a></li>
+        <li><a href="./contact.html">오시는 길</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="ft-bottom">
+    <span>© 2025 Visual Art TIME ARCHIVE 사진전문학원</span>
+    <span>서울 강남구 언주로 113길 13 성창빌딩 2층</span>
+  </div>
+</footer>
+<script>
+const b=document.getElementById('burger'),m=document.getElementById('mob');
+b.addEventListener('click',()=>m.classList.toggle('open'));
+</script>
+</body>
+</html>
