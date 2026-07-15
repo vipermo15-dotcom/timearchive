@@ -128,8 +128,10 @@ img{display:block;max-width:100%;}
 /* Hero slide images */
 .slide-img{
   position:absolute;inset:0;width:100%;height:100%;
-  object-fit:cover;object-position:center;z-index:0;
+  object-fit:cover;object-position:50% 15%;z-index:0;
 }
+/* 제품·악기 슬라이드는 중앙 기준 */
+.slide-3 .slide-img,.slide-4 .slide-img,.slide-5 .slide-img{object-position:center;}
 
 .slide-subject{
   position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
