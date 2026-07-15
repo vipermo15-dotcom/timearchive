@@ -101,6 +101,23 @@ footer{background:#050505;border-top:1px solid var(--border);padding:48px 40px;}
 @media(max-width:600px){.course-body{padding:56px 20px;}}
 
 </style>
+<style>
+/* ── 상세 커리큘럼 주차 그리드 ── */
+.detail-sec{max-width:1100px;margin:0 auto;padding:0 40px 80px;}
+.detail-tag{font-size:11px;font-weight:700;letter-spacing:.22em;color:var(--cyan);text-transform:uppercase;margin-bottom:10px;}
+.detail-h{font-size:clamp(20px,2.5vw,28px);font-weight:900;letter-spacing:-.02em;margin-bottom:24px;}
+.phase-label{font-size:11px;font-weight:700;letter-spacing:.18em;color:var(--t3);text-transform:uppercase;
+  padding:8px 0;border-bottom:1px solid var(--border);margin:32px 0 16px;}
+.phase-label:first-of-type{margin-top:0;}
+.wk-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:10px;}
+.wk{background:var(--s2);border:1px solid var(--border);border-radius:var(--r);padding:16px 18px;}
+.wk-num{font-size:10px;font-weight:800;letter-spacing:.16em;color:var(--cyan);margin-bottom:6px;}
+.wk-title{font-size:14px;font-weight:700;color:var(--t1);margin-bottom:8px;line-height:1.4;}
+.wk-pts{list-style:none;display:flex;flex-direction:column;gap:4px;}
+.wk-pts li{font-size:12px;color:var(--t2);padding-left:12px;position:relative;line-height:1.6;}
+.wk-pts li::before{content:'·';position:absolute;left:0;color:var(--cyan);font-weight:900;}
+@media(max-width:600px){.detail-sec{padding:0 20px 56px;}}
+</style>
 </head>
 <body>
 <nav class="gnav">
@@ -139,27 +156,22 @@ footer{background:#050505;border-top:1px solid var(--border);padding:48px 40px;}
   </div>
 </div>
 
-<div class="course-body">
-  <div>
-    <p class="sec-tag">Curriculum</p>
-    <h2 class="sec-title">커리큘럼</h2>
-    <ul class="curr-list"><li>조명 세팅 심화 — 스튜디오 멀티라이트 컨트롤</li><li>뷰티·화장품·제품 촬영 실전 기법</li><li>음식·식음료 스타일링 & 촬영</li><li>Lightroom·Photoshop 실무 리터칭 워크플로우</li><li>광고 컨셉 기획 → 촬영 → 납품 전 과정</li><li>포트폴리오 완성 & 클라이언트 제안서 작성</li></ul>
+<div style="max-width:1100px;margin:0 auto;padding:56px 40px 40px;display:grid;grid-template-columns:1fr 340px;gap:40px;align-items:start;"> <div style="display:contents;">
+  <div class="info-card" style="margin-bottom:20px;">
+    <p class="info-card-title">과정 정보</p>
+    <div class="info-row"><span>수강 기간</span><span>3개월</span></div><div class="info-row"><span>주 수업 횟수</span><span>주 2회</span></div><div class="info-row"><span>난이도</span><span>중급 — 고급</span></div><div class="info-row"><span>수업 방식</span><span>1:1 맞춤 강의</span></div><div class="info-row"><span>장소</span><span>강남구 성창빌딩 2층</span></div><div class="info-row"><span>총 수업</span><span>약 24회</span></div>
   </div>
-  <div>
-    <div class="info-card">
-      <p class="info-card-title">과정 정보</p>
-      <div class="info-row"><span>수강 기간</span><span>3개월</span></div>
-      <div class="info-row"><span>주 수업 횟수</span><span>주 2회</span></div>
-      <div class="info-row"><span>난이도</span><span>중급 — 고급</span></div>
-      <div class="info-row"><span>수업 방식</span><span>1:1 맞춤 강의</span></div>
-      <div class="info-row"><span>장소</span><span>강남구 성창빌딩 2층</span></div>
-    </div>
-    <div class="info-card">
-      <p class="info-card-title">이런 분께 추천합니다</p>
-      <ul class="for-list"><li>상업 사진가로 데뷔하고 싶은 분</li><li>브랜드·쇼핑몰 촬영을 업으로 삼고 싶은 분</li><li>기초 지식은 있지만 실전 경력이 부족한 분</li><li>전문 포트폴리오를 쌓고 싶은 분</li></ul>
-    </div>
-    <a href="./contact.html?course=course-commercial" class="btn-primary" style="display:block;text-align:center;margin-top:4px;">1:1 상담신청</a>
+  <div class="info-card">
+    <p class="info-card-title">이런 분께 추천합니다</p>
+    <ul class="for-list"><li>상업 사진가로 데뷔하고 싶은 분</li><li>브랜드·쇼핑몰 촬영을 업으로 삼고 싶은 분</li><li>기초 지식은 있지만 실전 경력이 부족한 분</li><li>전문 포트폴리오를 쌓고 싶은 분</li></ul>
   </div>
+  <a href="./contact.html?course=course-commercial" class="btn-primary" style="display:block;text-align:center;margin-top:14px;">1:1 상담신청</a>
+</div>
+
+<div class="detail-sec">
+  <p class="detail-tag">Weekly Curriculum</p>
+  <h2 class="detail-h">주차별 커리큘럼</h2>
+  <div class="phase-label">PART 1 — 조명 & 촬영 기법</div><div class="wk-grid"><div class="wk"><div class="wk-num">WEEK 1</div><div class="wk-title">스튜디오 조명 시스템 이해</div><ul class="wk-pts"><li>스트로브·지속광 종류와 특성</li><li>조명 세기·색온도·CRI 이해</li><li>단일 조명 기초 세팅 실습</li></ul></div><div class="wk"><div class="wk-num">WEEK 2</div><div class="wk-title">조명 모디파이어 & 단광원 활용</div><ul class="wk-pts"><li>소프트박스·뷰티디시·리플렉터 차이</li><li>그림자 방향과 농도 컨트롤</li><li>단광원 인물·제품 실습</li></ul></div><div class="wk"><div class="wk-num">WEEK 3</div><div class="wk-title">멀티라이트 세팅</div><ul class="wk-pts"><li>2~4등 조명 배치와 비율 조정</li><li>메인·필·백라이트 역할</li><li>라이팅 레이시오 실습</li></ul></div><div class="wk"><div class="wk-num">WEEK 4</div><div class="wk-title">뷰티·화장품 촬영</div><ul class="wk-pts"><li>하이키 조명 세팅</li><li>피부 질감·립·아이 표현</li><li>누끼용 배경·바닥 처리</li></ul></div><div class="wk"><div class="wk-num">WEEK 5</div><div class="wk-title">제품 소재별 촬영 기법</div><ul class="wk-pts"><li>반사 소재 (금속·유리) 광원 처리</li><li>투명·반투명 제품 기법</li><li>무광 소재 마무리 처리</li></ul></div><div class="wk"><div class="wk-num">WEEK 6</div><div class="wk-title">음식·식음료 스타일링 & 촬영</div><ul class="wk-pts"><li>음식 스타일링 — 질감·색감 표현</li><li>음료·거품·수증기 연출</li><li>배경·소품 컬러 매칭</li></ul></div></div><div class="phase-label">PART 2 — 리터칭 & 포스트</div><div class="wk-grid"><div class="wk"><div class="wk-num">WEEK 7–8</div><div class="wk-title">Lightroom 실무 보정</div><ul class="wk-pts"><li>RAW 현상 워크플로우</li><li>HSL·곡선 색보정</li><li>보정 프리셋 제작 & 일괄 적용</li></ul></div><div class="wk"><div class="wk-num">WEEK 9–10</div><div class="wk-title">Photoshop 리터칭 심화</div><ul class="wk-pts"><li>Frequency Separation 피부·제품 리터칭</li><li>배경 합성 & 색감 레이어</li><li>광고 납품 파일 포맷 세팅</li></ul></div></div><div class="phase-label">PART 3 — 기획 & 포트폴리오</div><div class="wk-grid"><div class="wk"><div class="wk-num">WEEK 11–12</div><div class="wk-title">광고 컨셉 기획 & 디렉팅</div><ul class="wk-pts"><li>무드보드 제작·레퍼런스 분석</li><li>모델 방향·소품 스타일링</li><li>전체 촬영 프로세스 시뮬레이션</li></ul></div><div class="wk"><div class="wk-num">WEEK 13–14</div><div class="wk-title">포트폴리오 완성 & 실전 납품</div><ul class="wk-pts"><li>뷰티·제품·음식 카테고리 실사 촬영</li><li>납품 기준 (포맷·해상도·색공간)</li><li>제안서·견적서 작성 실습</li></ul></div></div>
 </div>
 
 <div class="cta-band">

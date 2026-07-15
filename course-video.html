@@ -101,6 +101,23 @@ footer{background:#050505;border-top:1px solid var(--border);padding:48px 40px;}
 @media(max-width:600px){.course-body{padding:56px 20px;}}
 
 </style>
+<style>
+/* ── 상세 커리큘럼 주차 그리드 ── */
+.detail-sec{max-width:1100px;margin:0 auto;padding:0 40px 80px;}
+.detail-tag{font-size:11px;font-weight:700;letter-spacing:.22em;color:var(--cyan);text-transform:uppercase;margin-bottom:10px;}
+.detail-h{font-size:clamp(20px,2.5vw,28px);font-weight:900;letter-spacing:-.02em;margin-bottom:24px;}
+.phase-label{font-size:11px;font-weight:700;letter-spacing:.18em;color:var(--t3);text-transform:uppercase;
+  padding:8px 0;border-bottom:1px solid var(--border);margin:32px 0 16px;}
+.phase-label:first-of-type{margin-top:0;}
+.wk-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:10px;}
+.wk{background:var(--s2);border:1px solid var(--border);border-radius:var(--r);padding:16px 18px;}
+.wk-num{font-size:10px;font-weight:800;letter-spacing:.16em;color:var(--cyan);margin-bottom:6px;}
+.wk-title{font-size:14px;font-weight:700;color:var(--t1);margin-bottom:8px;line-height:1.4;}
+.wk-pts{list-style:none;display:flex;flex-direction:column;gap:4px;}
+.wk-pts li{font-size:12px;color:var(--t2);padding-left:12px;position:relative;line-height:1.6;}
+.wk-pts li::before{content:'·';position:absolute;left:0;color:var(--cyan);font-weight:900;}
+@media(max-width:600px){.detail-sec{padding:0 20px 56px;}}
+</style>
 </head>
 <body>
 <nav class="gnav">
@@ -130,7 +147,7 @@ footer{background:#050505;border-top:1px solid var(--border);padding:48px 40px;}
     <span class="badge badge-dim">국비지원 가능</span>
     <p class="ph-tag">Video & Editing</p>
     <h1 class="ph-title">영상 촬영·편집 과정</h1>
-    <p class="ph-sub">타임랩스·하이퍼랩스·제품 영상부터 프리미어·에프터이펙트 편집까지,<br>촬영과 후반 작업을 한 과정에서 완성합니다.</p>
+    <p class="ph-sub">타임랩스·하이퍼랩스·제품 영상 촬영부터 Premiere·After Effects 편집까지 한 과정에서 완성합니다.</p>
     <div class="ph-meta">
       <div class="ph-meta-item"><div class="ml">기간</div><div class="mv">3개월</div></div>
       <div class="ph-meta-item"><div class="ml">횟수</div><div class="mv">주 2회</div></div>
@@ -139,46 +156,22 @@ footer{background:#050505;border-top:1px solid var(--border);padding:48px 40px;}
   </div>
 </div>
 
-<div class="course-body">
-  <div>
-    <p class="sec-tag">Part 1 — Shooting</p>
-    <h2 class="sec-title" style="margin-bottom:20px;">영상 촬영</h2>
-    <ul class="curr-list" style="margin-bottom:48px;">
-      <li><strong>미러리스 영상 촬영 기본</strong> — 프레임레이트·셔터각도·ISO, 영상용 노출 설정</li>
-      <li><strong>제품 영상 촬영</strong> — 스튜디오 조명 세팅, 클로즈업·회전·슬라이딩 샷</li>
-      <li><strong>액션캠 활용</strong> — GoPro 세팅·마운트·영상 스타일링</li>
-      <li><strong>타임랩스</strong> — 인터벌 촬영 세팅, 노출 이동·키프레임 계산</li>
-      <li><strong>하이퍼랩스</strong> — 이동 촬영 경로 설계, 안정화 기법</li>
-    </ul>
+<div style="max-width:1100px;margin:0 auto;padding:56px 40px 40px;display:grid;grid-template-columns:1fr 340px;gap:40px;align-items:start;"> <div style="display:contents;">
+  <div class="info-card" style="margin-bottom:20px;">
+    <p class="info-card-title">과정 정보</p>
+    <div class="info-row"><span>수강 기간</span><span>3개월</span></div><div class="info-row"><span>주 수업 횟수</span><span>주 2회</span></div><div class="info-row"><span>난이도</span><span>초급 — 중급</span></div><div class="info-row"><span>수업 방식</span><span>1:1 맞춤 강의</span></div><div class="info-row"><span>사용 장비</span><span>미러리스·액션캠·조명</span></div><div class="info-row"><span>사용 툴</span><span>Premiere Pro · After Effects</span></div>
+  </div>
+  <div class="info-card">
+    <p class="info-card-title">이런 분께 추천합니다</p>
+    <ul class="for-list"><li>사진 경험이 있고 영상으로 확장하고 싶은 분</li><li>제품·브랜드 영상 콘텐츠 제작을 원하는 분</li><li>유튜브·SNS 영상 채널을 시작하고 싶은 분</li><li>타임랩스·하이퍼랩스 영상에 관심 있는 분</li></ul>
+  </div>
+  <a href="./contact.html?course=course-video" class="btn-primary" style="display:block;text-align:center;margin-top:14px;">1:1 상담신청</a>
+</div>
 
-    <p class="sec-tag">Part 2 — Editing</p>
-    <h2 class="sec-title" style="margin-bottom:20px;">영상 편집</h2>
-    <ul class="curr-list">
-      <li><strong>Adobe Premiere Pro</strong> — 컷 편집·음향 믹싱·자막·납품 포맷 세팅</li>
-      <li><strong>Adobe After Effects</strong> — 모션그래픽·타이틀·트랜지션·색보정 기초</li>
-    </ul>
-  </div>
-  <div>
-    <div class="info-card">
-      <p class="info-card-title">과정 정보</p>
-      <div class="info-row"><span>수강 기간</span><span>3개월</span></div>
-      <div class="info-row"><span>주 수업 횟수</span><span>주 2회</span></div>
-      <div class="info-row"><span>난이도</span><span>초급 — 중급</span></div>
-      <div class="info-row"><span>수업 방식</span><span>1:1 맞춤 강의</span></div>
-      <div class="info-row"><span>사용 장비</span><span>미러리스·액션캠·조명</span></div>
-      <div class="info-row"><span>사용 툴</span><span>Premiere Pro · After Effects</span></div>
-    </div>
-    <div class="info-card">
-      <p class="info-card-title">이런 분께 추천합니다</p>
-      <ul class="for-list">
-        <li>사진 촬영 경험이 있고 영상으로 확장하고 싶은 분</li>
-        <li>제품·브랜드 영상 콘텐츠 제작을 원하는 분</li>
-        <li>유튜브·SNS 영상 채널을 시작하고 싶은 분</li>
-        <li>타임랩스·하이퍼랩스 영상에 관심 있는 분</li>
-      </ul>
-    </div>
-    <a href="./contact.html?course=course-video" class="btn-primary" style="display:block;text-align:center;margin-top:4px;">1:1 상담신청</a>
-  </div>
+<div class="detail-sec">
+  <p class="detail-tag">Weekly Curriculum</p>
+  <h2 class="detail-h">주차별 커리큘럼</h2>
+  <div class="phase-label">PART 1 — 영상 촬영</div><div class="wk-grid"><div class="wk"><div class="wk-num">WEEK 1</div><div class="wk-title">미러리스 영상 기초</div><ul class="wk-pts"><li>프레임레이트 (24/30/60fps) 선택 기준</li><li>셔터각도 180° 법칙</li><li>영상용 노출·픽쳐프로파일 세팅</li></ul></div><div class="wk"><div class="wk-num">WEEK 2</div><div class="wk-title">제품 영상 촬영</div><ul class="wk-pts"><li>스튜디오 조명 영상 세팅</li><li>클로즈업·회전·슬라이딩 컷</li><li>제품 디테일 영상 실습</li></ul></div><div class="wk"><div class="wk-num">WEEK 3</div><div class="wk-title">액션캠 활용</div><ul class="wk-pts"><li>GoPro 세팅·화각·마운트 선택</li><li>POV·동행 촬영·방수 활용</li><li>영상 스타일링 설정</li></ul></div><div class="wk"><div class="wk-num">WEEK 4</div><div class="wk-title">타임랩스</div><ul class="wk-pts"><li>인터벌 촬영 세팅 (간격·총 시간 계산)</li><li>노출 이동 (Exposure Ramping) 기법</li><li>키프레임 계산 & 최종 길이 결정</li></ul></div><div class="wk"><div class="wk-num">WEEK 5</div><div class="wk-title">하이퍼랩스</div><ul class="wk-pts"><li>이동 경로 설계 & 수평 유지</li><li>흔들림 없는 이동 촬영 기법</li><li>Premiere에서 안정화 처리</li></ul></div></div><div class="phase-label">PART 2 — Adobe Premiere Pro</div><div class="wk-grid"><div class="wk"><div class="wk-num">WEEK 6–7</div><div class="wk-title">Premiere Pro 기초</div><ul class="wk-pts"><li>시퀀스 세팅·타임라인 구성</li><li>컷 편집·트림·리플 편집</li><li>Lumetri 컬러 그레이딩 기초</li></ul></div><div class="wk"><div class="wk-num">WEEK 8–9</div><div class="wk-title">Premiere Pro 심화</div><ul class="wk-pts"><li>음향 믹싱·노이즈 제거·음악 싱크</li><li>자막·하단 자막 자동화</li><li>유튜브·릴스·광고 납품 포맷</li></ul></div></div><div class="phase-label">PART 3 — Adobe After Effects</div><div class="wk-grid"><div class="wk"><div class="wk-num">WEEK 10–11</div><div class="wk-title">After Effects 기초</div><ul class="wk-pts"><li>레이어·컴포지션 구조 이해</li><li>타이틀·로워서드 모션그래픽</li><li>키프레임 애니메이션 기초</li></ul></div><div class="wk"><div class="wk-num">WEEK 12–13</div><div class="wk-title">After Effects 심화 & 포트폴리오</div><ul class="wk-pts"><li>트랙킹·마스킹 기초</li><li>색보정 레이어 활용</li><li>영상 포트폴리오 완성 발표</li></ul></div></div>
 </div>
 
 <div class="cta-band">
@@ -191,7 +184,6 @@ footer{background:#050505;border-top:1px solid var(--border);padding:48px 40px;}
     </div>
   </div>
 </div>
-
 </div>
 <footer>
   <div class="ft-inner">
@@ -211,6 +203,8 @@ footer{background:#050505;border-top:1px solid var(--border);padding:48px 40px;}
         <li><a href="./course-startup.html">창업 포트폴리오 과정</a></li>
         <li><a href="./course-video.html">영상·영화 촬영과정</a></li>
         <li><a href="./course-ai.html">AI 사진·영상 과정</a></li>
+        <li><a href="./course-ai.html">생성형 AI 과정</a></li>
+        <li><a href="./course-agent.html">AI 에이전트 과정</a></li>
         <li><a href="./course-private.html">1:1 개인 레슨</a></li>
       </ul>
     </div>

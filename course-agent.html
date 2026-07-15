@@ -101,6 +101,23 @@ footer{background:#050505;border-top:1px solid var(--border);padding:48px 40px;}
 @media(max-width:600px){.course-body{padding:56px 20px;}}
 
 </style>
+<style>
+/* ── 상세 커리큘럼 주차 그리드 ── */
+.detail-sec{max-width:1100px;margin:0 auto;padding:0 40px 80px;}
+.detail-tag{font-size:11px;font-weight:700;letter-spacing:.22em;color:var(--cyan);text-transform:uppercase;margin-bottom:10px;}
+.detail-h{font-size:clamp(20px,2.5vw,28px);font-weight:900;letter-spacing:-.02em;margin-bottom:24px;}
+.phase-label{font-size:11px;font-weight:700;letter-spacing:.18em;color:var(--t3);text-transform:uppercase;
+  padding:8px 0;border-bottom:1px solid var(--border);margin:32px 0 16px;}
+.phase-label:first-of-type{margin-top:0;}
+.wk-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:10px;}
+.wk{background:var(--s2);border:1px solid var(--border);border-radius:var(--r);padding:16px 18px;}
+.wk-num{font-size:10px;font-weight:800;letter-spacing:.16em;color:var(--cyan);margin-bottom:6px;}
+.wk-title{font-size:14px;font-weight:700;color:var(--t1);margin-bottom:8px;line-height:1.4;}
+.wk-pts{list-style:none;display:flex;flex-direction:column;gap:4px;}
+.wk-pts li{font-size:12px;color:var(--t2);padding-left:12px;position:relative;line-height:1.6;}
+.wk-pts li::before{content:'·';position:absolute;left:0;color:var(--cyan);font-weight:900;}
+@media(max-width:600px){.detail-sec{padding:0 20px 56px;}}
+</style>
 </head>
 <body>
 <nav class="gnav">
@@ -130,7 +147,7 @@ footer{background:#050505;border-top:1px solid var(--border);padding:48px 40px;}
     <span class="badge badge-cyan">신규 과정</span>
     <p class="ph-tag">AI Agent</p>
     <h1 class="ph-title">AI 에이전트 과정</h1>
-    <p class="ph-sub">MCP·Claude·힉스필드를 연결해 AI가 스스로 작동하는<br>창작·비즈니스 워크플로우를 직접 만드는 과정.</p>
+    <p class="ph-sub">MCP·Claude·힉스필드를 연결해 AI가 스스로 작동하는 창작·비즈니스 워크플로우를 직접 만드는 과정.</p>
     <div class="ph-meta">
       <div class="ph-meta-item"><div class="ml">기간</div><div class="mv">2개월</div></div>
       <div class="ph-meta-item"><div class="ml">횟수</div><div class="mv">주 2회</div></div>
@@ -139,41 +156,22 @@ footer{background:#050505;border-top:1px solid var(--border);padding:48px 40px;}
   </div>
 </div>
 
-<div class="course-body">
-  <div>
-    <p class="sec-tag">Curriculum</p>
-    <h2 class="sec-title">커리큘럼</h2>
-    <ul class="curr-list">
-      <li><strong>AI 에이전트 개념 이해</strong> — 에이전트란 무엇인가, Claude vs. ChatGPT 에이전트 비교</li>
-      <li><strong>Claude 에이전트 설정</strong> — Claude 프로젝트·프롬프트 구조 설계, 창작 지시서 자동화</li>
-      <li><strong>MCP (Model Context Protocol) 기초</strong> — MCP 개념·설치·서버 연결, 도구 확장 원리 이해</li>
-      <li><strong>MCP + Claude 연동 실습</strong> — 파일·웹·외부 서비스를 Claude에 연결해 에이전트 구성</li>
-      <li><strong>힉스필드 (Higgsfield) 활용</strong> — AI 이미지·영상 생성, 에이전트 파이프라인에 연결</li>
-      <li><strong>창작 자동화 파이프라인 구축</strong> — 기획 → AI 이미지·영상 생성 → 편집 → 업로드 자동화</li>
-      <li><strong>나만의 AI 에이전트 완성</strong> — 수강생 개인 비즈니스에 맞는 에이전트 설계 & 배포</li>
-    </ul>
+<div style="max-width:1100px;margin:0 auto;padding:56px 40px 40px;display:grid;grid-template-columns:1fr 340px;gap:40px;align-items:start;"> <div style="display:contents;">
+  <div class="info-card" style="margin-bottom:20px;">
+    <p class="info-card-title">과정 정보</p>
+    <div class="info-row"><span>수강 기간</span><span>2개월</span></div><div class="info-row"><span>주 수업 횟수</span><span>주 2회</span></div><div class="info-row"><span>난이도</span><span>초급 — 중급</span></div><div class="info-row"><span>수업 방식</span><span>1:1 맞춤 강의</span></div><div class="info-row"><span>사용 툴</span><span>Claude · MCP · Higgsfield</span></div><div class="info-row"><span>선수 지식</span><span>AI 도구 기본 사용 경험</span></div>
   </div>
-  <div>
-    <div class="info-card">
-      <p class="info-card-title">과정 정보</p>
-      <div class="info-row"><span>수강 기간</span><span>2개월</span></div>
-      <div class="info-row"><span>주 수업 횟수</span><span>주 2회</span></div>
-      <div class="info-row"><span>난이도</span><span>초급 — 중급</span></div>
-      <div class="info-row"><span>수업 방식</span><span>1:1 맞춤 강의</span></div>
-      <div class="info-row"><span>사용 툴</span><span>Claude · MCP · Higgsfield</span></div>
-      <div class="info-row"><span>선수 지식</span><span>AI 도구 기본 사용 경험</span></div>
-    </div>
-    <div class="info-card">
-      <p class="info-card-title">이런 분께 추천합니다</p>
-      <ul class="for-list">
-        <li>AI를 단순 사용이 아닌 직접 구성하고 싶은 분</li>
-        <li>창작·촬영 업무를 AI로 자동화하고 싶은 분</li>
-        <li>생성형 AI 과정 수료 후 심화를 원하는 분</li>
-        <li>1인 스튜디오·크리에이터 사업을 AI로 확장하려는 분</li>
-      </ul>
-    </div>
-    <a href="./contact.html?course=course-agent" class="btn-primary" style="display:block;text-align:center;margin-top:4px;">1:1 상담신청</a>
+  <div class="info-card">
+    <p class="info-card-title">이런 분께 추천합니다</p>
+    <ul class="for-list"><li>AI를 단순 사용이 아닌 직접 구성하고 싶은 분</li><li>창작·촬영 업무를 AI로 자동화하고 싶은 분</li><li>생성형 AI 과정 수료 후 심화를 원하는 분</li><li>1인 스튜디오·크리에이터 사업을 AI로 확장하려는 분</li></ul>
   </div>
+  <a href="./contact.html?course=course-agent" class="btn-primary" style="display:block;text-align:center;margin-top:14px;">1:1 상담신청</a>
+</div>
+
+<div class="detail-sec">
+  <p class="detail-tag">Weekly Curriculum</p>
+  <h2 class="detail-h">주차별 커리큘럼</h2>
+  <div class="phase-label">PART 1 — Claude 에이전트 설계</div><div class="wk-grid"><div class="wk"><div class="wk-num">WEEK 1–2</div><div class="wk-title">AI 에이전트 개념 이해</div><ul class="wk-pts"><li>에이전트란 무엇인가 — LLM과 에이전트의 차이</li><li>Claude vs. ChatGPT 에이전트 비교</li><li>에이전트 활용 사례 탐구</li></ul></div><div class="wk"><div class="wk-num">WEEK 3–4</div><div class="wk-title">Claude 에이전트 설계</div><ul class="wk-pts"><li>Claude 프로젝트 세팅 & 시스템 프롬프트 구조</li><li>창작 기획·촬영 지시서 자동화</li><li>반복 작업을 Claude 에이전트로 대체 실습</li></ul></div></div><div class="phase-label">PART 2 — MCP 연동</div><div class="wk-grid"><div class="wk"><div class="wk-num">WEEK 5–6</div><div class="wk-title">MCP 기초 & 설치</div><ul class="wk-pts"><li>MCP (Model Context Protocol) 개념과 작동 원리</li><li>MCP 서버 설치 & 클라이언트 연결</li><li>첫 번째 MCP 도구 연동 실습</li></ul></div><div class="wk"><div class="wk-num">WEEK 7–8</div><div class="wk-title">MCP + Claude 연동 심화</div><ul class="wk-pts"><li>파일·웹·외부 API MCP 연결</li><li>Claude가 도구를 사용하는 에이전트 구성</li><li>촬영 기획 자동화 파이프라인 실습</li></ul></div></div><div class="phase-label">PART 3 — Higgsfield & 파이프라인 구축</div><div class="wk-grid"><div class="wk"><div class="wk-num">WEEK 9–10</div><div class="wk-title">Higgsfield AI 활용</div><ul class="wk-pts"><li>Higgsfield 이미지·영상 생성 기초</li><li>텍스트·이미지 프롬프트로 AI 영상 제작</li><li>스타일 커스터마이징 & 고퀄리티 출력</li></ul></div><div class="wk"><div class="wk-num">WEEK 11–12</div><div class="wk-title">MCP + Higgsfield 자동화 파이프라인</div><ul class="wk-pts"><li>Claude → MCP → Higgsfield 연결 구성</li><li>기획 → AI 영상 생성 → 납품 자동화 흐름</li><li>에러 처리 & 파이프라인 최적화</li></ul></div><div class="wk"><div class="wk-num">WEEK 13–16</div><div class="wk-title">나만의 AI 에이전트 완성</div><ul class="wk-pts"><li>개인 비즈니스 맞춤 에이전트 설계</li><li>완성 에이전트 실제 작동 시연</li><li>AI 에이전트 운영 및 유지보수</li></ul></div></div>
 </div>
 
 <div class="cta-band">
@@ -186,7 +184,6 @@ footer{background:#050505;border-top:1px solid var(--border);padding:48px 40px;}
     </div>
   </div>
 </div>
-
 </div>
 <footer>
   <div class="ft-inner">
@@ -206,6 +203,8 @@ footer{background:#050505;border-top:1px solid var(--border);padding:48px 40px;}
         <li><a href="./course-startup.html">창업 포트폴리오 과정</a></li>
         <li><a href="./course-video.html">영상·영화 촬영과정</a></li>
         <li><a href="./course-ai.html">AI 사진·영상 과정</a></li>
+        <li><a href="./course-ai.html">생성형 AI 과정</a></li>
+        <li><a href="./course-agent.html">AI 에이전트 과정</a></li>
         <li><a href="./course-private.html">1:1 개인 레슨</a></li>
       </ul>
     </div>

@@ -101,6 +101,23 @@ footer{background:#050505;border-top:1px solid var(--border);padding:48px 40px;}
 @media(max-width:600px){.course-body{padding:56px 20px;}}
 
 </style>
+<style>
+/* ── 상세 커리큘럼 주차 그리드 ── */
+.detail-sec{max-width:1100px;margin:0 auto;padding:0 40px 80px;}
+.detail-tag{font-size:11px;font-weight:700;letter-spacing:.22em;color:var(--cyan);text-transform:uppercase;margin-bottom:10px;}
+.detail-h{font-size:clamp(20px,2.5vw,28px);font-weight:900;letter-spacing:-.02em;margin-bottom:24px;}
+.phase-label{font-size:11px;font-weight:700;letter-spacing:.18em;color:var(--t3);text-transform:uppercase;
+  padding:8px 0;border-bottom:1px solid var(--border);margin:32px 0 16px;}
+.phase-label:first-of-type{margin-top:0;}
+.wk-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:10px;}
+.wk{background:var(--s2);border:1px solid var(--border);border-radius:var(--r);padding:16px 18px;}
+.wk-num{font-size:10px;font-weight:800;letter-spacing:.16em;color:var(--cyan);margin-bottom:6px;}
+.wk-title{font-size:14px;font-weight:700;color:var(--t1);margin-bottom:8px;line-height:1.4;}
+.wk-pts{list-style:none;display:flex;flex-direction:column;gap:4px;}
+.wk-pts li{font-size:12px;color:var(--t2);padding-left:12px;position:relative;line-height:1.6;}
+.wk-pts li::before{content:'·';position:absolute;left:0;color:var(--cyan);font-weight:900;}
+@media(max-width:600px){.detail-sec{padding:0 20px 56px;}}
+</style>
 </head>
 <body>
 <nav class="gnav">
@@ -139,27 +156,22 @@ footer{background:#050505;border-top:1px solid var(--border);padding:48px 40px;}
   </div>
 </div>
 
-<div class="course-body">
-  <div>
-    <p class="sec-tag">Curriculum</p>
-    <h2 class="sec-title">커리큘럼</h2>
-    <ul class="curr-list"><li>쇼핑몰 제품 촬영 풀 셋업 — 장비·배경·조명</li><li>스마트스토어·쿠팡·무신사 납품 기준 이해</li><li>음식·의류·소품 카테고리별 촬영 노하우</li><li>단가 산정·견적서 작성·클라이언트 커뮤니케이션</li><li>1인 스튜디오 운영 전략</li><li>실제 클라이언트 작업 시뮬레이션</li></ul>
+<div style="max-width:1100px;margin:0 auto;padding:56px 40px 40px;display:grid;grid-template-columns:1fr 340px;gap:40px;align-items:start;"> <div style="display:contents;">
+  <div class="info-card" style="margin-bottom:20px;">
+    <p class="info-card-title">과정 정보</p>
+    <div class="info-row"><span>수강 기간</span><span>2개월</span></div><div class="info-row"><span>주 수업 횟수</span><span>주 2회</span></div><div class="info-row"><span>난이도</span><span>전 레벨</span></div><div class="info-row"><span>수업 방식</span><span>1:1 맞춤 강의</span></div><div class="info-row"><span>장소</span><span>강남구 성창빌딩 2층</span></div><div class="info-row"><span>총 수업</span><span>약 16~24회</span></div>
   </div>
-  <div>
-    <div class="info-card">
-      <p class="info-card-title">과정 정보</p>
-      <div class="info-row"><span>수강 기간</span><span>2개월</span></div>
-      <div class="info-row"><span>주 수업 횟수</span><span>주 2회</span></div>
-      <div class="info-row"><span>난이도</span><span>전 레벨</span></div>
-      <div class="info-row"><span>수업 방식</span><span>1:1 맞춤 강의</span></div>
-      <div class="info-row"><span>장소</span><span>강남구 성창빌딩 2층</span></div>
-    </div>
-    <div class="info-card">
-      <p class="info-card-title">이런 분께 추천합니다</p>
-      <ul class="for-list"><li>사진으로 부업·창업을 원하는 분</li><li>쇼핑몰을 운영하며 직접 촬영하고 싶은 분</li><li>프리랜서 포토그래퍼로 독립하고 싶은 분</li><li>브랜드 콘텐츠 제작자로 성장하고 싶은 분</li></ul>
-    </div>
-    <a href="./contact.html?course=course-startup" class="btn-primary" style="display:block;text-align:center;margin-top:4px;">1:1 상담신청</a>
+  <div class="info-card">
+    <p class="info-card-title">이런 분께 추천합니다</p>
+    <ul class="for-list"><li>사진으로 부업·창업을 원하는 분</li><li>쇼핑몰을 운영하며 직접 촬영하고 싶은 분</li><li>프리랜서 포토그래퍼로 독립하고 싶은 분</li><li>브랜드 콘텐츠 제작자로 성장하고 싶은 분</li></ul>
   </div>
+  <a href="./contact.html?course=course-startup" class="btn-primary" style="display:block;text-align:center;margin-top:14px;">1:1 상담신청</a>
+</div>
+
+<div class="detail-sec">
+  <p class="detail-tag">Weekly Curriculum</p>
+  <h2 class="detail-h">주차별 커리큘럼</h2>
+  <div class="phase-label">PART 1 — 홈스튜디오 & 촬영</div><div class="wk-grid"><div class="wk"><div class="wk-num">WEEK 1–2</div><div class="wk-title">쇼핑몰 촬영 환경 구축</div><ul class="wk-pts"><li>저예산 홈스튜디오 세팅</li><li>자연광·LED 조명 활용법</li><li>배경지·배경판 선택 기준</li></ul></div><div class="wk"><div class="wk-num">WEEK 3–4</div><div class="wk-title">카테고리별 촬영 기법</div><ul class="wk-pts"><li>의류·패션 아이템 촬영</li><li>식품·식음료 촬영</li><li>소품·인테리어 촬영</li></ul></div></div><div class="phase-label">PART 2 — 플랫폼 & 콘텐츠</div><div class="wk-grid"><div class="wk"><div class="wk-num">WEEK 5–6</div><div class="wk-title">플랫폼별 납품 기준</div><ul class="wk-pts"><li>스마트스토어·쿠팡·무신사 이미지 규격</li><li>대표·상세·썸네일 이미지 차이</li><li>파일 최적화 & 업로드 세팅</li></ul></div><div class="wk"><div class="wk-num">WEEK 7–8</div><div class="wk-title">브랜드 SNS 콘텐츠 제작</div><ul class="wk-pts"><li>SNS 콘텐츠 기획 (피드·릴스·쇼츠)</li><li>브랜드 무드·컬러 통일성</li><li>Lightroom 일괄 보정으로 톤 유지</li></ul></div></div><div class="phase-label">PART 3 — 수주 & 운영 전략</div><div class="wk-grid"><div class="wk"><div class="wk-num">WEEK 9–10</div><div class="wk-title">클라이언트 수주 전략</div><ul class="wk-pts"><li>단가 산정·견적서 작성</li><li>포트폴리오 사이트 구성</li><li>첫 클라이언트 미팅 시뮬레이션</li></ul></div><div class="wk"><div class="wk-num">WEEK 11–12</div><div class="wk-title">1인 스튜디오 운영</div><ul class="wk-pts"><li>SNS 채널 운영 전략</li><li>반복 수주 시스템 구축</li><li>실제 클라이언트 프로젝트 실습</li></ul></div></div>
 </div>
 
 <div class="cta-band">

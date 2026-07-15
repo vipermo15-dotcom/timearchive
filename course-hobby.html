@@ -101,6 +101,23 @@ footer{background:#050505;border-top:1px solid var(--border);padding:48px 40px;}
 @media(max-width:600px){.course-body{padding:56px 20px;}}
 
 </style>
+<style>
+/* ── 상세 커리큘럼 주차 그리드 ── */
+.detail-sec{max-width:1100px;margin:0 auto;padding:0 40px 80px;}
+.detail-tag{font-size:11px;font-weight:700;letter-spacing:.22em;color:var(--cyan);text-transform:uppercase;margin-bottom:10px;}
+.detail-h{font-size:clamp(20px,2.5vw,28px);font-weight:900;letter-spacing:-.02em;margin-bottom:24px;}
+.phase-label{font-size:11px;font-weight:700;letter-spacing:.18em;color:var(--t3);text-transform:uppercase;
+  padding:8px 0;border-bottom:1px solid var(--border);margin:32px 0 16px;}
+.phase-label:first-of-type{margin-top:0;}
+.wk-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:10px;}
+.wk{background:var(--s2);border:1px solid var(--border);border-radius:var(--r);padding:16px 18px;}
+.wk-num{font-size:10px;font-weight:800;letter-spacing:.16em;color:var(--cyan);margin-bottom:6px;}
+.wk-title{font-size:14px;font-weight:700;color:var(--t1);margin-bottom:8px;line-height:1.4;}
+.wk-pts{list-style:none;display:flex;flex-direction:column;gap:4px;}
+.wk-pts li{font-size:12px;color:var(--t2);padding-left:12px;position:relative;line-height:1.6;}
+.wk-pts li::before{content:'·';position:absolute;left:0;color:var(--cyan);font-weight:900;}
+@media(max-width:600px){.detail-sec{padding:0 20px 56px;}}
+</style>
 </head>
 <body>
 <nav class="gnav">
@@ -139,27 +156,22 @@ footer{background:#050505;border-top:1px solid var(--border);padding:48px 40px;}
   </div>
 </div>
 
-<div class="course-body">
-  <div>
-    <p class="sec-tag">Curriculum</p>
-    <h2 class="sec-title">커리큘럼</h2>
-    <ul class="curr-list"><li>카메라 구조 이해 — 셔터·조리개·ISO 기초</li><li>자연광 활용 인물·정물 촬영</li><li>구도와 빛의 원리 — 눈으로 보는 빛 훈련</li><li>RAW 파일 기초 보정 (Lightroom)</li><li>일상·여행 사진 실전 실습</li><li>첫 번째 작품 완성 & 출력</li></ul>
+<div style="max-width:1100px;margin:0 auto;padding:56px 40px 40px;display:grid;grid-template-columns:1fr 340px;gap:40px;align-items:start;"> <div style="display:contents;">
+  <div class="info-card" style="margin-bottom:20px;">
+    <p class="info-card-title">과정 정보</p>
+    <div class="info-row"><span>수강 기간</span><span>2개월</span></div><div class="info-row"><span>주 수업 횟수</span><span>주 1~2회</span></div><div class="info-row"><span>난이도</span><span>입문 — 초급</span></div><div class="info-row"><span>수업 방식</span><span>1:1 맞춤 강의</span></div><div class="info-row"><span>장소</span><span>강남구 성창빌딩 2층</span></div><div class="info-row"><span>총 수업</span><span>약 8~16회</span></div>
   </div>
-  <div>
-    <div class="info-card">
-      <p class="info-card-title">과정 정보</p>
-      <div class="info-row"><span>수강 기간</span><span>2개월</span></div>
-      <div class="info-row"><span>주 수업 횟수</span><span>주 1~2회</span></div>
-      <div class="info-row"><span>난이도</span><span>입문 — 초급</span></div>
-      <div class="info-row"><span>수업 방식</span><span>1:1 맞춤 강의</span></div>
-      <div class="info-row"><span>장소</span><span>강남구 성창빌딩 2층</span></div>
-    </div>
-    <div class="info-card">
-      <p class="info-card-title">이런 분께 추천합니다</p>
-      <ul class="for-list"><li>카메라를 처음 잡아보는 분</li><li>스마트폰에서 카메라로 넘어가고 싶은 분</li><li>취미로 사진을 배우고 싶은 직장인·주부</li><li>자녀·반려동물 사진을 잘 찍고 싶은 분</li></ul>
-    </div>
-    <a href="./contact.html?course=course-hobby" class="btn-primary" style="display:block;text-align:center;margin-top:4px;">1:1 상담신청</a>
+  <div class="info-card">
+    <p class="info-card-title">이런 분께 추천합니다</p>
+    <ul class="for-list"><li>카메라를 처음 잡아보는 분</li><li>스마트폰에서 카메라로 넘어가고 싶은 분</li><li>취미로 사진을 배우고 싶은 직장인·주부</li><li>자녀·반려동물 사진을 잘 찍고 싶은 분</li></ul>
   </div>
+  <a href="./contact.html?course=course-hobby" class="btn-primary" style="display:block;text-align:center;margin-top:14px;">1:1 상담신청</a>
+</div>
+
+<div class="detail-sec">
+  <p class="detail-tag">Weekly Curriculum</p>
+  <h2 class="detail-h">주차별 커리큘럼</h2>
+  <div class="phase-label">PART 1 — 카메라 & 빛 기초</div><div class="wk-grid"><div class="wk"><div class="wk-num">WEEK 1</div><div class="wk-title">카메라 구조 이해</div><ul class="wk-pts"><li>셔터·조리개·ISO 삼각관계</li><li>촬영 모드 비교 (A/S/P/M)</li><li>첫 수동 촬영 실습</li></ul></div><div class="wk"><div class="wk-num">WEEK 2</div><div class="wk-title">빛 읽기 훈련</div><ul class="wk-pts"><li>자연광의 방향·강도·색온도</li><li>골든아워·블루아워 활용</li><li>창가 빛 인물 촬영</li></ul></div><div class="wk"><div class="wk-num">WEEK 3</div><div class="wk-title">구도 원칙</div><ul class="wk-pts"><li>3분할법·황금비율·리딩라인</li><li>여백과 프레임 의도하기</li><li>다양한 앵글 실습</li></ul></div><div class="wk"><div class="wk-num">WEEK 4</div><div class="wk-title">자연광 인물 촬영</div><ul class="wk-pts"><li>배경 흐림 (보케) 만들기</li><li>눈빛·표정·순간 포착</li><li>가족·친구 포트레이트 실습</li></ul></div></div><div class="phase-label">PART 2 — 실전 & 보정</div><div class="wk-grid"><div class="wk"><div class="wk-num">WEEK 5</div><div class="wk-title">정물·일상 사진</div><ul class="wk-pts"><li>집 안 빛으로 정물 촬영</li><li>음식·음료 일상 사진</li><li>SNS용 구도와 색감</li></ul></div><div class="wk"><div class="wk-num">WEEK 6</div><div class="wk-title">RAW 기초 보정</div><ul class="wk-pts"><li>Lightroom 화면 구성 이해</li><li>노출·화이트밸런스·대비 보정</li><li>JPEG vs RAW 비교</li></ul></div><div class="wk"><div class="wk-num">WEEK 7</div><div class="wk-title">여행·거리 사진</div><ul class="wk-pts"><li>거리·풍경 촬영 접근법</li><li>야간·실내 촬영 설정</li><li>스마트폰과 카메라 혼용 전략</li></ul></div><div class="wk"><div class="wk-num">WEEK 8</div><div class="wk-title">첫 번째 작품 완성</div><ul class="wk-pts"><li>최종 보정 & 출력 설정</li><li>작품 선별 기준</li><li>소규모 갤러리 발표</li></ul></div></div>
 </div>
 
 <div class="cta-band">
