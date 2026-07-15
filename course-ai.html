@@ -102,7 +102,6 @@ footer{background:#050505;border-top:1px solid var(--border);padding:48px 40px;}
 
 </style>
 <style>
-/* ── 상세 커리큘럼 주차 그리드 ── */
 .detail-sec{max-width:1100px;margin:0 auto;padding:0 40px 80px;}
 .detail-tag{font-size:11px;font-weight:700;letter-spacing:.22em;color:var(--cyan);text-transform:uppercase;margin-bottom:10px;}
 .detail-h{font-size:clamp(20px,2.5vw,28px);font-weight:900;letter-spacing:-.02em;margin-bottom:24px;}
@@ -116,6 +115,9 @@ footer{background:#050505;border-top:1px solid var(--border);padding:48px 40px;}
 .wk-pts{list-style:none;display:flex;flex-direction:column;gap:4px;}
 .wk-pts li{font-size:12px;color:var(--t2);padding-left:12px;position:relative;line-height:1.6;}
 .wk-pts li::before{content:'·';position:absolute;left:0;color:var(--cyan);font-weight:900;}
+.tool-chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px;}
+.tool-chip{font-size:11px;font-weight:600;padding:3px 10px;border-radius:999px;
+  background:rgba(0,197,230,.12);border:1px solid rgba(0,197,230,.3);color:var(--cyan);}
 @media(max-width:600px){.detail-sec{padding:0 20px 56px;}}
 </style>
 </head>
@@ -147,31 +149,35 @@ footer{background:#050505;border-top:1px solid var(--border);padding:48px 40px;}
     <span class="badge badge-cyan">신규 과정</span>
     <p class="ph-tag">Generative AI</p>
     <h1 class="ph-title">생성형 AI 과정</h1>
-    <p class="ph-sub">ChatGPT·Gemini·Claude·Midjourney·파이퍼플라이를 활용해 사진·영상 결과물을 실제로 제작하는 실무 중심 과정.</p>
+    <p class="ph-sub">ChatGPT·Gemini·Claude·Midjourney·Firefly·Runway·Higgsfield 등<br>최신 AI 도구로 사진·영상 결과물을 실제로 제작하는 실무 중심 과정.</p>
     <div class="ph-meta">
-      <div class="ph-meta-item"><div class="ml">기간</div><div class="mv">2개월</div></div>
+      <div class="ph-meta-item"><div class="ml">기간</div><div class="mv">2~3개월</div></div>
       <div class="ph-meta-item"><div class="ml">횟수</div><div class="mv">주 2회</div></div>
       <div class="ph-meta-item"><div class="ml">레벨</div><div class="mv">전 레벨</div></div>
     </div>
   </div>
 </div>
 
-<div style="max-width:1100px;margin:0 auto;padding:56px 40px 40px;display:grid;grid-template-columns:1fr 340px;gap:40px;align-items:start;"> <div style="display:contents;">
-  <div class="info-card" style="margin-bottom:20px;">
-    <p class="info-card-title">과정 정보</p>
-    <div class="info-row"><span>수강 기간</span><span>2개월</span></div><div class="info-row"><span>주 수업 횟수</span><span>주 2회</span></div><div class="info-row"><span>난이도</span><span>전 레벨</span></div><div class="info-row"><span>수업 방식</span><span>1:1 맞춤 강의</span></div><div class="info-row"><span>사용 툴</span><span>ChatGPT · Gemini · Claude · Midjourney · 파이퍼플라이</span></div><div class="info-row"><span>결과물</span><span>사진·영상 AI 포트폴리오</span></div>
+<div style="max-width:1100px;margin:0 auto;padding:56px 40px 40px;display:grid;grid-template-columns:1fr 340px;gap:40px;align-items:start;">
+  <div>
+    <div class="info-card">
+      <p class="info-card-title">과정 정보</p>
+      <div class="info-row"><span>수강 기간</span><span>2~3개월</span></div><div class="info-row"><span>주 수업 횟수</span><span>주 2회</span></div><div class="info-row"><span>난이도</span><span>전 레벨</span></div><div class="info-row"><span>수업 방식</span><span>1:1 맞춤 강의</span></div><div class="info-row"><span>사용 툴</span><span>ChatGPT · Gemini · Claude · Midjourney · Firefly · Photoshop AI · Runway · Higgsfield 外</span></div><div class="info-row"><span>결과물</span><span>AI 사진 포트폴리오 + AI 광고 영상 30초</span></div>
+    </div>
   </div>
-  <div class="info-card">
-    <p class="info-card-title">이런 분께 추천합니다</p>
-    <ul class="for-list"><li>AI 도구로 창작 속도를 높이고 싶은 포토그래퍼</li><li>광고·SNS 콘텐츠를 혼자 제작하고 싶은 분</li><li>AI 영상 생성으로 새로운 비즈니스를 시작하려는 분</li><li>디지털 창작 워크플로우를 현대화하고 싶은 분</li></ul>
+  <div>
+    <div class="info-card">
+      <p class="info-card-title">이런 분께 추천합니다</p>
+      <ul class="for-list"><li>AI 도구로 창작 속도와 퀄리티를 높이고 싶은 포토그래퍼</li><li>광고·SNS 콘텐츠를 혼자 제작하고 싶은 1인 크리에이터</li><li>AI 영상 생성으로 새로운 비즈니스를 시작하려는 분</li><li>사진 실력을 AI와 결합해 차별화하고 싶은 분</li></ul>
+    </div>
+    <a href="./contact.html?course=course-ai" class="btn-primary" style="display:block;text-align:center;margin-top:14px;">1:1 상담신청</a>
   </div>
-  <a href="./contact.html?course=course-ai" class="btn-primary" style="display:block;text-align:center;margin-top:14px;">1:1 상담신청</a>
 </div>
 
 <div class="detail-sec">
   <p class="detail-tag">Weekly Curriculum</p>
   <h2 class="detail-h">주차별 커리큘럼</h2>
-  <div class="phase-label">PART 1 — AI 텍스트·기획 도구</div><div class="wk-grid"><div class="wk"><div class="wk-num">WEEK 1–2</div><div class="wk-title">ChatGPT 사진·영상 기획 활용</div><ul class="wk-pts"><li>촬영 컨셉·무드보드 자동 기획</li><li>광고 카피·SNS 캡션 생성</li><li>촬영 체크리스트·타임라인 자동화</li></ul></div><div class="wk"><div class="wk-num">WEEK 3–4</div><div class="wk-title">Google Gemini 활용</div><ul class="wk-pts"><li>이미지 분석 & 레퍼런스 리서치</li><li>다국어 콘텐츠 & SEO 키워드 생성</li><li>동영상 스크립트 초안 작성</li></ul></div><div class="wk"><div class="wk-num">WEEK 5–6</div><div class="wk-title">Claude 창작 기획 & 자동화</div><ul class="wk-pts"><li>브랜드 가이드·시나리오 작성</li><li>보정 지시서·클라이언트 제안서 자동화</li><li>롱폼 콘텐츠 기획 워크플로우</li></ul></div></div><div class="phase-label">PART 2 — AI 이미지·영상 생성</div><div class="wk-grid"><div class="wk"><div class="wk-num">WEEK 7–8</div><div class="wk-title">Midjourney 실무</div><ul class="wk-pts"><li>사진 레퍼런스 스타일 이미지 생성</li><li>광고 무드보드 & 컨셉 아트 제작</li><li>촬영 전 비주얼 시뮬레이션 활용</li></ul></div><div class="wk"><div class="wk-num">WEEK 9–10</div><div class="wk-title">파이퍼플라이 AI 영상 생성</div><ul class="wk-pts"><li>텍스트→영상 생성 프롬프트 전략</li><li>이미지→영상 변환 (사진을 영상으로)</li><li>AI 영상 편집·합성 실습</li></ul></div></div><div class="phase-label">PART 3 — 결과물 프로젝트</div><div class="wk-grid"><div class="wk"><div class="wk-num">WEEK 11–12</div><div class="wk-title">사진 결과물 프로젝트</div><ul class="wk-pts"><li>AI 이미지로 광고 콘텐츠 완성</li><li>SNS 피드·썸네일·배너 제작</li><li>클라이언트 납품용 결과물 마무리</li></ul></div><div class="wk"><div class="wk-num">WEEK 13–16</div><div class="wk-title">영상 결과물 프로젝트</div><ul class="wk-pts"><li>AI 영상 생성 → 편집 → 완성 전 과정</li><li>유튜브·릴스·광고 포맷별 제작</li><li>AI 포트폴리오 완성 발표</li></ul></div></div>
+  <div class="phase-label">PART 1 — AI 기획·텍스트 도구</div><div class="wk-grid"><div class="wk"><div class="wk-num">WEEK 1–2</div><div class="wk-title">ChatGPT 사진·영상 기획 활용</div><ul class="wk-pts"><li>촬영 컨셉·무드보드 자동 기획</li><li>광고 카피·SNS 캡션 생성</li><li>촬영 체크리스트·타임라인 자동화</li></ul><div class="tool-chips"><span class="tool-chip">ChatGPT</span></div></div><div class="wk"><div class="wk-num">WEEK 3–4</div><div class="wk-title">Google Gemini & Claude 활용</div><ul class="wk-pts"><li>Gemini — 이미지 분석·레퍼런스 리서치·다국어 콘텐츠</li><li>Claude — 브랜드 가이드·시나리오·제안서 작성</li><li>AI 도구별 특성 비교 & 실무 활용법</li></ul><div class="tool-chips"><span class="tool-chip">Gemini</span><span class="tool-chip">Claude</span></div></div></div><div class="phase-label">PART 2 — AI 이미지 생성</div><div class="wk-grid"><div class="wk"><div class="wk-num">WEEK 5–6</div><div class="wk-title">Midjourney & Adobe Firefly — AI 이미지 생성</div><ul class="wk-pts"><li>AI 이미지 생성 기초 & 프롬프트 작성법</li><li>사진 레퍼런스 스타일 무드보드 제작</li><li>Firefly — 브러시·생성형 채우기 실무</li></ul><div class="tool-chips"><span class="tool-chip">Midjourney</span><span class="tool-chip">Adobe Firefly</span></div></div><div class="wk"><div class="wk-num">WEEK 7–8</div><div class="wk-title">Photoshop AI — 실사 합성</div><ul class="wk-pts"><li>Generative Fill로 실사 사진에 AI 배경·오브젝트 합성</li><li>누끼 자동화 & 배경 생성</li><li>광고 합성 이미지 완성 실습</li></ul><div class="tool-chips"><span class="tool-chip">Photoshop AI</span></div></div><div class="wk"><div class="wk-num">WEEK 9–10</div><div class="wk-title">Lightroom AI & Topaz — AI 자동 보정</div><ul class="wk-pts"><li>Lightroom AI 마스킹·색보정·노이즈 제거</li><li>Topaz Photo AI — 업스케일·디테일 강화</li><li>AI 보정 프리셋 제작 & 일괄 적용</li></ul><div class="tool-chips"><span class="tool-chip">Lightroom AI</span><span class="tool-chip">Topaz</span></div></div></div><div class="phase-label">PART 3 — AI 영상 생성</div><div class="wk-grid"><div class="wk"><div class="wk-num">WEEK 11–12</div><div class="wk-title">Runway · Pika · 파이퍼플라이 — AI 영상 생성</div><ul class="wk-pts"><li>텍스트→영상 생성 프롬프트 전략</li><li>이미지→영상 변환 (사진을 움직이는 영상으로)</li><li>AI 영상 스타일·길이·해상도 최적화</li></ul><div class="tool-chips"><span class="tool-chip">Runway</span><span class="tool-chip">Pika</span><span class="tool-chip">파이퍼플라이</span></div></div><div class="wk"><div class="wk-num">WEEK 13–14</div><div class="wk-title">ElevenLabs & Higgsfield · Kling — 심화</div><ul class="wk-pts"><li>ElevenLabs AI 보이스오버 + Adobe 자막 자동 생성</li><li>Higgsfield·Kling — AI 모션그래픽·광고영상 합성</li><li>30초 AI 광고 영상 제작 실습</li></ul><div class="tool-chips"><span class="tool-chip">ElevenLabs</span><span class="tool-chip">Higgsfield</span><span class="tool-chip">Kling</span></div></div></div><div class="phase-label">PART 4 — 결과물 프로젝트</div><div class="wk-grid"><div class="wk"><div class="wk-num">WEEK 15–16</div><div class="wk-title">AI 사진 포트폴리오 완성</div><ul class="wk-pts"><li>AI 보조 광고 사진 포트폴리오 1세트 완성</li><li>SNS 피드·썸네일·배너 디자인</li><li>클라이언트 납품용 파일 세팅</li></ul><div class="tool-chips"><span class="tool-chip">Midjourney</span><span class="tool-chip">Photoshop AI</span><span class="tool-chip">Lightroom AI</span></div></div><div class="wk"><div class="wk-num">WEEK 17–18</div><div class="wk-title">AI 영상 포트폴리오 완성</div><ul class="wk-pts"><li>AI 광고 영상 30초 완성 (실제 제품 활용)</li><li>유튜브·릴스·광고 포맷별 최종 편집</li><li>AI 포트폴리오 발표 & 피드백</li></ul><div class="tool-chips"><span class="tool-chip">Runway</span><span class="tool-chip">Higgsfield</span><span class="tool-chip">ElevenLabs</span></div></div></div>
 </div>
 
 <div class="cta-band">
