@@ -304,6 +304,8 @@ img{display:block;max-width:100%;}
   padding:4px 10px;border-radius:var(--rp);
 }
 .course-badge.gov{background:rgba(255,255,255,.9);color:#000;}
+.course-badge.new{background:rgba(0,197,230,.2);color:var(--cyan);border:1px solid rgba(0,197,230,.4);}
+a.course-card{display:block;color:inherit;text-decoration:none;}
 
 .course-body{padding:20px;}
 .course-name{font-size:16px;font-weight:700;color:var(--w);margin-bottom:6px;}
@@ -808,7 +810,7 @@ footer{
     <a href="./courses.html" class="section-more">전체 과정 보기 →</a>
   </div>
   <div class="courses-grid">
-    <div class="course-card">
+    <a href="./course-commercial.html" class="course-card">
       <div class="course-thumb">
         <img src="assets/images/course-commercial.jpg" alt="상업사진 심화과정" class="course-thumb-img" style="width:100%;height:100%;object-fit:cover;display:block;" loading="lazy">
         <span class="course-badge">인기</span>
@@ -821,8 +823,8 @@ footer{
           <div class="course-arrow">→</div>
         </div>
       </div>
-    </div>
-    <div class="course-card">
+    </a>
+    <a href="./course-hobby.html" class="course-card">
       <div class="course-thumb">
         <img src="https://timearchive.co.kr/wp-content/uploads/2021/07/gallery10.jpg" alt="취미사진 입문과정" class="course-thumb-img" style="width:100%;height:100%;object-fit:cover;display:block;" loading="lazy">
         <span class="course-badge gov">국비지원</span>
@@ -835,8 +837,8 @@ footer{
           <div class="course-arrow">→</div>
         </div>
       </div>
-    </div>
-    <div class="course-card">
+    </a>
+    <a href="./course-startup.html" class="course-card">
       <div class="course-thumb">
         <img src="https://timearchive.co.kr/wp-content/uploads/2021/07/gallery6.jpg" alt="창업 포트폴리오 과정" class="course-thumb-img" style="width:100%;height:100%;object-fit:cover;display:block;" loading="lazy">
         <span class="course-badge">인기</span>
@@ -849,48 +851,62 @@ footer{
           <div class="course-arrow">→</div>
         </div>
       </div>
-    </div>
-    <div class="course-card">
+    </a>
+    <a href="./course-video.html" class="course-card">
       <div class="course-thumb">
-        <img src="https://timearchive.co.kr/wp-content/uploads/2021/07/gallery7.jpg" alt="영상·영화 촬영과정" class="course-thumb-img" style="width:100%;height:100%;object-fit:cover;display:block;" loading="lazy">
+        <img src="https://timearchive.co.kr/wp-content/uploads/2021/07/gallery7.jpg" alt="영상 촬영·편집 과정" class="course-thumb-img" style="width:100%;height:100%;object-fit:cover;display:block;" loading="lazy">
         <span class="course-badge gov">국비지원</span>
       </div>
       <div class="course-body">
-        <div class="course-name">영상·영화 촬영과정</div>
-        <div class="course-desc">사진에서 영상으로. 시네마틱 영상 제작 입문과 심화.</div>
+        <div class="course-name">영상 촬영·편집 과정</div>
+        <div class="course-desc">타임랩스·하이퍼랩스·제품 영상 촬영 + Premiere·After Effects.</div>
         <div class="course-meta">
           <span class="course-level">BEGINNER — INTER</span>
           <div class="course-arrow">→</div>
         </div>
       </div>
-    </div>
-    <div class="course-card">
+    </a>
+    <a href="./course-ai.html" class="course-card">
       <div class="course-thumb">
-        <img src="https://timearchive.co.kr/wp-content/uploads/2021/07/gallery8.jpg" alt="AI 사진·영상 과정" class="course-thumb-img" style="width:100%;height:100%;object-fit:cover;display:block;" loading="lazy">
+        <img src="https://timearchive.co.kr/wp-content/uploads/2021/07/gallery8.jpg" alt="생성형 AI 과정" class="course-thumb-img" style="width:100%;height:100%;object-fit:cover;display:block;" loading="lazy">
+        <span class="course-badge new">신규</span>
       </div>
       <div class="course-body">
-        <div class="course-name">AI 사진·영상 과정</div>
-        <div class="course-desc">생성AI와 촬영 기술을 결합한 차세대 크리에이터 과정.</div>
+        <div class="course-name">생성형 AI 과정</div>
+        <div class="course-desc">ChatGPT·Gemini·Claude·Midjourney·파이퍼플라이로 사진·영상 제작.</div>
         <div class="course-meta">
           <span class="course-level">ALL LEVELS</span>
           <div class="course-arrow">→</div>
         </div>
       </div>
-    </div>
-    <div class="course-card">
+    </a>
+    <a href="./course-agent.html" class="course-card">
+      <div class="course-thumb">
+        <img src="https://timearchive.co.kr/wp-content/uploads/2021/07/gallery5.jpg" alt="AI 에이전트 과정" class="course-thumb-img" style="width:100%;height:100%;object-fit:cover;display:block;" loading="lazy">
+        <span class="course-badge new">신규</span>
+      </div>
+      <div class="course-body">
+        <div class="course-name">AI 에이전트 과정</div>
+        <div class="course-desc">MCP·Claude·힉스필드로 AI 자동화 창작 워크플로우 구축.</div>
+        <div class="course-meta">
+          <span class="course-level">BEGINNER — INTER</span>
+          <div class="course-arrow">→</div>
+        </div>
+      </div>
+    </a>
+    <a href="./course-private.html" class="course-card">
       <div class="course-thumb">
         <img src="https://timearchive.co.kr/wp-content/uploads/2021/07/gallery9.jpg" alt="1:1 개인 레슨" class="course-thumb-img" style="width:100%;height:100%;object-fit:cover;display:block;" loading="lazy">
-        <span class="course-badge gov">국비지원</span>
       </div>
       <div class="course-body">
         <div class="course-name">1:1 개인 레슨</div>
         <div class="course-desc">원장 박희수와 1:1 집중 레슨. 일정·수준 완전 맞춤.</div>
         <div class="course-meta">
-          <span class="course-level">모든 레벨</span>
+          <span class="course-level">ALL LEVELS</span>
           <div class="course-arrow">→</div>
         </div>
       </div>
-    </div>
+    </a>
   </div>
 </section>
 
@@ -1081,12 +1097,13 @@ footer{
     <div>
       <p class="footer-links-title">수강 과정</p>
       <ul class="footer-links">
-        <li><a href="./courses.html#commercial">상업사진 심화과정</a></li>
-        <li><a href="./courses.html#hobby">취미사진 입문과정</a></li>
-        <li><a href="./courses.html#startup">창업 포트폴리오 과정</a></li>
-        <li><a href="./courses.html#video">영상·영화 촬영과정</a></li>
-        <li><a href="./courses.html#ai">AI 사진·영상 과정</a></li>
-        <li><a href="./courses.html#private">1:1 개인 레슨</a></li>
+        <li><a href="./course-commercial.html">상업사진 심화과정</a></li>
+        <li><a href="./course-hobby.html">취미사진 입문과정</a></li>
+        <li><a href="./course-startup.html">창업 포트폴리오 과정</a></li>
+        <li><a href="./course-video.html">영상 촬영·편집 과정</a></li>
+        <li><a href="./course-ai.html">생성형 AI 과정</a></li>
+        <li><a href="./course-agent.html">AI 에이전트 과정</a></li>
+        <li><a href="./course-private.html">1:1 개인 레슨</a></li>
       </ul>
     </div>
     <div>
