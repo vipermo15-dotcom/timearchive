@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Midjourney 계정 설정 & 기초 프롬프트 — 타임아카이브 교재</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:'Pretendard',-apple-system,sans-serif;background:#f8f7f4;color:#1a1a1a;line-height:1.7;}
+a{text-decoration:none;color:inherit;}
+.topbar{background:#1a1a1a;color:#fff;padding:14px 32px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:10;}
+.topbar-left{display:flex;align-items:center;gap:16px;}
+.back-btn{font-size:12px;color:rgba(255,255,255,.6);padding:5px 12px;border:1px solid rgba(255,255,255,.2);border-radius:999px;transition:all .2s;}
+.back-btn:hover{color:#fff;border-color:rgba(255,255,255,.5);}
+.topbar-course{font-size:12px;color:rgba(255,255,255,.5);}
+.topbar-session{font-size:13px;font-weight:700;}
+.nav-btns{display:flex;gap:8px;}
+.nav-btn{font-size:12px;padding:5px 14px;border:1px solid rgba(255,255,255,.2);border-radius:999px;color:rgba(255,255,255,.7);transition:all .2s;}
+.nav-btn:hover{background:rgba(255,255,255,.1);color:#fff;}
+.hero{background:#fff;border-bottom:2px solid #7c3aed;padding:40px 48px;}
+.session-tag{font-size:11px;font-weight:700;letter-spacing:.2em;color:#7c3aed;text-transform:uppercase;margin-bottom:10px;}
+.session-title{font-size:clamp(24px,4vw,36px);font-weight:900;letter-spacing:-.02em;margin-bottom:8px;}
+.session-desc{font-size:15px;color:#555;max-width:640px;}
+.meta-row{display:flex;gap:24px;margin-top:20px;flex-wrap:wrap;}
+.meta-item{display:flex;flex-direction:column;gap:2px;}
+.meta-label{font-size:10px;letter-spacing:.14em;color:#999;font-weight:600;text-transform:uppercase;}
+.meta-val{font-size:14px;font-weight:700;color:#1a1a1a;}
+.body-wrap{max-width:820px;margin:0 auto;padding:48px 32px 80px;}
+.block{margin-bottom:36px;}
+.block-title{font-size:13px;font-weight:700;letter-spacing:.18em;color:#7c3aed;text-transform:uppercase;margin-bottom:14px;padding-bottom:8px;border-bottom:2px solid #ede9fe;}
+.obj-list{list-style:none;display:flex;flex-direction:column;gap:8px;}
+.obj-list li{font-size:15px;padding-left:22px;position:relative;color:#333;}
+.obj-list li::before{content:"✓";position:absolute;left:0;color:#7c3aed;font-weight:700;}
+.timeline{display:flex;flex-direction:column;gap:4px;}
+.tl-item{display:flex;gap:16px;align-items:baseline;font-size:14px;padding:8px 14px;border-radius:6px;}
+.tl-item:nth-child(odd){background:#f5f3ff;}
+.tl-time{min-width:52px;font-weight:700;color:#7c3aed;font-size:13px;}
+.tl-text{color:#444;}
+.script-block{background:#fff;border-radius:10px;border:1px solid #e8e8e8;overflow:hidden;margin-bottom:16px;}
+.script-phase{background:#7c3aed;color:#fff;padding:10px 20px;font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;display:flex;align-items:center;gap:8px;}
+.script-phase .ph-time{opacity:.7;font-weight:400;}
+.script-body{padding:20px 24px;}
+.say{background:#f5f3ff;border-left:3px solid #7c3aed;padding:14px 18px;border-radius:0 8px 8px 0;font-size:15px;color:#2d1b69;line-height:1.8;margin:10px 0;font-style:italic;}
+.say::before{content:'"';font-size:20px;color:#7c3aed;font-style:normal;margin-right:4px;}
+.say::after{content:'"';font-size:20px;color:#7c3aed;font-style:normal;margin-left:4px;}
+.tip{background:#fefce8;border:1px solid #fde68a;border-radius:8px;padding:12px 16px;font-size:13px;color:#78350f;margin:10px 0;}
+.tip::before{content:"💡 강사 TIP  ";font-weight:700;}
+.action{background:#f0fdf4;border:1px solid #bbf7d0;border-radius:8px;padding:12px 16px;font-size:13px;color:#14532d;margin:10px 0;}
+.action::before{content:"▶ 실습  ";font-weight:700;}
+.warn{background:#fff7ed;border:1px solid #fed7aa;border-radius:8px;padding:12px 16px;font-size:13px;color:#9a3412;margin:10px 0;}
+.warn::before{content:"⚠ 주의  ";font-weight:700;}
+.note{font-size:14px;color:#555;margin:8px 0;line-height:1.8;}
+.step-list{list-style:none;counter-reset:step;display:flex;flex-direction:column;gap:8px;margin:10px 0;}
+.step-list li{counter-increment:step;font-size:14px;color:#333;padding:10px 14px 10px 44px;position:relative;background:#fafafa;border-radius:6px;}
+.step-list li::before{content:counter(step);position:absolute;left:14px;top:10px;width:22px;height:22px;background:#7c3aed;color:#fff;border-radius:50%;font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center;}
+.param-table{width:100%;border-collapse:collapse;margin:12px 0;font-size:13px;}
+.param-table th{background:#1a1a1a;color:#fff;padding:8px 14px;text-align:left;font-size:11px;letter-spacing:.1em;}
+.param-table td{padding:10px 14px;border-bottom:1px solid #f0f0f0;vertical-align:top;}
+.param-table tr:nth-child(even) td{background:#fafafa;}
+.param-table td:first-child{font-family:monospace;font-size:12px;font-weight:700;color:#7c3aed;white-space:nowrap;}
+.prompt-box{background:#1a1a1a;border-radius:8px;padding:16px 20px;font-family:monospace;font-size:13px;color:#e0e0e0;line-height:1.8;margin:10px 0;}
+.prompt-box .pk{color:#a78bfa;}
+.prompt-box .pv{color:#86efac;}
+.task-card{background:#1a1a1a;color:#fff;border-radius:10px;padding:24px;margin-bottom:12px;}
+.task-title{font-size:16px;font-weight:800;margin-bottom:10px;}
+.task-desc{font-size:14px;color:rgba(255,255,255,.7);line-height:1.8;}
+.task-list{list-style:none;margin-top:12px;display:flex;flex-direction:column;gap:6px;}
+.task-list li{font-size:13px;color:rgba(255,255,255,.8);padding-left:18px;position:relative;}
+.task-list li::before{content:"→";position:absolute;left:0;color:#a78bfa;}
+.divider{height:1px;background:#e8e8e8;margin:32px 0;}
+.compare-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:10px 0;}
+.compare-card{border-radius:8px;padding:14px 16px;font-size:13px;line-height:1.8;}
+.compare-bad{background:#fef2f2;border:1px solid #fecaca;}
+.compare-bad .compare-label{color:#991b1b;font-weight:700;font-size:11px;letter-spacing:.1em;margin-bottom:6px;}
+.compare-good{background:#f0fdf4;border:1px solid #bbf7d0;}
+.compare-good .compare-label{color:#14532d;font-weight:700;font-size:11px;letter-spacing:.1em;margin-bottom:6px;}
+.next-preview{background:#ede9fe;border-radius:10px;padding:20px 24px;}
+.next-label{font-size:11px;font-weight:700;letter-spacing:.16em;color:#7c3aed;margin-bottom:6px;}
+.next-title{font-size:16px;font-weight:700;}
+</style>
+</head>
+<body>
+<div class="topbar">
+  <div class="topbar-left">
+    <a href="../index.html" class="back-btn">← 목록</a>
+    <span class="topbar-course">생성형 AI 과정</span>
+    <span class="topbar-session">W3 · 1회차</span>
+  </div>
+  <div class="nav-btns">
+    <a href="04.html" class="nav-btn">← 이전</a>
+    <a href="06.html" class="nav-btn">다음 →</a>
+  </div>
+</div>
+
+<div class="hero">
+  <div class="session-tag">Week 3 · Session 1 &nbsp;|&nbsp; 생성형 AI 과정</div>
+  <h1 class="session-title">Midjourney 계정 설정 &amp;<br>기초 프롬프트</h1>
+  <p class="session-desc">Discord 세팅부터 첫 이미지 생성까지 — Midjourney의 기본 구조와 핵심 파라미터를 익힙니다.</p>
+  <div class="meta-row">
+    <div class="meta-item"><span class="meta-label">수업 시간</span><span class="meta-val">90분</span></div>
+    <div class="meta-item"><span class="meta-label">대상 도구</span><span class="meta-val">Midjourney v6.1</span></div>
+    <div class="meta-item"><span class="meta-label">준비물</span><span class="meta-val">노트북, Discord 계정, Midjourney 구독</span></div>
+    <div class="meta-item"><span class="meta-label">난이도</span><span class="meta-val">★★☆☆☆ 기초</span></div>
+  </div>
+</div>
+<div class="body-wrap">
+
+  <div class="block">
+    <div class="block-title">학습 목표</div>
+    <ul class="obj-list"><li>Discord와 Midjourney를 연결해 첫 이미지를 생성할 수 있다</li><li>/imagine 명령어로 영어 프롬프트를 입력하고 결과를 뽑을 수 있다</li><li>--ar, --v, --q 파라미터의 역할을 이해하고 적용할 수 있다</li><li>U(업스케일)와 V(변형)의 차이를 알고 원하는 이미지를 선택할 수 있다</li><li>나쁜 프롬프트와 좋은 프롬프트의 차이를 실습으로 확인할 수 있다</li></ul>
+  </div>
+
+  <div class="block">
+    <div class="block-title">수업 흐름</div>
+    <div class="timeline"><div class="tl-item"><span class="tl-time">00:00</span><span class="tl-text">이론 — Midjourney란? AI 이미지 생성의 원리</span></div><div class="tl-item"><span class="tl-time">10:00</span><span class="tl-text">실습 ① — Discord 설치 & Midjourney 서버 입장</span></div><div class="tl-item"><span class="tl-time">25:00</span><span class="tl-text">실습 ② — /imagine 첫 이미지 생성</span></div><div class="tl-item"><span class="tl-time">40:00</span><span class="tl-text">이론 — 핵심 파라미터 4종 (--ar · --v · --q · --no)</span></div><div class="tl-item"><span class="tl-time">55:00</span><span class="tl-text">실습 ③ — 파라미터 적용 비교 실습</span></div><div class="tl-item"><span class="tl-time">72:00</span><span class="tl-text">실습 ④ — U/V 버튼 활용 & 이미지 저장</span></div><div class="tl-item"><span class="tl-time">82:00</span><span class="tl-text">정리 & Q&A</span></div></div>
+  </div>
+
+  <div class="divider"></div>
+  <div class="block">
+    <div class="block-title">강의 스크립트</div>
+
+    <div class="script-block">
+  <div class="script-phase">도입 — Midjourney란?<span class="ph-time">(00:00 – 10:00)</span></div>
+  <div class="script-body"><div class="say">지난 2주는 텍스트 AI였습니다. ChatGPT, Claude, Gemini로 기획서와 캡션을 만들었죠. 이번 주부터는 이미지를 만드는 AI입니다. 첫 번째는 Midjourney입니다.</div><div class="say">Midjourney는 현재 AI 이미지 생성 도구 중 가장 예술적인 퀄리티를 냅니다. 특히 광고 사진, 패션, 뷰티, 건축 렌더링 쪽에서 실무에 가장 많이 쓰입니다. 실제로 보그 커버, 광고 시안, 영화 콘셉트 아트에도 사용되고 있어요.</div><p class="note">화면에 Midjourney로 만든 광고 스타일 이미지 3~5장 보여주기 (Pinterest나 Midjourney 갤러리에서 미리 준비)</p><div class="say">우리 사진 과정에서는 Midjourney를 세 가지로 활용합니다. 첫째, 촬영 전 비주얼 시뮬레이션. 촬영하기 전에 어떤 느낌이 나올지 AI로 미리 확인하는 거예요. 둘째, 클라이언트 무드보드에 삽입. 직접 찍지 않은 레퍼런스를 AI로 생성해서 제안서에 넣습니다. 셋째, 합성용 배경 생성. 제품 촬영 후 Photoshop과 합성할 배경을 Midjourney로 만들 수 있습니다.</div><div class="warn">Midjourney는 월 구독 서비스입니다. Basic 플랜 $10/월, Standard $30/월. 오늘 수업은 Basic으로 충분합니다. 이미 구독하신 분은 진행, 아직 안 하신 분은 오늘 함께 가입합니다.</div></div>
+</div>
+
+    <div class="script-block">
+  <div class="script-phase">실습 ① — Discord & Midjourney 설정<span class="ph-time">(10:00 – 25:00)</span></div>
+  <div class="script-body"><div class="say">Midjourney는 Discord라는 채팅 앱 안에서 작동합니다. 처음엔 좀 낯설 수 있는데, 5분만 지나면 바로 익숙해집니다.</div><ol class="step-list"><li>discord.com 접속 → 앱 다운로드 또는 브라우저에서 열기</li><li>구글 계정으로 Discord 로그인 또는 신규 가입</li><li>midjourney.com 접속 → 우측 상단 'Sign In' → Discord로 로그인</li><li>'Join the Beta' 클릭 → Midjourney Discord 서버 입장</li><li>왼쪽 채널 목록에서 'newbies-숫자' 채널 중 하나 클릭</li><li>하단 입력창에 /imagine 입력 → 명령어 팝업 선택</li></ol><div class="tip">Midjourney 공식 Discord는 수만 명이 동시에 사용하기 때문에 채팅이 엄청 빠릅니다. 내 이미지를 찾을 때는 하단 입력창에 /show 를 쓰거나, midjourney.com에 로그인해서 'Manage' 탭에서 확인하는 것이 훨씬 편합니다.</div><div class="say">가입이 다 됐으면 이제 첫 이미지를 만들어볼게요.</div></div>
+</div>
+
+    <div class="script-block">
+  <div class="script-phase">실습 ② — /imagine 첫 이미지 생성<span class="ph-time">(25:00 – 40:00)</span></div>
+  <div class="script-body"><div class="say">Midjourney에서 이미지를 만들 때는 /imagine 명령어를 쓰고, 그 다음에 설명을 영어로 씁니다. 처음에는 영어가 부담스러울 수 있는데, ChatGPT나 Claude한테 번역해달라고 하면 됩니다.</div><div class="action">함께 아래 프롬프트 입력</div><div class="prompt-box"><span class="pk">/imagine</span> <span class="pv">a bottle of perfume on a white marble table,</span><br><span class="pv">soft morning light, minimalist, luxury brand photography,</span><br><span class="pv">high resolution --ar 4:5 --v 6.1</span></div><div class="say">Enter를 누르면 잠깐 기다리면 이미지 4장이 나옵니다. 이 4장 중에서 골라서 업스케일하거나 변형할 수 있어요. 어떤 이미지가 나왔나요? 마음에 드는 거 있으세요?</div><div class="tip">처음에 이미지가 예상과 다를 수 있습니다. 걱정 마세요. Midjourney는 프롬프트를 조금씩 바꿔가며 반복 실험하는 도구입니다. 한 번에 완벽한 이미지가 나오는 경우는 드물어요.</div></div>
+</div>
+
+    <div class="script-block">
+  <div class="script-phase">이론 — 핵심 파라미터 4종<span class="ph-time">(40:00 – 55:00)</span></div>
+  <div class="script-body"><div class="say">Midjourney 프롬프트 뒤에 '--' 로 시작하는 설정값을 '파라미터'라고 합니다. 이 파라미터가 이미지 결과를 크게 바꿉니다. 자주 쓰는 4가지만 외우면 됩니다.</div><table class="param-table">
+  <tr><th>파라미터</th><th>기능</th><th>예시</th><th>설명</th></tr>
+  <tr><td>--ar</td><td>비율 (Aspect Ratio)</td><td>--ar 4:5</td><td>인스타 세로 / 1:1 정사각 / 16:9 와이드</td></tr>
+  <tr><td>--v</td><td>버전 (Version)</td><td>--v 6.1</td><td>최신 버전 사용 권장. 숫자 높을수록 최신</td></tr>
+  <tr><td>--q</td><td>퀄리티 (Quality)</td><td>--q 2</td><td>기본값 1, 최고 2. GPU 2배 사용하므로 신중히</td></tr>
+  <tr><td>--no</td><td>제외 요소</td><td>--no text, watermark</td><td>결과에서 빼고 싶은 것 지정</td></tr>
+</table><div class="say">가장 자주 쓰는 건 --ar 입니다. 인스타그램 피드는 4:5, 스토리는 9:16, 웹 배너는 16:9로 맞춰주면 됩니다.</div></div>
+</div>
+
+    <div class="script-block">
+  <div class="script-phase">실습 ③ — 파라미터 비교 실습<span class="ph-time">(55:00 – 72:00)</span></div>
+  <div class="script-body"><div class="action">같은 내용을 파라미터만 바꿔서 3번 입력 — 결과 비교</div><p class="note"><strong>버전 1</strong> — 비율 없음 (기본 정사각)</p><div class="prompt-box"><span class="pk">/imagine</span> <span class="pv">cosmetic lipstick product shot, elegant, white background</span></div><p class="note"><strong>버전 2</strong> — 인스타 세로 비율</p><div class="prompt-box"><span class="pk">/imagine</span> <span class="pv">cosmetic lipstick product shot, elegant, white background <span class="pk">--ar 4:5</span></span></div><p class="note"><strong>버전 3</strong> — 세로 + 텍스트·워터마크 제외</p><div class="prompt-box"><span class="pk">/imagine</span> <span class="pv">cosmetic lipstick product shot, elegant, white background <span class="pk">--ar 4:5 --no text, watermark, logo</span></span></div><div class="say">세 결과를 나란히 보면 파라미터가 얼마나 큰 차이를 만드는지 바로 보입니다. --no 파라미터는 특히 제품 사진에서 텍스트나 브랜드 로고가 이상하게 들어갈 때 쓰면 좋습니다.</div></div>
+</div>
+
+    <div class="script-block">
+  <div class="script-phase">실습 ④ — U/V 버튼 & 이미지 저장<span class="ph-time">(72:00 – 82:00)</span></div>
+  <div class="script-body"><div class="say">4장 이미지 아래에 U1~U4, V1~V4 버튼이 있습니다. U는 Upscale(업스케일), V는 Variation(변형)입니다.</div><p class="note">
+<strong>U1~U4</strong> — 4장 중 해당 번호 이미지를 고해상도로 업스케일<br>
+<strong>V1~V4</strong> — 해당 이미지를 기반으로 비슷한 느낌으로 4장 다시 생성<br>
+<strong>🔄 (재생성)</strong> — 같은 프롬프트로 완전히 새로운 4장 생성
+      </p><ol class="step-list"><li>마음에 드는 이미지 번호의 U 버튼 클릭 (예: U3)</li><li>업스케일된 이미지가 나오면 클릭해서 크게 보기</li><li>이미지 우클릭 → '이미지 저장' 또는 '다른 이름으로 저장'</li><li>저장 폴더는 '타임아카이브 AI 실습' 폴더 만들어서 정리</li></ol><div class="tip">midjourney.com 에 로그인하면 내가 만든 모든 이미지를 '갤러리'에서 볼 수 있습니다. 여기서 다운로드하면 더 깔끔하게 관리할 수 있어요.</div></div>
+</div>
+
+    <div class="script-block">
+  <div class="script-phase">정리 & Q&A<span class="ph-time">(82:00 – 90:00)</span></div>
+  <div class="script-body"><div class="say">오늘 배운 것 정리합니다. Midjourney는 Discord 채팅창에서 /imagine 명령어로 이미지를 만듭니다. 프롬프트는 영어로 씁니다. 핵심 파라미터 --ar (비율), --v (버전), --no (제외)를 꼭 기억하세요. 다음 시간에는 더 정교하게 스타일을 제어하는 고급 파라미터와, 레퍼런스 이미지를 활용하는 방법을 배웁니다.</div><p class="note">Q&A 5분</p></div>
+</div>
+  </div>
+
+  <div class="divider"></div>
+  <div class="block">
+    <div class="block-title">실습 과제</div>
+    <div class="task-card">
+      <div class="task-title">과제 — 제품 사진 시뮬레이션 이미지 3장</div>
+      <div class="task-desc">Midjourney로 본인이 찍고 싶은 촬영 컨셉을 이미지로 시뮬레이션해보세요.</div>
+      <ul class="task-list">
+        <li>주제 선택: 제품, 뷰티, 음식, 패션 중 하나</li>
+        <li>프롬프트 3가지 작성 (파라미터 포함) → 각각 최고 결과 1장 저장</li>
+        <li>ChatGPT/Claude에게 영어 프롬프트 번역·개선 도움 받기 OK</li>
+        <li>3장 + 프롬프트 스크린샷 다음 시간에 가져오기</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="next-preview">
+    <div class="next-label">다음 시간 예고</div>
+    <div class="next-title">W3-2 · Midjourney 고급 프롬프트 &amp; 스타일 제어 — --sref 스타일 레퍼런스, --cref 캐릭터 레퍼런스, --style raw, Personalization</div>
+  </div>
+</div>
+
+</body>
+</html>
