@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Claude 창작 기획 & 제안서 자동화 — 타임아카이브 교재</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:'Pretendard',-apple-system,sans-serif;background:#f8f7f4;color:#1a1a1a;line-height:1.7;}
+a{text-decoration:none;color:inherit;}
+.topbar{background:#1a1a1a;color:#fff;padding:14px 32px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:10;}
+.topbar-left{display:flex;align-items:center;gap:16px;}
+.back-btn{font-size:12px;color:rgba(255,255,255,.6);padding:5px 12px;border:1px solid rgba(255,255,255,.2);border-radius:999px;transition:all .2s;}
+.back-btn:hover{color:#fff;border-color:rgba(255,255,255,.5);}
+.topbar-course{font-size:12px;color:rgba(255,255,255,.5);}
+.topbar-session{font-size:13px;font-weight:700;}
+.nav-btns{display:flex;gap:8px;}
+.nav-btn{font-size:12px;padding:5px 14px;border:1px solid rgba(255,255,255,.2);border-radius:999px;color:rgba(255,255,255,.7);transition:all .2s;}
+.nav-btn:hover{background:rgba(255,255,255,.1);color:#fff;}
+.hero{background:#fff;border-bottom:2px solid #7c3aed;padding:40px 48px;}
+.session-tag{font-size:11px;font-weight:700;letter-spacing:.2em;color:#7c3aed;text-transform:uppercase;margin-bottom:10px;}
+.session-title{font-size:clamp(24px,4vw,36px);font-weight:900;letter-spacing:-.02em;margin-bottom:8px;}
+.session-desc{font-size:15px;color:#555;max-width:640px;}
+.meta-row{display:flex;gap:24px;margin-top:20px;flex-wrap:wrap;}
+.meta-item{display:flex;flex-direction:column;gap:2px;}
+.meta-label{font-size:10px;letter-spacing:.14em;color:#999;font-weight:600;text-transform:uppercase;}
+.meta-val{font-size:14px;font-weight:700;color:#1a1a1a;}
+.body-wrap{max-width:820px;margin:0 auto;padding:48px 32px 80px;}
+/* 블록들 */
+.block{margin-bottom:36px;}
+.block-title{font-size:13px;font-weight:700;letter-spacing:.18em;color:#7c3aed;text-transform:uppercase;margin-bottom:14px;padding-bottom:8px;border-bottom:2px solid #ede9fe;}
+.obj-list{list-style:none;display:flex;flex-direction:column;gap:8px;}
+.obj-list li{font-size:15px;padding-left:22px;position:relative;color:#333;}
+.obj-list li::before{content:"✓";position:absolute;left:0;color:#7c3aed;font-weight:700;}
+.timeline{display:flex;flex-direction:column;gap:4px;}
+.tl-item{display:flex;gap:16px;align-items:baseline;font-size:14px;padding:8px 14px;border-radius:6px;}
+.tl-item:nth-child(odd){background:#f5f3ff;}
+.tl-time{min-width:52px;font-weight:700;color:#7c3aed;font-size:13px;}
+.tl-text{color:#444;}
+/* 스크립트 */
+.script-block{background:#fff;border-radius:10px;border:1px solid #e8e8e8;overflow:hidden;margin-bottom:16px;}
+.script-phase{background:#7c3aed;color:#fff;padding:10px 20px;font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;display:flex;align-items:center;gap:8px;}
+.script-phase .ph-time{opacity:.7;font-weight:400;}
+.script-body{padding:20px 24px;}
+.say{background:#f5f3ff;border-left:3px solid #7c3aed;padding:14px 18px;border-radius:0 8px 8px 0;font-size:15px;color:#2d1b69;line-height:1.8;margin:10px 0;font-style:italic;}
+.say::before{content:'"';font-size:20px;color:#7c3aed;font-style:normal;margin-right:4px;}
+.say::after{content:'"';font-size:20px;color:#7c3aed;font-style:normal;margin-left:4px;}
+.tip{background:#fefce8;border:1px solid #fde68a;border-radius:8px;padding:12px 16px;font-size:13px;color:#78350f;margin:10px 0;}
+.tip::before{content:"💡 강사 TIP  ";font-weight:700;}
+.action{background:#f0fdf4;border:1px solid #bbf7d0;border-radius:8px;padding:12px 16px;font-size:13px;color:#14532d;margin:10px 0;}
+.action::before{content:"▶ 실습  ";font-weight:700;}
+.note{font-size:14px;color:#555;margin:8px 0;line-height:1.8;}
+.step-list{list-style:none;counter-reset:step;display:flex;flex-direction:column;gap:8px;margin:10px 0;}
+.step-list li{counter-increment:step;font-size:14px;color:#333;padding:10px 14px 10px 44px;position:relative;background:#fafafa;border-radius:6px;}
+.step-list li::before{content:counter(step);position:absolute;left:14px;top:10px;width:22px;height:22px;background:#7c3aed;color:#fff;border-radius:50%;font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center;}
+/* 실습 과제 */
+.task-card{background:#1a1a1a;color:#fff;border-radius:10px;padding:24px;margin-bottom:12px;}
+.task-title{font-size:16px;font-weight:800;margin-bottom:10px;}
+.task-desc{font-size:14px;color:rgba(255,255,255,.7);line-height:1.8;}
+.task-list{list-style:none;margin-top:12px;display:flex;flex-direction:column;gap:6px;}
+.task-list li{font-size:13px;color:rgba(255,255,255,.8);padding-left:18px;position:relative;}
+.task-list li::before{content:"→";position:absolute;left:0;color:#a78bfa;}
+.divider{height:1px;background:#e8e8e8;margin:32px 0;}
+.next-preview{background:#ede9fe;border-radius:10px;padding:20px 24px;}
+.next-label{font-size:11px;font-weight:700;letter-spacing:.16em;color:#7c3aed;margin-bottom:6px;}
+.next-title{font-size:16px;font-weight:700;}
+</style>
+</head>
+<body>
+<div class="topbar">
+  <div class="topbar-left">
+    <a href="../index.html" class="back-btn">← 목록</a>
+    <span class="topbar-course">생성형 AI 과정</span>
+    <span class="topbar-session">W2 · 1회차</span>
+  </div>
+  <div class="nav-btns">
+    <a href="02.html" class="nav-btn">← 이전</a>
+    <a href="04.html" class="nav-btn">다음 →</a>
+  </div>
+</div>
+
+<div class="hero">
+  <div class="session-tag">Week 2 · Session 1 &nbsp;|&nbsp; 생성형 AI 과정</div>
+  <h1 class="session-title">Claude 창작 기획 &amp; 제안서 자동화</h1>
+  <p class="session-desc">Claude의 강점인 긴 문서 작성과 창의적 기획을 활용해 클라이언트 제안서와 촬영 시나리오를 자동화합니다.</p>
+  <div class="meta-row">
+    <div class="meta-item"><span class="meta-label">수업 시간</span><span class="meta-val">90분</span></div>
+    <div class="meta-item"><span class="meta-label">대상 도구</span><span class="meta-val">Claude (claude.ai)</span></div>
+    <div class="meta-item"><span class="meta-label">준비물</span><span class="meta-val">노트북, Claude 계정</span></div>
+    <div class="meta-item"><span class="meta-label">난이도</span><span class="meta-val">★★☆☆☆ 기초</span></div>
+  </div>
+</div>
+<div class="body-wrap">
+
+  <div class="block">
+    <div class="block-title">학습 목표</div>
+    <ul class="obj-list"><li>Claude와 ChatGPT의 차이를 설명하고 용도에 맞게 선택할 수 있다</li><li>Claude로 브랜드 촬영 제안서 초안을 자동 생성할 수 있다</li><li>긴 문서를 Claude에게 붙여넣고 요약·분석을 요청할 수 있다</li><li>Claude 프로젝트 기능으로 나만의 AI 비서를 설정할 수 있다</li></ul>
+  </div>
+
+  <div class="block">
+    <div class="block-title">수업 흐름</div>
+    <div class="timeline"><div class="tl-item"><span class="tl-time">00:00</span><span class="tl-text">이론 — Claude vs ChatGPT 비교</span></div><div class="tl-item"><span class="tl-time">15:00</span><span class="tl-text">실습 ① — Claude 계정 & 프로젝트 설정</span></div><div class="tl-item"><span class="tl-time">30:00</span><span class="tl-text">실습 ② — 촬영 제안서 자동 생성</span></div><div class="tl-item"><span class="tl-time">55:00</span><span class="tl-text">실습 ③ — 문서 붙여넣기 & 요약·분석</span></div><div class="tl-item"><span class="tl-time">75:00</span><span class="tl-text">정리 & 어떤 도구를 언제 쓸까</span></div></div>
+  </div>
+
+  <div class="divider"></div>
+  <div class="block">
+    <div class="block-title">강의 스크립트</div>
+
+    <div class="script-block">
+  <div class="script-phase">이론 — Claude vs ChatGPT<span class="ph-time">(00:00 – 15:00)</span></div>
+  <div class="script-body"><div class="say">지난 두 번은 ChatGPT를 배웠습니다. 오늘은 Claude입니다. 처음에는 '또 다른 도구를 배워야 하나' 하실 수 있는데, 둘을 같이 쓰면 시너지가 큽니다. 비유하자면 ChatGPT는 빠르고 다재다능한 직원, Claude는 꼼꼼하고 글을 잘 쓰는 작가 같은 느낌입니다.</div><p class="note">
+<strong>ChatGPT가 강한 것:</strong> 빠른 답변, 코드, 검색 연동 (GPT-4o), 이미지 생성 (DALL-E)<br>
+<strong>Claude가 강한 것:</strong> 긴 문서 읽기·요약, 창의적 글쓰기, 논리적 제안서, 일관된 톤 유지<br><br>
+→ 사진 촬영 기획에서: 무드보드·체크리스트는 ChatGPT, 제안서·시나리오는 Claude
+      </p><div class="say">저는 실무에서 ChatGPT로 빠른 아이디어를 뽑고, Claude로 제안서나 긴 글을 다듬습니다. 오늘 그 방법을 배웁니다.</div></div>
+</div>
+
+    <div class="script-block">
+  <div class="script-phase">실습 ① — Claude 계정 & 프로젝트 설정<span class="ph-time">(15:00 – 30:00)</span></div>
+  <div class="script-body"><ol class="step-list"><li>claude.ai 접속 → 구글 계정으로 로그인</li><li>왼쪽 사이드바 'Projects' 클릭 → New Project</li><li>프로젝트 이름: '타임아카이브 사진 기획' 입력</li><li>Project Instructions에 아래 내용 입력 후 저장</li></ol><p class="note"><strong>[Project Instructions 예시]</strong><br><br>
+당신은 타임아카이브 사진전문학원 소속 사진 디렉터입니다.<br>
+광고사진, 뷰티, 제품, 쇼핑몰 촬영을 전문으로 합니다.<br>
+문서를 작성할 때는 전문적이지만 이해하기 쉬운 언어를 사용합니다.<br>
+클라이언트 제안서는 항상 목차, 본문, 견적 요약 형식으로 작성합니다.</p><div class="say">이 설정을 한 번 해두면, 이 프로젝트 안에서 대화할 때마다 Claude가 사진 디렉터 역할로 답해줍니다. 매번 역할 설명을 안 해도 되는 거예요.</div></div>
+</div>
+
+    <div class="script-block">
+  <div class="script-phase">실습 ② — 촬영 제안서 자동 생성<span class="ph-time">(30:00 – 55:00)</span></div>
+  <div class="script-body"><div class="say">이제 실제 클라이언트 제안서를 만들어봅니다. 예시 상황을 드릴게요.</div><div class="action">아래 프롬프트를 Claude에 입력</div><p class="note"><strong>[촬영 제안서 프롬프트]</strong><br><br>
+다음 정보를 바탕으로 클라이언트 촬영 제안서를 작성해주세요.<br><br>
+클라이언트: 중소 뷰티 브랜드 '루나코스메틱'<br>
+담당자: 마케팅 팀장<br>
+촬영 목적: 신제품 쿠션 파운데이션 3종 런칭, 온라인몰 및 SNS 활용<br>
+촬영 일정: 2026년 8월 중<br>
+예산: 협의 중<br><br>
+제안서 구성:<br>
+1. 제안 개요 (1페이지 분량)<br>
+2. 촬영 컨셉 제안 2가지 (각 컨셉별 방향·조명·배경·소품)<br>
+3. 촬영 결과물 목록 (납품 파일 종류·수량)<br>
+4. 진행 일정표 (협의~납품 2주 기준)<br>
+5. 투자 비용 요약 (예시 가격으로 작성)</p><div class="say">결과물을 보세요. 이 정도 제안서를 예전엔 몇 시간 걸려 만들었다면, 이제 5분 안에 초안이 나옵니다. 여기서 구체적인 금액, 실제 납품 파일 수를 수정하면 바로 쓸 수 있어요.</div><div class="tip">제안서 결과를 복사해서 구글 독스나 한글 문서에 붙여넣으면 바로 편집 가능합니다.</div></div>
+</div>
+
+    <div class="script-block">
+  <div class="script-phase">실습 ③ — 문서 분석 & 요약<span class="ph-time">(55:00 – 75:00)</span></div>
+  <div class="script-body"><div class="say">Claude의 또 다른 강점, 긴 문서 읽기입니다. 클라이언트가 보낸 브리핑 문서, 경쟁사 자료, 계약서 등을 붙여넣으면 Claude가 분석해줍니다.</div><div class="action">예시 실습: 오늘 만든 제안서를 다시 Claude에 붙여넣고 아래 요청</div><p class="note"><strong>[문서 분석 프롬프트]</strong><br><br>
+위 제안서를 검토해주세요.<br>
+1. 클라이언트 입장에서 의문이 생길 수 있는 부분 3가지<br>
+2. 제안서에서 보완하면 좋을 점 2가지<br>
+3. 이 클라이언트를 설득하기 위한 핵심 메시지 1문장</p><div class="say">이렇게 Claude에게 스스로 만든 문서를 다시 검토시키면 품질이 올라갑니다. 저도 중요한 제안서는 Claude에게 먼저 피드백 받고 보냅니다.</div></div>
+</div>
+
+    <div class="script-block">
+  <div class="script-phase">정리 — 언제 ChatGPT, 언제 Claude<span class="ph-time">(75:00 – 90:00)</span></div>
+  <div class="script-body"><p class="note">
+<strong>ChatGPT 쓸 때:</strong> 빠른 아이디어 뽑기, 짧은 캡션, 체크리스트, 검색 필요한 것<br>
+<strong>Claude 쓸 때:</strong> 제안서·계약서·긴 이메일 작성, 문서 분석·요약, 창의적 시나리오
+      </p><div class="say">두 도구를 상황에 맞게 쓰는 게 핵심입니다. 다음 시간에는 세 번째 도구, Gemini를 배웁니다. 구글 검색과 연동되는 게 강점이에요.</div></div>
+</div>
+  </div>
+
+  <div class="divider"></div>
+  <div class="block">
+    <div class="block-title">실습 과제</div>
+    <div class="task-card">
+      <div class="task-title">과제 — 실제 또는 가상 클라이언트 제안서 초안 만들기</div>
+      <div class="task-desc">Claude로 본인이 실제로 받고 싶은 촬영 의뢰 제안서를 만들어보세요.</div>
+      <ul class="task-list">
+        <li>클라이언트 정보 (업종·제품·목적) 직접 설정</li>
+        <li>Claude로 제안서 초안 생성</li>
+        <li>Claude에게 스스로 피드백 요청 후 수정</li>
+        <li>최종 제안서 캡처 또는 문서 저장</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="next-preview">
+    <div class="next-label">다음 시간 예고</div>
+    <div class="next-title">W2-2 · Gemini 이미지 분석 &amp; 콘텐츠 기획 — 구글 검색 연동, 사진 이미지 분석, 유튜브 스크립트 자동화</div>
+  </div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>타임아카이브 강사 교재</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+:root{
+  --bg:#0e0e0e;
+  --s1:#161616;
+  --s2:#1e1e1e;
+  --border:rgba(255,255,255,.07);
+  --text:#e0e0e0;
+  --muted:rgba(255,255,255,.38);
+  --cyan:#00C5E6;
+  --cyan-dim:rgba(0,197,230,.12);
+  --cyan-border:rgba(0,197,230,.25);
+  --green:#22c55e;
+  --amber:#f59e0b;
+}
+body{font-family:'Pretendard',-apple-system,sans-serif;background:var(--bg);color:var(--text);line-height:1.6;min-height:100vh;}
+a{text-decoration:none;color:inherit;}
+
+/* ── topbar ── */
+.topbar{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:14px 40px;
+  border-bottom:1px solid var(--border);
+  position:sticky;top:0;z-index:20;
+  background:rgba(14,14,14,.85);backdrop-filter:blur(12px);
+}
+.topbar-left{display:flex;align-items:center;gap:12px;}
+.topbar-dot{color:var(--muted);}
+.topbar-label{font-size:11px;letter-spacing:.2em;color:var(--muted);font-weight:600;text-transform:uppercase;}
+.topbar-name{font-size:12px;letter-spacing:.1em;color:var(--cyan);font-weight:700;text-transform:uppercase;}
+.topbar-right{font-size:11px;color:var(--muted);letter-spacing:.12em;}
+
+/* ── hero ── */
+.hero{padding:64px 40px 56px;border-bottom:1px solid var(--border);}
+.hero-tag{font-size:10px;letter-spacing:.25em;color:var(--cyan);font-weight:700;text-transform:uppercase;margin-bottom:16px;}
+.hero-title{font-size:clamp(32px,5vw,52px);font-weight:900;letter-spacing:-.03em;line-height:1.1;margin-bottom:14px;}
+.hero-sub{font-size:14px;color:var(--muted);max-width:560px;line-height:1.8;}
+.hero-stats{display:flex;gap:32px;margin-top:32px;flex-wrap:wrap;}
+.stat{display:flex;flex-direction:column;gap:4px;}
+.stat-val{font-size:22px;font-weight:900;color:#fff;}
+.stat-label{font-size:11px;color:var(--muted);letter-spacing:.1em;}
+
+/* ── main ── */
+.main{max-width:960px;margin:0 auto;padding:56px 40px 100px;}
+
+/* ── course section ── */
+.course-section{margin-bottom:56px;}
+.course-header{display:flex;align-items:flex-start;justify-content:space-between;gap:16px;margin-bottom:20px;padding-bottom:16px;border-bottom:1px solid var(--border);}
+.course-header-left{}
+.course-tag{font-size:9px;letter-spacing:.22em;font-weight:700;text-transform:uppercase;margin-bottom:6px;}
+.tag-ai{color:#a78bfa;}
+.tag-agent{color:#38bdf8;}
+.tag-video{color:#f87171;}
+.tag-edit{color:#fb923c;}
+.course-title{font-size:20px;font-weight:800;letter-spacing:-.01em;}
+.course-meta{font-size:12px;color:var(--muted);margin-top:3px;}
+.course-progress{font-size:11px;color:var(--muted);text-align:right;white-space:nowrap;}
+.progress-bar{width:120px;height:4px;background:rgba(255,255,255,.08);border-radius:2px;margin-top:6px;margin-left:auto;}
+.progress-fill{height:100%;border-radius:2px;background:var(--cyan);}
+
+/* ── material list ── */
+.material-list{display:flex;flex-direction:column;gap:3px;}
+.material-item{
+  display:flex;align-items:center;gap:16px;
+  padding:14px 18px;
+  border-radius:8px;
+  border:1px solid transparent;
+  transition:all .15s;
+}
+.material-item:hover{background:var(--s1);border-color:var(--border);}
+.material-item.ready:hover{border-color:var(--cyan-border);}
+.mat-num{font-size:10px;font-weight:700;color:var(--muted);min-width:40px;letter-spacing:.05em;}
+.mat-info{flex:1;min-width:0;}
+.mat-title{font-size:14px;font-weight:600;color:rgba(255,255,255,.75);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.material-item.ready .mat-title{color:#fff;}
+.mat-desc{font-size:11px;color:var(--muted);margin-top:2px;}
+.mat-actions{display:flex;align-items:center;gap:8px;flex-shrink:0;}
+.badge{font-size:9px;font-weight:700;padding:3px 9px;border-radius:999px;letter-spacing:.06em;}
+.badge-done{background:rgba(34,197,94,.15);color:#4ade80;border:1px solid rgba(34,197,94,.2);}
+.badge-wip{background:rgba(245,158,11,.1);color:#fbbf24;border:1px solid rgba(245,158,11,.18);}
+.btn-view{
+  font-size:11px;font-weight:600;letter-spacing:.05em;
+  padding:6px 14px;border-radius:6px;
+  border:1px solid var(--cyan-border);
+  color:var(--cyan);
+  background:var(--cyan-dim);
+  transition:all .15s;white-space:nowrap;
+}
+.btn-view:hover{background:var(--cyan);color:#000;}
+.btn-view-disabled{
+  font-size:11px;font-weight:600;
+  padding:6px 14px;border-radius:6px;
+  border:1px solid var(--border);
+  color:var(--muted);
+  background:transparent;
+  cursor:not-allowed;
+  white-space:nowrap;
+}
+
+/* ── divider ── */
+.section-divider{height:1px;background:var(--border);margin:48px 0;}
+
+/* ── footer ── */
+.footer{border-top:1px solid var(--border);padding:28px 40px;display:flex;align-items:center;justify-content:space-between;}
+.footer-left{font-size:11px;color:var(--muted);}
+.footer-right{font-size:11px;color:var(--muted);}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="topbar-left">
+    <span class="topbar-label">TIMEARCHIVE</span>
+    <span class="topbar-dot">·</span>
+    <span class="topbar-name">강사 교재</span>
+  </div>
+  <div class="topbar-right">4개 과정 &nbsp;·&nbsp; 총 58회차</div>
+</div>
+
+<div class="hero">
+  <div class="hero-tag">Instructor Materials · 2026</div>
+  <h1 class="hero-title">수업 교재<br>&amp; 강의 스크립트</h1>
+  <p class="hero-sub">타임아카이브 사진전문학원 강사용 교재입니다.<br>과정별 강의 대본 · 실습 가이드 · 학생 배포 자료를 확인하세요.</p>
+  <div class="hero-stats">
+    <div class="stat"><span class="stat-val">4</span><span class="stat-label">과정</span></div>
+    <div class="stat"><span class="stat-val">58</span><span class="stat-label">회차</span></div>
+    <div class="stat"><span class="stat-val">4</span><span class="stat-label">완성 회차</span></div>
+    <div class="stat"><span class="stat-val">54</span><span class="stat-label">준비중</span></div>
+  </div>
+</div>
+
+<div class="main">
+
+  <!-- 생성형 AI -->
+  <div class="course-section">
+    <div class="course-header">
+      <div class="course-header-left">
+        <div class="course-tag tag-ai">Generative AI · 생성형 AI 과정</div>
+        <div class="course-title">ChatGPT · Claude · Midjourney · Runway 外</div>
+        <div class="course-meta">8주 · 16회 · AI 텍스트·이미지·영상 생성 전 과정</div>
+      </div>
+      <div class="course-progress">
+        4 / 16 완성
+        <div class="progress-bar"><div class="progress-fill" style="width:25%"></div></div>
+      </div>
+    </div>
+    <div class="material-list">
+      <a href="ai-gen/01.html" class="material-item ready">
+        <span class="mat-num">W1-1</span>
+        <div class="mat-info">
+          <div class="mat-title">ChatGPT 소개 &amp; 프롬프트 기초</div>
+          <div class="mat-desc">생성형 AI 개념 · 계정 설정 · 프롬프트 4요소 · 비교 실습 — 90분</div>
+        </div>
+        <div class="mat-actions">
+          <span class="badge badge-done">완성</span>
+          <span class="btn-view">보기 →</span>
+        </div>
+      </a>
+      <a href="ai-gen/02.html" class="material-item ready">
+        <span class="mat-num">W1-2</span>
+        <div class="mat-info">
+          <div class="mat-title">ChatGPT 사진 기획 자동화 실습</div>
+          <div class="mat-desc">무드보드 기획서 · 촬영 체크리스트 · SNS 캡션 5버전 자동 생성 — 90분</div>
+        </div>
+        <div class="mat-actions">
+          <span class="badge badge-done">완성</span>
+          <span class="btn-view">보기 →</span>
+        </div>
+      </a>
+      <a href="ai-gen/03.html" class="material-item ready">
+        <span class="mat-num">W2-1</span>
+        <div class="mat-info">
+          <div class="mat-title">Claude 창작 기획 &amp; 제안서 자동화</div>
+          <div class="mat-desc">ChatGPT vs Claude 비교 · 프로젝트 설정 · 클라이언트 제안서 생성 — 90분</div>
+        </div>
+        <div class="mat-actions">
+          <span class="badge badge-done">완성</span>
+          <span class="btn-view">보기 →</span>
+        </div>
+      </a>
+      <a href="ai-gen/04.html" class="material-item ready">
+        <span class="mat-num">W2-2</span>
+        <div class="mat-info">
+          <div class="mat-title">Gemini 이미지 분석 &amp; 콘텐츠 기획</div>
+          <div class="mat-desc">이미지 업로드 분석 · 구글 검색 연동 · 콘텐츠 캘린더 자동 생성 — 90분</div>
+        </div>
+        <div class="mat-actions">
+          <span class="badge badge-done">완성</span>
+          <span class="btn-view">보기 →</span>
+        </div>
+      </a>
+      <div class="material-item">
+        <span class="mat-num">W3-1</span>
+        <div class="mat-info">
+          <div class="mat-title">Midjourney 계정 설정 &amp; 기초 프롬프트</div>
+          <div class="mat-desc">Discord 설정 · 첫 이미지 생성 · --style / --ar 파라미터</div>
+        </div>
+        <div class="mat-actions">
+          <span class="badge badge-wip">준비중</span>
+          <span class="btn-view-disabled">보기</span>
+        </div>
+      </div>
+      <div class="material-item">
+        <span class="mat-num">W3-2</span>
+        <div class="mat-info">
+          <div class="mat-title">Midjourney 고급 프롬프트 &amp; 스타일 제어</div>
+          <div class="mat-desc">--profile · --sref · 레퍼런스 이미지 활용</div>
+        </div>
+        <div class="mat-actions">
+          <span class="badge badge-wip">준비중</span>
+          <span class="btn-view-disabled">보기</span>
+        </div>
+      </div>
+      <div class="material-item">
+        <span class="mat-num">W4-1</span>
+        <div class="mat-info">
+          <div class="mat-title">Adobe Firefly &amp; Photoshop AI 기초</div>
+          <div class="mat-desc">Firefly 웹 · Generative Fill 기초 실습</div>
+        </div>
+        <div class="mat-actions">
+          <span class="badge badge-wip">준비중</span>
+          <span class="btn-view-disabled">보기</span>
+        </div>
+      </div>
+      <div class="material-item">
+        <span class="mat-num">W4-2</span>
+        <div class="mat-info">
+          <div class="mat-title">Generative Fill 실사 합성 실습</div>
+          <div class="mat-desc">배경 합성 · 오브젝트 추가/제거 · 실사 광고 사진 완성</div>
+        </div>
+        <div class="mat-actions">
+          <span class="badge badge-wip">준비중</span>
+          <span class="btn-view-disabled">보기</span>
+        </div>
+      </div>
+      <div class="material-item">
+        <span class="mat-num">W5-1</span>
+        <div class="mat-info">
+          <div class="mat-title">Lightroom AI 마스킹 &amp; 자동 보정</div>
+          <div class="mat-desc">AI 선택 마스크 · 자동 노출 · 일관 보정 배치 처리</div>
+        </div>
+        <div class="mat-actions">
+          <span class="badge badge-wip">준비중</span>
+          <span class="btn-view-disabled">보기</span>
+        </div>
+      </div>
+      <div class="material-item">
+        <span class="mat-num">W5-2</span>
+        <div class="mat-info">
+          <div class="mat-title">Topaz Photo AI 업스케일 &amp; 디테일</div>
+          <div class="mat-desc">저해상도 업스케일 · 노이즈 제거 · 샤프니스 복원</div>
+        </div>
+        <div class="mat-actions">
+          <span class="badge badge-wip">준비중</span>
+          <span class="btn-view-disabled">보기</span>
+        </div>
+      </div>
+      <div class="material-item">
+        <span class="mat-num">W6-1</span>
+        <div class="mat-info">
+          <div class="mat-title">Runway 텍스트→영상 기초</div>
+          <div class="mat-desc">Gen-3 Alpha · 텍스트 프롬프트로 영상 생성 · 카메라 모션</div>
+        </div>
+        <div class="mat-actions">
+          <span class="badge badge-wip">준비중</span>
+          <span class="btn-view-disabled">보기</span>
+        </div>
+      </div>
+      <div class="material-item">
+        <span class="mat-num">W6-2</span>
+        <div class="mat-info">
+          <div class="mat-title">Runway 이미지→영상 &amp; 파이퍼플라이</div>
+          <div class="mat-desc">이미지 기반 영상 생성 · Pika · 파이퍼플라이 비교</div>
+        </div>
+        <div class="mat-actions">
+          <span class="badge badge-wip">준비중</span>
+          <span class="btn-view-disabled">보기</span>
+        </div>
+      </div>
+      <div class="material-item">
+        <span class="mat-num">W7-1</span>
+        <div class="mat-info">
+          <div class="mat-title">ElevenLabs AI 보이스오버</div>
+          <div class="mat-desc">음성 클로닝 · 내레이션 생성 · 영상 싱크 맞추기</div>
+        </div>
+        <div class="mat-actions">
+          <span class="badge badge-wip">준비중</span>
+          <span class="btn-view-disabled">보기</span>
+        </div>
+      </div>
+      <div class="material-item">
+        <span class="mat-num">W7-2</span>
+        <div class="mat-info">
+          <div class="mat-title">Higgsfield &amp; Kling AI 광고영상 합성</div>
+          <div class="mat-desc">제품 광고 영상 합성 · AI 모션 · 실사 품질 영상 제작</div>
+        </div>
+        <div class="mat-actions">
+          <span class="badge badge-wip">준비중</span>
+          <span class="btn-view-disabled">보기</span>
+        </div>
+      </div>
+      <div class="material-item">
+        <span class="mat-num">W8-1</span>
+        <div class="mat-info">
+          <div class="mat-title">AI 사진 포트폴리오 완성</div>
+          <div class="mat-desc">8주 결과물 큐레이션 · 포트폴리오 구성 · PDF 제작</div>
+        </div>
+        <div class="mat-actions">
+          <span class="badge badge-wip">준비중</span>
+          <span class="btn-view-disabled">보기</span>
+        </div>
+      </div>
+      <div class="material-item">
+        <span class="mat-num">W8-2</span>
+        <div class="mat-info">
+          <div class="mat-title">AI 광고 영상 30초 완성 &amp; 발표</div>
+          <div class="mat-desc">최종 결과물 발표 · 피드백 · 수료</div>
+        </div>
+        <div class="mat-actions">
+          <span class="badge badge-wip">준비중</span>
+          <span class="btn-view-disabled">보기</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-divider"></div>
+
+  <!-- AI 에이전트 -->
+  <div class="course-section">
+    <div class="course-header">
+      <div class="course-header-left">
+        <div class="course-tag tag-agent">AI Agent · AI 에이전트 과정</div>
+        <div class="course-title">Claude · MCP · Higgsfield</div>
+        <div class="course-meta">8주 · 16회 · 에이전트 설계부터 자동화 파이프라인 완성</div>
+      </div>
+      <div class="course-progress">
+        0 / 16 완성
+        <div class="progress-bar"><div class="progress-fill" style="width:0%"></div></div>
+      </div>
+    </div>
+    <div class="material-list">
+      <div class="material-item">
+        <span class="mat-num">W1-1</span>
+        <div class="mat-info">
+          <div class="mat-title">AI 에이전트 개념 &amp; Claude 기초</div>
+          <div class="mat-desc">에이전트 vs 챗봇 차이 · Claude 소개 · 활용 범위</div>
+        </div>
+        <div class="mat-actions"><span class="badge badge-wip">준비중</span><span class="btn-view-disabled">보기</span></div>
+      </div>
+      <div class="material-item">
+        <span class="mat-num">W1-2</span>
+        <div class="mat-info">
+          <div class="mat-title">Claude 프로젝트 설정 &amp; 시스템 프롬프트</div>
+          <div class="mat-desc">Project Instructions · 나만의 AI 비서 설정</div>
+        </div>
+        <div class="mat-actions"><span class="badge badge-wip">준비중</span><span class="btn-view-disabled">보기</span></div>
+      </div>
+      <div class="material-item">
+        <span class="mat-num">W2-1</span>
+        <div class="mat-info">
+          <div class="mat-title">창작 기획 자동화 에이전트 설계</div>
+          <div class="mat-desc">업무 분해 · 에이전트 플로우 설계 · 반복 작업 자동화</div>
+        </div>
+        <div class="mat-actions"><span class="badge badge-wip">준비중</span><span class="btn-view-disabled">보기</span></div>
+      </div>
+      <div class="material-item">
+        <span class="mat-num">W2-2</span>
+        <div class="mat-info">
+          <div class="mat-title">Claude 에이전트 반복 작업 대체 실습</div>
+          <div class="mat-desc">파일 처리 자동화 · 배치 작업 · 결과 검증</div>
+        </div>
+        <div class="mat-actions"><span class="badge badge-wip">준비중</span><span class="btn-view-disabled">보기</span></div>
+      </div>
+      <div class="material-item">
+        <span class="mat-num">W3-1</span>
+        <div class="mat-info">
+          <div class="mat-title">MCP 개념 &amp; 설치 실습</div>
+          <div class="mat-desc">MCP란 무엇인가 · Claude Desktop 설치 · 첫 연결</div>
+        </div>
+        <div class="mat-actions"><span class="badge badge-wip">준비중</span><span class="btn-view-disabled">보기</span></div>
+      </div>
+      <div class="material-item">
+        <span class="mat-num">W3-2</span>
+        <div class="mat-info">
+          <div class="mat-title">MCP 서버 연결 &amp; 첫 도구 연동</div>
+          <div class="mat-desc">MCP 서버 설정 · 파일시스템 / 브라우저 도구 연동</div>
+        </div>
+        <div class="mat-actions"><span class="badge badge-wip">준비중</span><span class="btn-view-disabled">보기</span></div>
+      </div>
+      <div class="material-item">
+        <span class="mat-num">W4–8</span>
+        <div class="mat-info">
+          <div class="mat-title">MCP+Claude 심화 / Higgsfield 연동 / 자동화 파이프라인 완성</div>
+          <div class="mat-desc">고급 MCP 활용 · Higgsfield 영상 자동화 · 에이전트 포트폴리오</div>
+        </div>
+        <div class="mat-actions"><span class="badge badge-wip">준비중</span><span class="btn-view-disabled">보기</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-divider"></div>
+
+  <!-- 영상 촬영 -->
+  <div class="course-section">
+    <div class="course-header">
+      <div class="course-header-left">
+        <div class="course-tag tag-video">Video Shooting · 영상 촬영 과정</div>
+        <div class="course-title">미러리스 · 타임랩스 · 하이퍼랩스 · 액션캠</div>
+        <div class="course-meta">5주 · 10회 · 제품 영상부터 하이퍼랩스까지</div>
+      </div>
+      <div class="course-progress">
+        0 / 10 완성
+        <div class="progress-bar"><div class="progress-fill" style="width:0%"></div></div>
+      </div>
+    </div>
+    <div class="material-list">
+      <div class="material-item">
+        <span class="mat-num">W1-1</span>
+        <div class="mat-info">
+          <div class="mat-title">미러리스 영상 기초 설정</div>
+          <div class="mat-desc">영상 모드 설정 · 해상도/프레임레이트 · ND 필터 활용</div>
+        </div>
+        <div class="mat-actions"><span class="badge badge-wip">준비중</span><span class="btn-view-disabled">보기</span></div>
+      </div>
+      <div class="material-item">
+        <span class="mat-num">W1-2</span>
+        <div class="mat-info">
+          <div class="mat-title">영상용 노출 &amp; 픽쳐프로파일</div>
+          <div class="mat-desc">180도 셔터 법칙 · S-Log / HLG · 컬러 그레이딩 전처리</div>
+        </div>
+        <div class="mat-actions"><span class="badge badge-wip">준비중</span><span class="btn-view-disabled">보기</span></div>
+      </div>
+      <div class="material-item">
+        <span class="mat-num">W2-1</span>
+        <div class="mat-info">
+          <div class="mat-title">제품 영상 촬영 기법</div>
+          <div class="mat-desc">터니테이블 · 슬라이더 · 매크로 클로즈업 · 조명 세팅</div>
+        </div>
+        <div class="mat-actions"><span class="badge badge-wip">준비중</span><span class="btn-view-disabled">보기</span></div>
+      </div>
+      <div class="material-item">
+        <span class="mat-num">W2-2</span>
+        <div class="mat-info">
+          <div class="mat-title">액션캠 설정 &amp; 마운트 활용</div>
+          <div class="mat-desc">GoPro / Insta360 설정 · 마운트 종류 · 손떨림 보정</div>
+        </div>
+        <div class="mat-actions"><span class="badge badge-wip">준비중</span><span class="btn-view-disabled">보기</span></div>
+      </div>
+      <div class="material-item">
+        <span class="mat-num">W3–5</span>
+        <div class="mat-info">
+          <div class="mat-title">타임랩스 &amp; 하이퍼랩스 완성</div>
+          <div class="mat-desc">인터벌 설정 · 노출 잠금 · 하이퍼랩스 경로 계획 · 편집까지</div>
+        </div>
+        <div class="mat-actions"><span class="badge badge-wip">준비중</span><span class="btn-view-disabled">보기</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-divider"></div>
+
+  <!-- 영상 편집 -->
+  <div class="course-section">
+    <div class="course-header">
+      <div class="course-header-left">
+        <div class="course-tag tag-edit">Video Editing · 영상 편집 과정</div>
+        <div class="course-title">Premiere Pro · After Effects</div>
+        <div class="course-meta">8주 · 16회 · 컷 편집부터 모션그래픽까지</div>
+      </div>
+      <div class="course-progress">
+        0 / 16 완성
+        <div class="progress-bar"><div class="progress-fill" style="width:0%"></div></div>
+      </div>
+    </div>
+    <div class="material-list">
+      <div class="material-item">
+        <span class="mat-num">W1-1</span>
+        <div class="mat-info">
+          <div class="mat-title">Premiere Pro 인터페이스 &amp; 프로젝트 세팅</div>
+          <div class="mat-desc">시퀀스 설정 · 미디어 관리 · 단축키 세팅</div>
+        </div>
+        <div class="mat-actions"><span class="badge badge-wip">준비중</span><span class="btn-view-disabled">보기</span></div>
+      </div>
+      <div class="material-item">
+        <span class="mat-num">W1-2</span>
+        <div class="mat-info">
+          <div class="mat-title">컷 편집 &amp; 타임라인 구성</div>
+          <div class="mat-desc">컷·롤·슬립 편집 · J/L 컷 · 리듬감 있는 편집</div>
+        </div>
+        <div class="mat-actions"><span class="badge badge-wip">준비중</span><span class="btn-view-disabled">보기</span></div>
+      </div>
+      <div class="material-item">
+        <span class="mat-num">W2–4</span>
+        <div class="mat-info">
+          <div class="mat-title">컬러 그레이딩 / 음향 / 자막 / 내보내기</div>
+          <div class="mat-desc">Lumetri · 오디오 믹싱 · Essential Graphics · 최종 출력</div>
+        </div>
+        <div class="mat-actions"><span class="badge badge-wip">준비중</span><span class="btn-view-disabled">보기</span></div>
+      </div>
+      <div class="material-item">
+        <span class="mat-num">W5-1</span>
+        <div class="mat-info">
+          <div class="mat-title">After Effects 인터페이스 &amp; 기초</div>
+          <div class="mat-desc">컴포지션 개념 · 레이어 · 키프레임 기초 애니메이션</div>
+        </div>
+        <div class="mat-actions"><span class="badge badge-wip">준비중</span><span class="btn-view-disabled">보기</span></div>
+      </div>
+      <div class="material-item">
+        <span class="mat-num">W5–8</span>
+        <div class="mat-info">
+          <div class="mat-title">모션그래픽 / 타이틀 / 트랙킹 / 최종 작품</div>
+          <div class="mat-desc">텍스트 애니메이션 · 트랙 매트 · 카메라 트랙킹 · 포트폴리오</div>
+        </div>
+        <div class="mat-actions"><span class="badge badge-wip">준비중</span><span class="btn-view-disabled">보기</span></div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="footer">
+  <div class="footer-left">TIMEARCHIVE 사진전문학원 &nbsp;·&nbsp; 강사 내부 자료</div>
+  <div class="footer-right">최종 업데이트 2026-07-16</div>
+</div>
+
+</body>
+</html>

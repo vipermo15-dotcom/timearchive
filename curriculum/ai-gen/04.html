@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Gemini 이미지 분석 & 콘텐츠 기획 — 타임아카이브 교재</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:'Pretendard',-apple-system,sans-serif;background:#f8f7f4;color:#1a1a1a;line-height:1.7;}
+a{text-decoration:none;color:inherit;}
+.topbar{background:#1a1a1a;color:#fff;padding:14px 32px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:10;}
+.topbar-left{display:flex;align-items:center;gap:16px;}
+.back-btn{font-size:12px;color:rgba(255,255,255,.6);padding:5px 12px;border:1px solid rgba(255,255,255,.2);border-radius:999px;transition:all .2s;}
+.back-btn:hover{color:#fff;border-color:rgba(255,255,255,.5);}
+.topbar-course{font-size:12px;color:rgba(255,255,255,.5);}
+.topbar-session{font-size:13px;font-weight:700;}
+.nav-btns{display:flex;gap:8px;}
+.nav-btn{font-size:12px;padding:5px 14px;border:1px solid rgba(255,255,255,.2);border-radius:999px;color:rgba(255,255,255,.7);transition:all .2s;}
+.nav-btn:hover{background:rgba(255,255,255,.1);color:#fff;}
+.hero{background:#fff;border-bottom:2px solid #7c3aed;padding:40px 48px;}
+.session-tag{font-size:11px;font-weight:700;letter-spacing:.2em;color:#7c3aed;text-transform:uppercase;margin-bottom:10px;}
+.session-title{font-size:clamp(24px,4vw,36px);font-weight:900;letter-spacing:-.02em;margin-bottom:8px;}
+.session-desc{font-size:15px;color:#555;max-width:640px;}
+.meta-row{display:flex;gap:24px;margin-top:20px;flex-wrap:wrap;}
+.meta-item{display:flex;flex-direction:column;gap:2px;}
+.meta-label{font-size:10px;letter-spacing:.14em;color:#999;font-weight:600;text-transform:uppercase;}
+.meta-val{font-size:14px;font-weight:700;color:#1a1a1a;}
+.body-wrap{max-width:820px;margin:0 auto;padding:48px 32px 80px;}
+/* 블록들 */
+.block{margin-bottom:36px;}
+.block-title{font-size:13px;font-weight:700;letter-spacing:.18em;color:#7c3aed;text-transform:uppercase;margin-bottom:14px;padding-bottom:8px;border-bottom:2px solid #ede9fe;}
+.obj-list{list-style:none;display:flex;flex-direction:column;gap:8px;}
+.obj-list li{font-size:15px;padding-left:22px;position:relative;color:#333;}
+.obj-list li::before{content:"✓";position:absolute;left:0;color:#7c3aed;font-weight:700;}
+.timeline{display:flex;flex-direction:column;gap:4px;}
+.tl-item{display:flex;gap:16px;align-items:baseline;font-size:14px;padding:8px 14px;border-radius:6px;}
+.tl-item:nth-child(odd){background:#f5f3ff;}
+.tl-time{min-width:52px;font-weight:700;color:#7c3aed;font-size:13px;}
+.tl-text{color:#444;}
+/* 스크립트 */
+.script-block{background:#fff;border-radius:10px;border:1px solid #e8e8e8;overflow:hidden;margin-bottom:16px;}
+.script-phase{background:#7c3aed;color:#fff;padding:10px 20px;font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;display:flex;align-items:center;gap:8px;}
+.script-phase .ph-time{opacity:.7;font-weight:400;}
+.script-body{padding:20px 24px;}
+.say{background:#f5f3ff;border-left:3px solid #7c3aed;padding:14px 18px;border-radius:0 8px 8px 0;font-size:15px;color:#2d1b69;line-height:1.8;margin:10px 0;font-style:italic;}
+.say::before{content:'"';font-size:20px;color:#7c3aed;font-style:normal;margin-right:4px;}
+.say::after{content:'"';font-size:20px;color:#7c3aed;font-style:normal;margin-left:4px;}
+.tip{background:#fefce8;border:1px solid #fde68a;border-radius:8px;padding:12px 16px;font-size:13px;color:#78350f;margin:10px 0;}
+.tip::before{content:"💡 강사 TIP  ";font-weight:700;}
+.action{background:#f0fdf4;border:1px solid #bbf7d0;border-radius:8px;padding:12px 16px;font-size:13px;color:#14532d;margin:10px 0;}
+.action::before{content:"▶ 실습  ";font-weight:700;}
+.note{font-size:14px;color:#555;margin:8px 0;line-height:1.8;}
+.step-list{list-style:none;counter-reset:step;display:flex;flex-direction:column;gap:8px;margin:10px 0;}
+.step-list li{counter-increment:step;font-size:14px;color:#333;padding:10px 14px 10px 44px;position:relative;background:#fafafa;border-radius:6px;}
+.step-list li::before{content:counter(step);position:absolute;left:14px;top:10px;width:22px;height:22px;background:#7c3aed;color:#fff;border-radius:50%;font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center;}
+/* 실습 과제 */
+.task-card{background:#1a1a1a;color:#fff;border-radius:10px;padding:24px;margin-bottom:12px;}
+.task-title{font-size:16px;font-weight:800;margin-bottom:10px;}
+.task-desc{font-size:14px;color:rgba(255,255,255,.7);line-height:1.8;}
+.task-list{list-style:none;margin-top:12px;display:flex;flex-direction:column;gap:6px;}
+.task-list li{font-size:13px;color:rgba(255,255,255,.8);padding-left:18px;position:relative;}
+.task-list li::before{content:"→";position:absolute;left:0;color:#a78bfa;}
+.divider{height:1px;background:#e8e8e8;margin:32px 0;}
+.next-preview{background:#ede9fe;border-radius:10px;padding:20px 24px;}
+.next-label{font-size:11px;font-weight:700;letter-spacing:.16em;color:#7c3aed;margin-bottom:6px;}
+.next-title{font-size:16px;font-weight:700;}
+</style>
+</head>
+<body>
+<div class="topbar">
+  <div class="topbar-left">
+    <a href="../index.html" class="back-btn">← 목록</a>
+    <span class="topbar-course">생성형 AI 과정</span>
+    <span class="topbar-session">W2 · 2회차</span>
+  </div>
+  <div class="nav-btns">
+    <a href="03.html" class="nav-btn">← 이전</a>
+    <a href="05.html" class="nav-btn">다음 →</a>
+  </div>
+</div>
+
+<div class="hero">
+  <div class="session-tag">Week 2 · Session 2 &nbsp;|&nbsp; 생성형 AI 과정</div>
+  <h1 class="session-title">Gemini 이미지 분석 &amp; 콘텐츠 기획</h1>
+  <p class="session-desc">Google Gemini의 이미지 분석 기능과 검색 연동으로 사진 레퍼런스를 분석하고 콘텐츠 캘린더를 자동화합니다.</p>
+  <div class="meta-row">
+    <div class="meta-item"><span class="meta-label">수업 시간</span><span class="meta-val">90분</span></div>
+    <div class="meta-item"><span class="meta-label">대상 도구</span><span class="meta-val">Google Gemini</span></div>
+    <div class="meta-item"><span class="meta-label">준비물</span><span class="meta-val">구글 계정, 레퍼런스 사진 3장</span></div>
+    <div class="meta-item"><span class="meta-label">난이도</span><span class="meta-val">★★☆☆☆ 기초</span></div>
+  </div>
+</div>
+<div class="body-wrap">
+
+  <div class="block">
+    <div class="block-title">학습 목표</div>
+    <ul class="obj-list"><li>Gemini에 이미지를 업로드해 조명·구도·컬러 분석을 요청할 수 있다</li><li>레퍼런스 사진을 분석해 촬영 가이드를 추출할 수 있다</li><li>Gemini의 Google 검색 연동으로 최신 트렌드를 리서치할 수 있다</li><li>한 달치 SNS 콘텐츠 캘린더를 자동으로 생성할 수 있다</li></ul>
+  </div>
+
+  <div class="block">
+    <div class="block-title">수업 흐름</div>
+    <div class="timeline"><div class="tl-item"><span class="tl-time">00:00</span><span class="tl-text">이론 — Gemini의 강점 (이미지 이해 + 구글 연동)</span></div><div class="tl-item"><span class="tl-time">10:00</span><span class="tl-text">실습 ① — 레퍼런스 사진 이미지 분석</span></div><div class="tl-item"><span class="tl-time">35:00</span><span class="tl-text">실습 ② — 트렌드 리서치 & SEO 키워드</span></div><div class="tl-item"><span class="tl-time">55:00</span><span class="tl-text">실습 ③ — 한 달 SNS 콘텐츠 캘린더 자동 생성</span></div><div class="tl-item"><span class="tl-time">75:00</span><span class="tl-text">3가지 도구 정리 & 사용 루틴 설계</span></div></div>
+  </div>
+
+  <div class="divider"></div>
+  <div class="block">
+    <div class="block-title">강의 스크립트</div>
+
+    <div class="script-block">
+  <div class="script-phase">이론 — Gemini 강점<span class="ph-time">(00:00 – 10:00)</span></div>
+  <div class="script-body"><div class="say">오늘은 Google Gemini입니다. Gemini는 구글이 만든 AI로 두 가지 큰 강점이 있습니다. 첫째, 이미지를 이해하고 분석하는 능력. 둘째, 구글 검색과 연동되어 최신 정보를 가져올 수 있는 것.</div><p class="note">
+<strong>Gemini 강점 요약:</strong><br>
+① 이미지 업로드 → 조명·구도·컬러·분위기 분석<br>
+② 구글 검색 연동 → 최신 트렌드·뉴스·통계 가져오기<br>
+③ 다국어 → 해외 레퍼런스 영문 분석 후 한국어 요약<br>
+④ 구글 드라이브·문서 연동 가능 (Google One AI 구독 시)
+      </p><div class="say">ChatGPT와 Claude가 텍스트 중심이었다면, Gemini는 '사진을 보여주고 분석받는' 용도에 특히 강합니다.</div></div>
+</div>
+
+    <div class="script-block">
+  <div class="script-phase">실습 ① — 레퍼런스 이미지 분석<span class="ph-time">(10:00 – 35:00)</span></div>
+  <div class="script-body"><div class="say">준비한 레퍼런스 사진을 Gemini에 올려봅시다. 화면 아래쪽에 이미지 첨부 버튼이 있습니다.</div><ol class="step-list"><li>gemini.google.com 접속 → 구글 계정 로그인</li><li>입력창 오른쪽 이미지 아이콘 클릭 → 레퍼런스 사진 업로드</li><li>아래 프롬프트 입력</li></ol><p class="note"><strong>[이미지 분석 프롬프트]</strong><br><br>
+이 사진을 사진작가 관점에서 분석해주세요.<br><br>
+분석 항목:<br>
+1. 조명 — 광원 방향, 광원 종류 추정 (자연광/인공광, 소프트/하드), 빛과 그림자 비율<br>
+2. 구도 — 촬영 앵글, 구도 방식 (3분할/중앙/리딩라인 등), 여백 활용<br>
+3. 컬러 — 주조색, 보조색, 전체 색온도 (따뜻함/차가움)<br>
+4. 분위기 키워드 — 이 사진의 느낌을 5개 단어로<br>
+5. 이 사진을 재현하기 위한 촬영 세팅 추천</p><div class="say">이렇게 나온 분석을 인쇄해서 촬영 현장에 가져가면, 레퍼런스를 그대로 재현하는 데 큰 도움이 됩니다.</div><div class="tip">여러 레퍼런스 사진을 한 번에 올려서 '이 사진들의 공통 스타일을 분석해줘'라고 하면 무드보드의 방향을 잡는 데 유용합니다.</div></div>
+</div>
+
+    <div class="script-block">
+  <div class="script-phase">실습 ② — 트렌드 리서치<span class="ph-time">(35:00 – 55:00)</span></div>
+  <div class="script-body"><div class="say">Gemini는 구글 검색과 연결되어 있어서 최신 정보를 가져올 수 있습니다.</div><div class="action">아래 프롬프트 입력</div><p class="note"><strong>[트렌드 리서치 프롬프트]</strong><br><br>
+2026년 뷰티·화장품 광고 사진의 최신 트렌드를 조사해주세요.<br><br>
+포함할 내용:<br>
+1. 지금 인스타그램·핀터레스트에서 유행하는 뷰티 사진 스타일 3가지<br>
+2. 각 스타일의 조명·컬러·소품 특징<br>
+3. 국내 브랜드 중 이 트렌드를 잘 적용한 사례<br>
+4. 이 트렌드에 맞게 촬영할 때 주의할 점</p><div class="say">ChatGPT나 Claude는 학습 데이터 기준일이 있어서 최신 트렌드를 모를 수 있습니다. 이럴 때 Gemini의 구글 연동이 빛납니다.</div></div>
+</div>
+
+    <div class="script-block">
+  <div class="script-phase">실습 ③ — 콘텐츠 캘린더 자동 생성<span class="ph-time">(55:00 – 75:00)</span></div>
+  <div class="script-body"><div class="action">아래 프롬프트 입력</div><p class="note"><strong>[콘텐츠 캘린더 프롬프트]</strong><br><br>
+인스타그램 계정 운영을 위한 8월 한 달 콘텐츠 캘린더를 만들어주세요.<br><br>
+계정 정보:<br>
+- 업종: 사진 스튜디오 / 사진 강좌<br>
+- 타깃: 20~40대 사진에 관심 있는 일반인<br>
+- 포스팅 빈도: 주 3회 (월·수·금)<br><br>
+각 포스팅마다:<br>
+- 날짜<br>
+- 콘텐츠 주제<br>
+- 사진 방향 (어떤 사진을 올릴지)<br>
+- 캡션 방향 (어떤 메시지를 담을지)<br>
+- 추천 해시태그 5개<br><br>
+표 형식으로 만들어주세요.</p><div class="say">이렇게 만든 캘린더를 노션이나 구글 스프레드시트에 옮기면 한 달 운영 계획이 완성됩니다.</div></div>
+</div>
+
+    <div class="script-block">
+  <div class="script-phase">1~2주차 정리 — 3가지 도구 사용 루틴<span class="ph-time">(75:00 – 90:00)</span></div>
+  <div class="script-body"><div class="say">지난 2주 동안 ChatGPT, Claude, Gemini 세 가지를 배웠습니다. 실무에서 이 도구들을 어떻게 쓰면 좋을지 루틴을 정리해드릴게요.</div><p class="note">
+<strong>촬영 기획 시작할 때:</strong><br>
+1. Gemini로 트렌드·레퍼런스 리서치<br>
+2. ChatGPT로 무드보드 컨셉·체크리스트 빠르게 뽑기<br>
+3. Claude로 클라이언트 제안서·시나리오 다듬기<br><br>
+<strong>촬영 후 콘텐츠 작업:</strong><br>
+1. Gemini로 완성 사진 분석 (다음 촬영 개선점 찾기)<br>
+2. ChatGPT로 SNS 캡션 5버전 생성<br>
+3. Claude로 뉴스레터·블로그 글 작성
+      </p><div class="say">다음 시간부터는 이미지 생성 파트로 넘어갑니다. Midjourney로 실제 이미지를 만드는 거예요. 사진학원인데 왜 AI 이미지를 만드냐고요? 촬영 전 비주얼 시뮬레이션, 무드보드에 바로 활용할 수 있기 때문입니다.</div></div>
+</div>
+  </div>
+
+  <div class="divider"></div>
+  <div class="block">
+    <div class="block-title">실습 과제</div>
+    <div class="task-card">
+      <div class="task-title">과제 — 레퍼런스 분석 & 콘텐츠 캘린더</div>
+      <div class="task-desc">좋아하는 사진 계정에서 레퍼런스 3장을 고르고, Gemini로 분석한 뒤 다음 달 콘텐츠 캘린더를 만들어오세요.</div>
+      <ul class="task-list">
+        <li>레퍼런스 3장 Gemini 업로드 → 공통 스타일 분석 요청</li>
+        <li>분석 결과를 참고해 내 계정에 적용할 방향 정리</li>
+        <li>Gemini로 8월 콘텐츠 캘린더 자동 생성</li>
+        <li>캘린더 중 가장 마음에 드는 포스팅 1개 → ChatGPT로 캡션 5버전 생성</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="next-preview">
+    <div class="next-label">다음 시간 예고</div>
+    <div class="next-title">W3-1 · Midjourney 계정 설정 &amp; 기초 프롬프트 — Discord 설정, 첫 이미지 생성, --style 파라미터</div>
+  </div>
+</div>
+
+</body>
+</html>
